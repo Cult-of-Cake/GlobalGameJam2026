@@ -97,7 +97,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wi0c6"]
-size = Vector2(0.10890657, 0.01318468)
+size = Vector2(0.13426769, 0.024748262)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xhfnw"]
 size = Vector2(34, 20)
@@ -199,7 +199,7 @@ position = Vector2(0.9999962, 0)
 scale = Vector2(-667.26263, 1156.6473)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Raycasts/SpiderCeiling" unique_id=460038400]
-position = Vector2(0.0014986545, -0.025937034)
+position = Vector2(0.0014986516, -0.031718828)
 scale = Vector2(1.004556, 1)
 shape = SubResource("RectangleShape2D_wi0c6")
 
