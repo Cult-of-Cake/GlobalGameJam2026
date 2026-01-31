@@ -1,17 +1,13 @@
 extends CharacterBody2D
 
-
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 var facing = "RIGHT"
 
 func _ready():
-	FormSetup();
-
-func _input(event):
-	CheckFormSwap()
-
+	FormSetup()
+	
 func _unhandled_input(event):
 	if event.get_class() == "InputEventKey":
 		if event.keycode == 4194326 && event.pressed == true:
@@ -57,8 +53,7 @@ func _physics_process(delta: float) -> void:
 		get_tree().quit()
 
 	move_and_slide()
-
-
+	
 func POooooOONCH():
 	var bodies = $ThePunchZone.get_overlapping_bodies()
 	for body in bodies:
