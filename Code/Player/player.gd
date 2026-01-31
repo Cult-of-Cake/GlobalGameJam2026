@@ -12,6 +12,15 @@ func _ready():
 	activate_sprites()
 	show_sprite(%SpiderStanding)
 	
+func _input(_event: InputEvent) -> void:
+	CheckFormSwap()
+
+func _ready():
+	FormSetup()
+	hide_sprites()
+	activate_sprites()
+	show_sprite(%SpiderStanding)
+	
 func _unhandled_input(event):
 	if event.get_class() == "InputEventKey":
 		if event.keycode == 4194326 && event.pressed == true:
@@ -23,11 +32,8 @@ func _unhandled_input(event):
 			POooooOONCH()
 
 func _physics_process(delta: float) -> void:
-	if !metafloor && is_on_floor():
-		Global.landed.emit()
-		metafloor = true
-		 
-	CheckFormSwap()
+	
+	# Handle player-induced upward velocity
 	if (currPhysics == PHYSICS.FLY):
 		if Input.is_action_just_pressed("ui_accept") and !is_on_floor():
 			if flyCount < FLY_MAX:
@@ -38,14 +44,16 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY
 	
 	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-		hide_sprites()
-		$SpiderJumping.visible = true
+	if !metafloor && is_on_floor():
+		Global.landed.emit()
+		metafloor = true
+		
+	if (currPhysics == PHYSICS.JUMP or currPhysics == PHYSICS.FLY):
+		if not is_on_floor():
+			velocity += get_gravity() * delta
+	elif (currPhysics == PHYSICS.SWIM):
+		if not is_on_floor():
+			velocity += get_gravity() * delta / 3
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
