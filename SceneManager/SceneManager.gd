@@ -15,7 +15,7 @@ const incr_size = 0.1 # time in seconds between checking for a Wait to be cancel
 
 # ==== Main functions & variables =================================================================
 
-enum MODES { INIT, READY, RUNNING, STOPPING, WAITING }
+enum MODES { INIT, READY, RUNNING, STOPPING, WAITING, SUSPENDED }
 var mode = MODES.INIT
 var variables = {}
 var all_scripts = {}
