@@ -306,6 +306,97 @@ emotion_keywords = Array[String](["ANGRY"])
 emotion_images = Array[Texture2D]([ExtResource("8")])
 dialogue_fontname = "CaveatBrush-Regular.ttf"
 
+[node name="Merino" type="Control" parent="Characters" unique_id="Merino"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 3.0
+offset_right = 747.0
+offset_bottom = 206.0
+script = ExtResource("2")
+character_abbreviation = "M"
+character_full_name = "Merino"
+neutral_image = ExtResource("9")
+emotion_keywords = Array[String](["serious"])
+emotion_images = Array[Texture2D]([ExtResource("3")])
+dialogue_colour = Color(0.207843, 0.12549, 0.392157, 1)
+dialogue_background = Color(0.796078, 0.745098, 0.623529, 0.8)
+dialogue_fontname = "MaidenOrange-Regular.ttf"
+dialogue_fontsize = 28
+image_side = -1
+
+[node name="Stickle" type="Control" parent="Characters" unique_id="Stickle"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 3.0
+offset_right = 747.0
+offset_bottom = 206.0
+script = ExtResource("2")
+character_abbreviation = "P"
+character_full_name = "Stickle"
+neutral_image = ExtResource("9")
+emotion_keywords = Array[String](["serious"])
+emotion_images = Array[Texture2D]([ExtResource("3")])
+dialogue_colour = Color(0.207843, 0.12549, 0.392157, 1)
+dialogue_background = Color(0.796078, 0.745098, 0.623529, 0.8)
+dialogue_fontname = "MaidenOrange-Regular.ttf"
+dialogue_fontsize = 28
+image_side = -1
+
+[node name="Crewel" type="Control" parent="Characters" unique_id="Crewel"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 3.0
+offset_right = 747.0
+offset_bottom = 206.0
+script = ExtResource("2")
+character_abbreviation = "G1"
+character_full_name = "Crewel"
+neutral_image = ExtResource("9")
+emotion_keywords = Array[String](["serious"])
+emotion_images = Array[Texture2D]([ExtResource("3")])
+dialogue_colour = Color(0.207843, 0.12549, 0.392157, 1)
+dialogue_background = Color(0.796078, 0.745098, 0.623529, 0.8)
+dialogue_fontname = "MaidenOrange-Regular.ttf"
+dialogue_fontsize = 28
+image_side = -1
+
+[node name="Intarsia" type="Control" parent="Characters" unique_id="Intarsia"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 3.0
+offset_right = 747.0
+offset_bottom = 206.0
+script = ExtResource("2")
+character_abbreviation = "G2"
+character_full_name = "Intarsia"
+neutral_image = ExtResource("9")
+emotion_keywords = Array[String](["serious"])
+emotion_images = Array[Texture2D]([ExtResource("3")])
+dialogue_colour = Color(0.207843, 0.12549, 0.392157, 1)
+dialogue_background = Color(0.796078, 0.745098, 0.623529, 0.8)
+dialogue_fontname = "MaidenOrange-Regular.ttf"
+dialogue_fontsize = 28
+image_side = -1
+
+[node name="Douppion" type="Control" parent="Characters" unique_id="Douppion"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 3.0
+offset_right = 747.0
+offset_bottom = 206.0
+script = ExtResource("2")
+character_abbreviation = "G3"
+character_full_name = "Douppion"
+neutral_image = ExtResource("9")
+emotion_keywords = Array[String](["serious"])
+emotion_images = Array[Texture2D]([ExtResource("3")])
+dialogue_colour = Color(0.207843, 0.12549, 0.392157, 1)
+dialogue_background = Color(0.796078, 0.745098, 0.623529, 0.8)
+dialogue_fontname = "MaidenOrange-Regular.ttf"
+dialogue_fontsize = 28
+image_side = -1
+
+
 [node name="BranchOptions" type="GridContainer" parent="." unique_id=989443343]
 layout_mode = 0
 offset_left = 357.0
