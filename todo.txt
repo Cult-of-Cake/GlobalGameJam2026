@@ -1,4 +1,5 @@
 
 
 Form shift checks if you "fit"
-Spider rotates as he moves
+
+Bird can only be switched to in the air, dies if it lands
