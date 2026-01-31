@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
@@ -11,7 +10,7 @@ func _ready():
 	FormSetup()
 	hide_sprites()
 	activate_sprites()
-	$SpiderStanding.visible = true
+	show_sprite(%SpiderStanding)
 	
 func _unhandled_input(event):
 	if event.get_class() == "InputEventKey":
@@ -62,6 +61,7 @@ func _physics_process(delta: float) -> void:
 	if global_position.y > 2000:
 		get_tree().quit()
 
+	UpdateSprites()
 	move_and_slide()
 	
 func POooooOONCH():
@@ -88,7 +88,6 @@ const FLY_MAX = 3
 func FormSetup() -> void:
 	for n in formSpriteNames:
 		formSprites.append(SceneManager.GetTexture("res://Assets/characters/", n, ".png"))
-	$Sprite2D.texture = formSprites[currForm]
 	
 func CheckFormSwap() -> void:
 	
@@ -109,16 +108,58 @@ func CheckFormSwap() -> void:
 	if (currForm != prevForm):
 		print ("Changed form to %s" % currForm)
 		currPhysics = formPhysics[currForm]
-		$Sprite2D.texture = formSprites[currForm]
+		UpdateSprites()
 		
 		if (currPhysics != PHYSICS.FLY):
 			flyCount = 0
 
+func IsFormAllowed(form : FORM):
+	var allowedForms = [ true, true, true, true] #Global.GetVar("hasSnake"), Global.GetVar("hasSpider") ]
+	return allowedForms[form]
+
+func CycleUntilAllowed(dir : int):
+	while true: # This forces at least one iteration, like a do-while (which Godot lacks)
+		currForm = (currForm as int + dir) % FORM.size() as FORM
+		if IsFormAllowed(currForm):
+			break
+
+func SwitchIfAllowed(form : FORM):
+	if (IsFormAllowed(form)):
+		currForm = form
+	
+#endregion
+
+@onready var all_sprites = [
+	%SpiderStanding,
+	%SnakeStanding, %SnakeJumping,
+	%BirdFlying,
+	%JellyfishSwimming
+]
+
 func activate_sprites():
-	$SpiderStanding.play()
-	$SpiderJumping.play()
+	for sprite in all_sprites:
+		if (sprite):
+			sprite.play()
 
 func hide_sprites():
-	$SpiderStanding.visible = false
-	$SpiderJumping.visible = false
-#endregion
+	for sprite in all_sprites:
+		if (sprite):
+			sprite.visible = false
+
+func show_sprite(sprite : Node):
+	sprite.visible = true
+	
+func UpdateSprites():
+	hide_sprites()
+	match currForm:
+		FORM.SNAKE:
+			if is_on_floor():
+				show_sprite(%SnakeStanding)
+			else:
+				show_sprite(%SnakeJumping)
+		FORM.SPIDER:
+			show_sprite(%SpiderStanding)
+		FORM.BIRD:
+			show_sprite(%BirdFlying)
+		FORM.JELLYFISH:
+			show_sprite(%JellyfishSwimming)
