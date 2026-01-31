@@ -28,7 +28,7 @@ position = Vector2(189, 429)
 dialogue_script = "AngryFluff"
 
 [node name="FlyingMook" parent="." unique_id=2118646747 instance=ExtResource("5_ifn1m")]
-position = Vector2(589, 285)
+position = Vector2(588, 104)
 leftRange = 200
 rightRange = 400
 
