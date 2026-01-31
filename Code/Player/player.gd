@@ -5,6 +5,7 @@ const JUMP_VELOCITY = -400.0
 
 var facing = Global.FACING.RIGHT
 var metafloor = true
+var punching = false
 
 var invincible = false
 var stunned = false
@@ -131,11 +132,11 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 func POooooOONCH():
-	var bodies = $ThePunchZone.get_overlapping_bodies()
-	for body in bodies:
-		if body.has_method("is_punchable") && body.is_punchable():
-			body.get_punched(facing)
-
+	if(!punching && currForm == FORM.SNAKE):
+		punching = true;
+		%SnakePunching.stop()
+		%SnakePunching.play()
+		#Actual Punch is executed when the signal indicating the correct frame is received
 
 #region Forms
 enum FORM { SPIDER, BIRD, SNAKE, JELLYFISH }
@@ -176,6 +177,13 @@ func CheckFormSwap() -> void:
 		currPhysics = formPhysics[currForm]
 		UpdateSprites()
 		
+		if currForm == FORM.SNAKE:
+			$CollisionShape2D.shape.radius = 35
+			$CollisionShape2D.shape.height = 130
+		if currForm == FORM.SPIDER:
+			$CollisionShape2D.shape.radius = 27.5
+			$CollisionShape2D.shape.height = 55
+		
 		if (currPhysics != PHYSICS.FLY):
 			flyCount = 0
 
@@ -209,8 +217,8 @@ func SwitchIfAllowed(form : FORM):
 #region Animations
 
 @onready var all_sprites = [
-	%SpiderStanding,
-	%SnakeStanding, %SnakeJumping,
+	%SpiderStanding, %SpiderWalking,
+	%SnakeStanding, %SnakeWalking, %SnakeJumping, %SnakePunching,
 	%BirdFlying,
 	%JellyfishSwimming
 ]
@@ -230,33 +238,61 @@ func show_sprite(sprite : Node):
 	
 func UpdateSprites():
 	hide_sprites()
+	var is_moving = Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
 	match currForm:
 		FORM.SNAKE:
-			if is_on_floor():
-				show_sprite(%SnakeStanding)
+			var sprite
+			if !punching:
+				if is_on_floor():
+					if is_moving:
+						sprite = %SnakeWalking
+					else:
+						sprite = %SnakeStanding
+				else:
+					sprite = %SnakeJumping
 			else:
-				show_sprite(%SnakeJumping)
+				sprite = %SnakePunching
+			show_sprite(sprite)
+			SpriteRotate(sprite, facing == Global.FACING.LEFT)
 		FORM.SPIDER:
-			show_sprite(%SpiderStanding)
+			var sprite
+			if is_moving:
+				sprite = %SpiderWalking
+			else:
+				sprite = %SpiderStanding
+			show_sprite(sprite)
 			if is_on_floor():
-				SpiderRotate(facing == Global.FACING.LEFT, false, 0)
+				SpriteRotate(sprite, facing == Global.FACING.LEFT, false)
 			elif %SpiderWallLeft.is_colliding():
-				SpiderRotate(facing == Global.FACING.UP, false, 90)
+				SpriteRotate(sprite, facing == Global.FACING.UP, false, 90)
 			elif %SpiderWallRight.is_colliding():
-				SpiderRotate(facing == Global.FACING.DOWN, false, -90)
+				SpriteRotate(sprite, facing == Global.FACING.DOWN, false, -90)
 			elif custom_on_ceiling():
-				SpiderRotate(facing == Global.FACING.LEFT, true, 0)
+				SpriteRotate(sprite, facing == Global.FACING.LEFT, true)
 			else:
 				if !stunned:
-					SpiderRotate(facing == Global.FACING.LEFT, false, 0)
+					SpriteRotate(sprite, facing == Global.FACING.LEFT, false)
 		FORM.BIRD:
 			show_sprite(%BirdFlying)
 		FORM.JELLYFISH:
 			show_sprite(%JellyfishSwimming)
 
-func SpiderRotate(flip_h, flip_v, rotation):
-	%SpiderStanding.flip_h = flip_h
-	%SpiderStanding.flip_v = flip_v
-	%SpiderStanding.rotation = rotation
+func SpriteRotate(sprite : Node, flip_h : bool, flip_v : bool = false, rotation : int = 0):
+	sprite.flip_h = flip_h
+	sprite.flip_v = flip_v
+	sprite.rotation = rotation
 
 #endregion
+
+
+func _on_snake_punching_animation_finished() -> void:
+		punching = false;
+		hide_sprites()
+
+
+func _on_snake_punching_frame_changed() -> void:
+	if %SnakePunching.frame == 2:
+		var bodies = $ThePunchZone.get_overlapping_bodies()
+		for body in bodies:
+			if body.has_method("is_punchable") && body.is_punchable():
+				body.get_punched(facing)
