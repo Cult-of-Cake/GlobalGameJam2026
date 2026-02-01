@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://kd1f5vw7wkm7" path="res://Assets/tilesets/IcyTiles.png" id="1_y1bk6"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_00ayb"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_obpj6"]
 texture = ExtResource("1_y1bk6")
 2:2/0 = 0
 2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -397,10 +397,64 @@ texture = ExtResource("1_y1bk6")
 13:19/0 = 0
 13:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSet" id="TileSet_je02s"]
-physics_layer_0/collision_layer = 5
-sources/0 = SubResource("TileSetAtlasSource_00ayb")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e8y4t"]
+texture = ExtResource("1_y1bk6")
+texture_region_size = Vector2i(32, 32)
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+9:1/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+9:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+9:4/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+11:5/0 = 0
+12:5/0 = 0
+13:5/0 = 0
+2:6/0 = 0
+6:6/0 = 0
+9:6/0 = 0
+11:6/0 = 0
+13:6/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+6:7/0 = 0
+8:7/0 = 0
+9:7/0 = 0
+11:7/0 = 0
+12:7/0 = 0
+13:7/0 = 0
+2:8/0 = 0
+5:8/0 = 0
+4:9/0 = 0
+5:9/0 = 0
+6:9/0 = 0
 
-[node name="IcyTiles" type="TileMap" unique_id=1451087481]
-tile_set = SubResource("TileSet_je02s")
+[sub_resource type="TileSet" id="TileSet_e8y4t"]
+physics_layer_0/collision_layer = 5
+sources/0 = SubResource("TileSetAtlasSource_obpj6")
+sources/1 = SubResource("TileSetAtlasSource_e8y4t")
+
+[node name="TileMap" type="TileMap" unique_id=1595978568]
+tile_set = SubResource("TileSet_e8y4t")
 format = 2
