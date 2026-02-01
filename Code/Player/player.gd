@@ -333,7 +333,7 @@ func SwitchIfAllowed(form : FORM):
 @onready var all_sprites = [
 	%SpiderStanding, %SpiderWalking,
 	%SnakeStanding, %SnakeWalking, %SnakeJumping, %SnakePunching,
-	%BirdFlying,
+	%BirdFlying, %BirdStanding,
 	%JellyfishSwimming
 ]
 
@@ -387,7 +387,12 @@ func UpdateSprites():
 				if !stunned:
 					SpriteRotate(sprite, facing == Global.FACING.LEFT, false)
 		FORM.BIRD:
-			show_sprite(%BirdFlying)
+			if !is_on_floor():
+				SpriteRotate(%BirdFlying, facing == Global.FACING.LEFT)
+				show_sprite(%BirdFlying)
+			else:
+				SpriteRotate(%BirdStanding, facing == Global.FACING.LEFT)
+				show_sprite(%BirdStanding)
 		FORM.JELLYFISH:
 			show_sprite(%JellyfishSwimming)
 
