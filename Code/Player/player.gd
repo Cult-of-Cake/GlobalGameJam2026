@@ -210,7 +210,14 @@ func _on_snake_punching_frame_changed() -> void:
 			if body.has_method("is_punchable") && body.is_punchable():
 				body.get_punched(facing)
 
+
 #region Forms
+var FORM_SIZES = [
+	[27,55],   #Spider
+	[35,130],  #Snake
+	[62,124],  #Bird
+	[44,140]]  #Jellyfish
+
 enum FORM { SPIDER, SNAKE, BIRD, JELLYFISH }
 var currForm = FORM.SPIDER
 
@@ -249,25 +256,22 @@ func CheckFormSwap() -> void:
 		currPhysics = formPhysics[currForm]
 		UpdateSprites()
 		
-		print(check_vertical_clearance())
-		check_horizontal_clearance()
+
 		
 		if currForm == FORM.SPIDER:
-			$CollisionShape2D.shape.radius = 27
-			$CollisionShape2D.shape.height = 55
+			$CollisionShape2D.shape.radius = FORM_SIZES[FORM.SPIDER][0]
+			$CollisionShape2D.shape.height = FORM_SIZES[FORM.SPIDER][1]		
 		if currForm == FORM.SNAKE:
-			$CollisionShape2D.shape.radius = 35
-			$CollisionShape2D.shape.height = 130
-			%AudioManager.play_sfx("res://Assets/audio/SnakeMaskActivate.wav") #play snake mask activation sfx
+			$CollisionShape2D.shape.radius = FORM_SIZES[FORM.SNAKE][0]
+			$CollisionShape2D.shape.height = FORM_SIZES[FORM.SNAKE][1]
 		if currForm == FORM.BIRD:
-			$CollisionShape2D.shape.radius = 62
-			$CollisionShape2D.shape.height = 124
-			%AudioManager.play_sfx("res://Assets/audio/BirdMaskActivate.wav") #play bird mask activation sfx
+			$CollisionShape2D.shape.radius = FORM_SIZES[FORM.BIRD][0]
+			$CollisionShape2D.shape.height = FORM_SIZES[FORM.BIRD][1]
 		if currForm == FORM.JELLYFISH:
-			$CollisionShape2D.shape.radius = 44
-			$CollisionShape2D.shape.height = 140
-			%AudioManager.play_sfx("res://Assets/audio/BlubMaskActivate.wav") #play jellyfish mask activation sfx
-				
+			$CollisionShape2D.shape.radius = FORM_SIZES[FORM.JELLYFISH][0]
+			$CollisionShape2D.shape.height = FORM_SIZES[FORM.JELLYFISH][1]
+
+
 		if (currPhysics != PHYSICS.FLY):
 			flyCount = 0
 
@@ -290,8 +294,21 @@ func custom_on_ceiling():
 	return false
 
 func IsFormAllowed(form : FORM):
-	var allowedForms = [ true, Global.GetVar("hasSnake"),
+	var globalForms = [ true, Global.GetVar("hasSnake"),
 		Global.GetVar("hasBird"), Global.GetVar("hasJelly") ]
+	
+	var clearance = [check_horizontal_clearance(), check_vertical_clearance()]
+	
+	var allowedForms = [true]
+	var index = 1;
+	while(index < globalForms.size()): 		
+		print("%d,%d,%s" % [(clearance[0] - FORM_SIZES[index][0]), (clearance[1] - FORM_SIZES[index][1]), globalForms[index]])
+		allowedForms.push_back((
+			((clearance[0] - FORM_SIZES[index][0]) > 0)
+			&& ((clearance[1] - FORM_SIZES[index][1]) > 0)
+			&& bool(globalForms[index])
+		))
+		index = index + 1
 	return allowedForms[form]
 
 func CycleUntilAllowed(dir : int):
