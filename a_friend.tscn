@@ -55,12 +55,13 @@ _data = {
 size = Vector2(42, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2nk0t"]
-size = Vector2(30, 38)
+size = Vector2(85.5107, 211)
 
 [node name="AFriend" type="CharacterBody2D" unique_id=1041484247]
 script = ExtResource("1_lxemx")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1844304917]
+visible = false
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_i1wbi")
 
@@ -68,6 +69,7 @@ sprite_frames = SubResource("SpriteFrames_i1wbi")
 libraries/ = SubResource("AnimationLibrary_2y4ht")
 
 [node name="WallFinder" type="Area2D" parent="." unique_id=1183658105]
+visible = false
 
 [node name="WallFinder" type="CollisionShape2D" parent="WallFinder" unique_id=108727133]
 shape = SubResource("RectangleShape2D_i1wbi")
@@ -75,10 +77,12 @@ shape = SubResource("RectangleShape2D_i1wbi")
 [node name="DialogueArea" type="Area2D" parent="." unique_id=123546345]
 
 [node name="DialogueShape2D" type="CollisionShape2D" parent="DialogueArea" unique_id=1394217004]
+position = Vector2(0, -19.5)
 scale = Vector2(2.105, 1)
 shape = SubResource("RectangleShape2D_2nk0t")
 
 [node name="Raycasts" type="Node2D" parent="." unique_id=1300242030]
+visible = false
 
 [node name="EdgeCheckerR" type="RayCast2D" parent="Raycasts" unique_id=340186985]
 unique_name_in_owner = true

@@ -11,7 +11,68 @@
 [ext_resource type="PackedScene" uid="uid://d0vrjkh3cj7md" path="res://Assets/tilesets/JoTiles.tscn" id="7_80d54"]
 [ext_resource type="PackedScene" uid="uid://c7dm13tuwl4c4" path="res://SceneManager/SceneManager.tscn" id="7_trksy"]
 [ext_resource type="PackedScene" uid="uid://cft4e1k72yhum" path="res://AudioManager/audio_manager.tscn" id="9_80d54"]
+[ext_resource type="Texture2D" uid="uid://bk33y64udisps" path="res://Assets/characters/friends/Stickle.png" id="9_ou0sf"]
 [ext_resource type="Texture2D" uid="uid://uho65kt5j0we" path="res://Assets/images/Background_1_BG.png" id="9_ufi5d"]
+[ext_resource type="Texture2D" uid="uid://c5rr36y3rybey" path="res://Assets/characters/friends/snake_guardian.png" id="10_0vjly"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0vjly"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_ou0sf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_i1wbi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3g0b1"]
+resource_name = "get hit"
+length = 1.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5emyg"]
+_data = {
+&"RESET": SubResource("Animation_i1wbi"),
+&"get hit": SubResource("Animation_3g0b1")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5emyg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_0vjly")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Level_01" type="Node2D" unique_id=590419832]
 scale = Vector2(0.99876404, 0.9939016)
@@ -53,7 +114,7 @@ Keyboard_Image = "Keyboard_W"
 Controller_Image = "Keyboard_W"
 
 [node name="E" type="Sprite2D" parent="Key Showcase" unique_id=1123708227]
-position = Vector2(2157.6667, 615.7551)
+position = Vector2(2030.5095, 615.7551)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("5_dvpsv")
 script = ExtResource("4_dvpsv")
@@ -61,7 +122,7 @@ Keyboard_Image = "Keyboard_E"
 Controller_Image = "Keyboard_E"
 
 [node name="2" type="Sprite2D" parent="Key Showcase" unique_id=194774697]
-position = Vector2(2220.7449, 615.7551)
+position = Vector2(2087.5806, 615.7551)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("5_dvpsv")
 script = ExtResource("4_dvpsv")
@@ -87,12 +148,28 @@ position = Vector2(1330.6445, 644.9331)
 dialogue_script = "level_01_sign"
 
 [node name="Flower" parent="NPCs" unique_id=1041484247 instance=ExtResource("5_ahj24")]
-position = Vector2(2121.6223, 356.17206)
+position = Vector2(2184.7002, 307.87756)
 dialogue_script = "level_01_stickle_01"
 
+[node name="Sprite" type="AnimatedSprite2D" parent="NPCs/Flower" unique_id=568299571]
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_0vjly")
+autoplay = "default"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NPCs/Flower/Sprite" unique_id=278156325]
+libraries/ = SubResource("AnimationLibrary_5emyg")
+
 [node name="Guardian" parent="NPCs" unique_id=491927411 instance=ExtResource("5_ahj24")]
-position = Vector2(2197, 746)
+position = Vector2(2208.73, 630.84717)
 dialogue_script = "level_01_g1_01"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="NPCs/Guardian" unique_id=971813245]
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_5emyg")
+autoplay = "default"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NPCs/Guardian/Sprite" unique_id=2141287488]
+libraries/ = SubResource("AnimationLibrary_5emyg")
 
 [node name="Enemies" type="Node2D" parent="." unique_id=95553413]
 
