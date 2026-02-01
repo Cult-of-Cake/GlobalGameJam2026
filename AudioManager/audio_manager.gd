@@ -63,9 +63,17 @@ func setup_layered_music():
 	print("=== AUDIO FILE CHECK ===")
 	print("File 1: ", file1.resource_path)
 	print("File 2: ", file2.resource_path)
+	print("File 3: ", file3.resource_path)
+	print("File 4: ", file4.resource_path)
+	print("File 5: ", file5.resource_path)
+	print("File 6: ", file6.resource_path)
 	
 	sync_stream.set_sync_stream(0, file1)
 	sync_stream.set_sync_stream(1, file2)
+	sync_stream.set_sync_stream(2, file3)
+	sync_stream.set_sync_stream(3, file4)
+	sync_stream.set_sync_stream(4, file5)
+	sync_stream.set_sync_stream(5, file6)
 	
 	# Start all layers silent
 	for i in range(sync_stream.stream_count):
@@ -127,6 +135,10 @@ func _process(delta):
 		if Engine.get_process_frames() % 30 == 0:
 			var vol0 = sync_stream.get_sync_stream_volume(0)
 			var vol1 = sync_stream.get_sync_stream_volume(1)
+			var vol2 = sync_stream.get_sync_stream_volume(2)
+			var vol3 = sync_stream.get_sync_stream_volume(3)
+			var vol4 = sync_stream.get_sync_stream_volume(4)
+			var vol5 = sync_stream.get_sync_stream_volume(5)
 			#print("Zone: ", current_zone, " | Layer 0: ", snappedf(vol0, 0.1), " dB | Layer 1: ", snappedf(vol1, 0.1), " dB")
 
 # Set initial music state for start of level
@@ -136,15 +148,37 @@ func set_zone_instant(zone_name: String):
 	
 	# Set target volumes
 	match zone_name.to_lower():
-		"default", "zone1":
+		"default", "musiczone1":
 			layer_volumes[0] = 0.0
 			layer_volumes[1] = -80.0
+			layer_volumes[2] = -80.0
+			layer_volumes[3] = -80.0
+			layer_volumes[4] = 0.0
+			layer_volumes[5] = -80.0
 			print("  ✓ DEFAULT: Layer 0 ON, Layer 1 OFF")
 
 		"zone2", "musiczone2":
 			layer_volumes[0] = 0.0
 			layer_volumes[1] = 0.0
 			print("  ✓ ZONE2: Both layers ON")
+			
+		# Waterfall
+		"zone3", "musiczone3":
+			layer_volumes[0] = 0.0
+			layer_volumes[1] = -80.0
+			layer_volumes[2] = 0.0
+			layer_volumes[3] = -80.0
+			layer_volumes[4] = 0.0
+			layer_volumes[5] = 0.0
+			
+		# Volcano
+		"zone4", "musiczone4":
+			layer_volumes[0] = 0.0
+			layer_volumes[1] = -80.0
+			layer_volumes[2] = -80.0
+			layer_volumes[3] = 0.0
+			layer_volumes[4] = 0.0
+			layer_volumes[5] = -80.0
 	
 	# Apply volumes IMMEDIATELY to the stream (no lerp)
 	if layered_player and layered_player.stream is AudioStreamSynchronized:
@@ -164,7 +198,7 @@ func change_music_zone(zone_name: String):
 	current_zone = zone_name
 	
 	match zone_name.to_lower():
-		"default", "zone1":
+		"default", "musiczone1":
 			layer_volumes[0] = 0.0
 			layer_volumes[1] = -80.0
 			layer_volumes[2] = -80.0
@@ -193,10 +227,16 @@ func change_music_zone(zone_name: String):
 			layer_volumes[5] = 0.0
 			
 		# Volcano
-		"zone3", "musiczone3":
+		"zone4", "musiczone4":
 			layer_volumes[0] = 0.0
 			layer_volumes[1] = -80.0
 			layer_volumes[2] = -80.0
 			layer_volumes[3] = 0.0
 			layer_volumes[4] = 0.0
 			layer_volumes[5] = -80.0
+			
+	if layered_player and layered_player.stream is AudioStreamSynchronized:
+			var sync_stream = layered_player.stream as AudioStreamSynchronized
+			for layer_id in layer_volumes.keys():
+				sync_stream.set_sync_stream_volume(layer_id, layer_volumes[layer_id])
+				print("    Layer ", layer_id, " set to ", layer_volumes[layer_id], " dB instantly")

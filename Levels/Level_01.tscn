@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b4vyu7cnxpcba" path="res://Levels/level_01.gd" id="1_vn7jf"]
 [ext_resource type="PackedScene" uid="uid://d3xksmwdntvb5" path="res://Player.tscn" id="2_chua2"]
-[ext_resource type="Texture2D" uid="uid://cycxv01lj5wpt" path="res://Assets/images/Background_1_FG.png" id="3_5emyg"]
+[ext_resource type="Texture2D" uid="uid://dyhw5r3d13kws" path="res://Assets/images/Background_1_FG.png" id="3_5emyg"]
 [ext_resource type="PackedScene" uid="uid://bp5n4liitxa4p" path="res://a_mook.tscn" id="3_gjko5"]
 [ext_resource type="Texture2D" uid="uid://bxxjhsi2y1ftp" path="res://Assets/gui/Keyboard_WASD.PNG" id="3_yxpqp"]
 [ext_resource type="Script" uid="uid://bmkkv4bjwmqb2" path="res://SceneManager/ShowcaseItem.gd" id="4_dvpsv"]
@@ -198,6 +198,8 @@ startup_scene = ""
 
 [node name="AudioManager" parent="." unique_id=1900050100 instance=ExtResource("9_80d54")]
 unique_name_in_owner = true
+mute = false
+crossfade_time_ms = 2000.0
 
 [node name="MusicZone2" type="Area2D" parent="AudioManager" unique_id=1540613541]
 
