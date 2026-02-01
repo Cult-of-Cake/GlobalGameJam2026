@@ -190,6 +190,11 @@ func POooooOONCH():
 		%SnakePunching.play()
 		#Actual Punch is executed when the signal indicating the correct frame is received
 
+
+func _on_snake_punching_animation_finished() -> void:
+		punching = false;
+		hide_sprites()
+
 func _on_snake_punching_frame_changed() -> void:
 	if %SnakePunching.frame == 2:
 		var bodies = $ThePunchZone.get_overlapping_bodies()
@@ -239,6 +244,9 @@ func CheckFormSwap() -> void:
 		print(check_vertical_clearance())
 		check_horizontal_clearance()
 		
+		if currForm == FORM.SPIDER:
+			$CollisionShape2D.shape.radius = 27
+			$CollisionShape2D.shape.height = 55
 		if currForm == FORM.SNAKE:
 			$CollisionShape2D.shape.radius = 35
 			$CollisionShape2D.shape.height = 130
@@ -354,18 +362,6 @@ func SpriteRotate(sprite : Node, flip_h : bool, flip_v : bool = false, rotation 
 #endregion
 
 
-func _on_snake_punching_animation_finished() -> void:
-		punching = false;
-		hide_sprites()
-
-
-func _on_snake_punching_frame_changed() -> void:
-	if %SnakePunching.frame == 2:
-		var bodies = $ThePunchZone.get_overlapping_bodies()
-		for body in bodies:
-			if body.has_method("is_punchable") && body.is_punchable():
-				body.get_punched(facing)
-				
 
 #Audio group cooldown refill pool
 func _refill_pool(type: SfxType) -> void:
@@ -422,4 +418,3 @@ func check_horizontal_clearance():
 	else:
 		right = %CastRight.get_collision_point().x - global_position.x
 	return left + right
-
