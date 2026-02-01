@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://f1ybcp7koxbd"]
 
+[ext_resource type="Script" uid="uid://b4vyu7cnxpcba" path="res://Levels/level_01.gd" id="1_vn7jf"]
 [ext_resource type="PackedScene" uid="uid://d3xksmwdntvb5" path="res://Player.tscn" id="2_chua2"]
 [ext_resource type="PackedScene" uid="uid://bp5n4liitxa4p" path="res://a_mook.tscn" id="3_gjko5"]
 [ext_resource type="Script" uid="uid://cbih5a3e085ns" path="res://Code/Enemies/Wanderer.gd" id="4_kvphc"]
@@ -9,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c7dm13tuwl4c4" path="res://SceneManager/SceneManager.tscn" id="7_trksy"]
 
 [node name="Level_01" type="Node2D" unique_id=590419832]
+script = ExtResource("1_vn7jf")
 
 [node name="Player" parent="." unique_id=1625906938 instance=ExtResource("2_chua2")]
 unique_name_in_owner = true
@@ -43,30 +45,35 @@ position = Vector2(2458, 925)
 script = ExtResource("4_kvphc")
 startsLeft = true
 wanderSpeed = 40.0
+hitpoints = 1
 
 [node name="Mook_W2" parent="Enemies" unique_id=252804385 instance=ExtResource("3_gjko5")]
 position = Vector2(3006, 935)
 script = ExtResource("4_kvphc")
 startsLeft = true
 wanderSpeed = 40.0
+hitpoints = 1
 
 [node name="Mook_W3" parent="Enemies" unique_id=1335397018 instance=ExtResource("3_gjko5")]
 position = Vector2(3117, 935)
 script = ExtResource("4_kvphc")
 startsLeft = true
 wanderSpeed = 40.0
+hitpoints = 1
 
 [node name="Mook_W4" parent="Enemies" unique_id=1433745020 instance=ExtResource("3_gjko5")]
 position = Vector2(3220, 935)
 script = ExtResource("4_kvphc")
 startsLeft = true
 wanderSpeed = 40.0
+hitpoints = 1
 
 [node name="Mook_W5" parent="Enemies" unique_id=568217436 instance=ExtResource("3_gjko5")]
 position = Vector2(3340, 935)
 script = ExtResource("4_kvphc")
 startsLeft = true
 wanderSpeed = 40.0
+hitpoints = 1
 
 [node name="FlyingMook" parent="Enemies" unique_id=2118646747 instance=ExtResource("6_teea1")]
 position = Vector2(954, 1434)
