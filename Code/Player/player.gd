@@ -302,7 +302,6 @@ func diag_finished() -> void:
 func custom_on_ceiling():
 	var bodies = %SpiderCeiling.get_overlapping_bodies()
 	for body in bodies:
-		print(body)
 		if body.get_class() == "TileMap" && !stunned && (Input.is_action_pressed("ui_up") || Input.is_action_pressed("ui_left") || Input.is_action_pressed("ui_right") || crawling):
 			return true
 	return false
@@ -318,7 +317,7 @@ func IsFormAllowed(form : FORM):
 	while(index < globalForms.size()): 		
 		print("%d,%d,%s" % [(clearance[0] - FORM_SIZES[index][0]), (clearance[1] - FORM_SIZES[index][1]), globalForms[index]])
 		allowedForms.push_back((
-			((clearance[0] - FORM_SIZES[index][0]) > 0)
+			((clearance[0] - (2* FORM_SIZES[index][0])) > 0)
 			&& ((clearance[1] - FORM_SIZES[index][1]) > 0)
 			&& bool(globalForms[index])
 		))
@@ -414,6 +413,7 @@ func SpriteRotate(sprite : Node, flip_h : bool, flip_v : bool = false, rotation 
 
 func Die() -> void:
 	position = starting_position
+	hitpoints = MAX_HITPOINTS
 
 #Audio group cooldown refill pool
 func _refill_pool(type: SfxType) -> void:
