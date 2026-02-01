@@ -15,6 +15,8 @@ var active_zones := []
 func _ready():
 	setup_layered_music()
 	setup_music_zones()
+
+func StartBGMusic():
 	# Set default zone instantly (no crossfade)
 	set_zone_instant("default")
 
