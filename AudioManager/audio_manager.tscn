@@ -4,6 +4,8 @@
 
 [node name="AudioManager" type="Node2D" unique_id=1900050100]
 script = ExtResource("1_eufxx")
+mute = null
+crossfade_time_ms = null
 
 [node name="SFX_Player" type="AudioStreamPlayer" parent="." unique_id=1755937150]
 

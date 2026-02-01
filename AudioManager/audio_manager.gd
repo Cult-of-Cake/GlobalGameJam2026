@@ -51,10 +51,14 @@ func setup_layered_music():
 		return
 	
 	var sync_stream = AudioStreamSynchronized.new()
-	sync_stream.stream_count = 2
+	sync_stream.stream_count = 6
 	
-	var file1 = preload("res://Assets/audio/FieldMusicStem1.ogg")
-	var file2 = preload("res://Assets/audio/FieldMusicStem2.ogg")
+	var file1 = preload("res://Assets/audio/FieldMusicStem1.ogg") # Base
+	var file2 = preload("res://Assets/audio/FieldMusicStem2.ogg") # Forest/Jungle
+	var file3 = preload("res://Assets/audio/FieldMusicStem3.ogg") # Waterfall
+	var file4 = preload("res://Assets/audio/FieldMusicStem4.ogg") # Volcano
+	var file5 = preload("res://Assets/audio/FieldMusicStem5.ogg") # Vocal 1
+	var file6 = preload("res://Assets/audio/FieldMusicStem6.ogg") # Vocal 2
 	
 	print("=== AUDIO FILE CHECK ===")
 	print("File 1: ", file1.resource_path)
@@ -163,9 +167,36 @@ func change_music_zone(zone_name: String):
 		"default", "zone1":
 			layer_volumes[0] = 0.0
 			layer_volumes[1] = -80.0
-			print("  ✓ DEFAULT: Layer 0 = 0dB (ON), Layer 1 = -80dB (OFF)")
+			layer_volumes[2] = -80.0
+			layer_volumes[3] = -80.0
+			layer_volumes[4] = 0.0
+			layer_volumes[5] = -80.0
+			#print("  ✓ DEFAULT: Layer 0 = 0dB (ON), Layer 1 = -80dB (OFF)")
 
+		# Forest/Jungle
 		"zone2", "musiczone2":
 			layer_volumes[0] = 0.0
 			layer_volumes[1] = 0.0
-			print("  ✓ ZONE2: Layer 0 = 0dB (ON), Layer 1 = 0dB (ON)")
+			layer_volumes[2] = -80.0
+			layer_volumes[3] = -80.0
+			layer_volumes[4] = 0.0
+			layer_volumes[5] = -80.0
+			#print("  ✓ ZONE2: Layer 0 = 0dB (ON), Layer 1 = 0dB (ON)")
+			
+		# Waterfall
+		"zone3", "musiczone3":
+			layer_volumes[0] = 0.0
+			layer_volumes[1] = -80.0
+			layer_volumes[2] = 0.0
+			layer_volumes[3] = -80.0
+			layer_volumes[4] = 0.0
+			layer_volumes[5] = 0.0
+			
+		# Volcano
+		"zone3", "musiczone3":
+			layer_volumes[0] = 0.0
+			layer_volumes[1] = -80.0
+			layer_volumes[2] = -80.0
+			layer_volumes[3] = 0.0
+			layer_volumes[4] = 0.0
+			layer_volumes[5] = -80.0
