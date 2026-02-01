@@ -68,7 +68,7 @@ func _init(line : String):
 			opt_text = opt_text.substr(1)
 		opt_text = opt_text.strip_edges()
 		opt_destination = line.substr(arrow_posn + 2).strip_edges()
-		
+	
 	# Wait -- this one has to be before looking for a file
 	if line.begins_with("..."):
 		command_type = TYPE.WAIT

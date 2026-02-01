@@ -9,8 +9,16 @@
 [ext_resource type="Texture2D" uid="uid://4wsnnimqvplx" path="res://Assets/characters/Jeff Angry.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://c1j3ij6oc8sal" path="res://Assets/images/placeholder/Spider_Render_MCL.png" id="8_rrhmh"]
 [ext_resource type="Texture2D" uid="uid://cmq6wcg7knd5s" path="res://Assets/images/Logo Only.png" id="13"]
+[ext_resource type="PackedScene" uid="uid://cft4e1k72yhum" path="res://AudioManager/audio_manager.tscn" id="2_51u05"]
+[ext_resource type="Script" uid="uid://bmkkv4bjwmqb2" path="res://SceneManager/ShowcaseItem.gd" id="4_rrhmh"]
+[ext_resource type="Texture2D" uid="uid://cecwlpb65odp6" path="res://Assets/gui/option_button.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://dgng0xy7x7bun" path="res://Assets/characters/Spooder_Headshot.png" id="9_lcihg"]
+[ext_resource type="Texture2D" uid="uid://86hbq2hmgsnl" path="res://Assets/characters/Stickle_Headshot.png" id="10_d008f"]
+[ext_resource type="Texture2D" uid="uid://c5rr36y3rybey" path="res://Assets/characters/friends/snake_guardian.png" id="11_sqnnq"]
+[ext_resource type="Texture2D" uid="uid://dub5lvg2byphy" path="res://Assets/characters/friends/bird_guardian.png" id="12_a8f7x"]
+[ext_resource type="Texture2D" uid="uid://gd1fnebkahia" path="res://Assets/characters/friends/jelly_guardian.png" id="13_ra7tg"]
 
-[sub_resource type="FontFile" id="1"]
+[sub_resource type="FontFile" id="FontFile_sqnnq"]
 fallbacks = Array[Font]([ExtResource("6"), ExtResource("6")])
 subpixel_positioning = 0
 msdf_pixel_range = 14
@@ -31,9 +39,9 @@ cache/0/16/0/underline_thickness = 0.0
 cache/0/16/0/scale = 1.0
 
 [sub_resource type="Theme" id="2"]
-default_font = SubResource("1")
+default_font = SubResource("FontFile_sqnnq")
 /colors/Black = Color(0, 0, 0, 1)
-/fonts/Font = SubResource("1")
+/fonts/Font = SubResource("FontFile_sqnnq")
 
 [node name="SceneManager" type="CanvasLayer" unique_id=995662514]
 script = ExtResource("1")
@@ -55,7 +63,7 @@ centered = false
 centered = false
 
 [node name="Speaker_Background" type="ColorRect" parent="." unique_id=1405147047]
-visible = false
+unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.8)
 custom_minimum_size = Vector2(1000, 120)
 anchors_preset = 9
@@ -72,6 +80,13 @@ offset_top = 482.0
 offset_right = 998.0
 offset_bottom = 578.0
 autowrap_mode = 2
+
+[node name="Showcase_Icon" type="Sprite2D" parent="." unique_id=178848562]
+position = Vector2(953, 607)
+scale = Vector2(0.1, 0.1)
+script = ExtResource("4_rrhmh")
+Keyboard_Image = "Keyboard_ENTER"
+Controller_Image = "Keyboard_ENTER"
 
 [node name="Nametag_Background" type="ColorRect" parent="." unique_id=718579555]
 visible = false
@@ -179,7 +194,7 @@ offset_bottom = 206.0
 script = ExtResource("2")
 character_abbreviation = "M"
 character_full_name = "Merino"
-neutral_image = ExtResource("8_rrhmh")
+neutral_image = ExtResource("9_lcihg")
 emotion_keywords = Array[String](["serious"])
 emotion_images = Array[Texture2D]([ExtResource("3")])
 dialogue_colour = Color(0.207843, 0.12549, 0.392157, 1)
@@ -197,6 +212,7 @@ offset_bottom = 206.0
 script = ExtResource("2")
 character_abbreviation = "P"
 character_full_name = "Stickle"
+neutral_image = ExtResource("10_d008f")
 emotion_keywords = Array[String](["serious"])
 emotion_images = Array[Texture2D]([ExtResource("3")])
 dialogue_colour = Color(0.207843, 0.12549, 0.392157, 1)
@@ -214,6 +230,7 @@ offset_bottom = 206.0
 script = ExtResource("2")
 character_abbreviation = "G1"
 character_full_name = "Crewel"
+neutral_image = ExtResource("11_sqnnq")
 emotion_keywords = Array[String](["serious"])
 emotion_images = Array[Texture2D]([ExtResource("3")])
 dialogue_colour = Color(0.207843, 0.12549, 0.392157, 1)
@@ -231,6 +248,7 @@ offset_bottom = 206.0
 script = ExtResource("2")
 character_abbreviation = "G2"
 character_full_name = "Intarsia"
+neutral_image = ExtResource("12_a8f7x")
 emotion_keywords = Array[String](["serious"])
 emotion_images = Array[Texture2D]([ExtResource("3")])
 dialogue_colour = Color(0.207843, 0.12549, 0.392157, 1)
@@ -248,6 +266,7 @@ offset_bottom = 206.0
 script = ExtResource("2")
 character_abbreviation = "G3"
 character_full_name = "Douppion"
+neutral_image = ExtResource("13_ra7tg")
 emotion_keywords = Array[String](["serious"])
 emotion_images = Array[Texture2D]([ExtResource("3")])
 dialogue_colour = Color(0.207843, 0.12549, 0.392157, 1)
@@ -257,10 +276,10 @@ dialogue_fontsize = 28
 image_side = -1
 
 [node name="BranchOptions" type="GridContainer" parent="." unique_id=989443343]
-offset_left = 357.0
-offset_top = 420.0
-offset_right = 667.0
-offset_bottom = 619.0
+offset_left = 459.0
+offset_top = 202.0
+offset_right = 1015.0
+offset_bottom = 401.0
 
 [node name="TextureButton" type="TextureButton" parent="BranchOptions" unique_id=852512798]
 visible = false
@@ -277,3 +296,5 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "I AM BUTTON TOO"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="button_down" from="BranchOptions/TextureButton" to="." method="_on_texture_button_button_down"]

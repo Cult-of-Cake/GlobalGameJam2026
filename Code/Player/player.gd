@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -600.0
+const MAX_HITPOINTS = 5
 
 var facing = Global.FACING.RIGHT
 var metafloor = true
@@ -11,6 +12,8 @@ var invincible = false
 var stunned = false
 var crawling
 var direction
+var starting_position : Vector2 # Set in _ready
+var hitpoints = MAX_HITPOINTS
 
 var invincibleDuration = 2
 var stunDuration = 0.4
@@ -62,6 +65,7 @@ func _ready():
 	hide_sprites()
 	activate_sprites()
 	show_sprite(%SpiderStanding)
+	starting_position = position
 	
 	# Initialize state for every sound type for the grouped audio
 	for type in SFX_POOLS:
@@ -79,8 +83,12 @@ func get_hit(damage: int, direction: Vector2, force: int):
 	
 	if !invincible:
 		velocity = direction.normalized() * force
-		become_invincible()
-		become_stunned()
+		hitpoints -= damage
+		if (hitpoints <= 0):
+			Die()
+		else:
+			become_invincible()
+			become_stunned()
 		
 
 func become_invincible():
@@ -234,7 +242,12 @@ const FLY_MAX = 3
 func FormSetup() -> void:
 	for n in formSpriteNames:
 		formSprites.append(SceneManager.GetTexture("res://Assets/characters/", n, ".png"))
+		
+func FixTheGoddamnSpiderBox() -> void:
+	$CollisionShape2D.shape.radius = FORM_SIZES[FORM.SPIDER][0]
+	$CollisionShape2D.shape.height = FORM_SIZES[FORM.SPIDER][1]	
 	
+
 func CheckFormSwap() -> void:
 	
 	var prevForm = currForm
@@ -304,7 +317,7 @@ func IsFormAllowed(form : FORM):
 	while(index < globalForms.size()): 		
 		print("%d,%d,%s" % [(clearance[0] - FORM_SIZES[index][0]), (clearance[1] - FORM_SIZES[index][1]), globalForms[index]])
 		allowedForms.push_back((
-			((clearance[0] - FORM_SIZES[index][0]) > 0)
+			((clearance[0] - (2* FORM_SIZES[index][0])) > 0)
 			&& ((clearance[1] - FORM_SIZES[index][1]) > 0)
 			&& bool(globalForms[index])
 		))
@@ -328,7 +341,7 @@ func SwitchIfAllowed(form : FORM):
 @onready var all_sprites = [
 	%SpiderStanding, %SpiderWalking,
 	%SnakeStanding, %SnakeWalking, %SnakeJumping, %SnakePunching,
-	%BirdFlying,
+	%BirdFlying, %BirdStanding,
 	%JellyfishSwimming
 ]
 
@@ -382,7 +395,12 @@ func UpdateSprites():
 				if !stunned:
 					SpriteRotate(sprite, facing == Global.FACING.LEFT, false)
 		FORM.BIRD:
-			show_sprite(%BirdFlying)
+			if !is_on_floor():
+				SpriteRotate(%BirdFlying, facing == Global.FACING.LEFT)
+				show_sprite(%BirdFlying)
+			else:
+				SpriteRotate(%BirdStanding, facing == Global.FACING.LEFT)
+				show_sprite(%BirdStanding)
 		FORM.JELLYFISH:
 			show_sprite(%JellyfishSwimming)
 
@@ -394,8 +412,8 @@ func SpriteRotate(sprite : Node, flip_h : bool, flip_v : bool = false, rotation 
 #endregion
 
 func Die() -> void:
-	position.x -= 500
-	position.y = 500
+	position = starting_position
+	hitpoints = MAX_HITPOINTS
 
 #Audio group cooldown refill pool
 func _refill_pool(type: SfxType) -> void:

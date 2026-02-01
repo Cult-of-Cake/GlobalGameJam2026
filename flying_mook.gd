@@ -13,8 +13,10 @@ func _ready():
 func _physics_process(delta):
 	if direction == "LEFT":
 		velocity = Vector2(-1 * speed, 0)
+		$AnimatedSprite2D.flip_h = true
 	if direction == "RIGHT":
 		velocity = Vector2(speed, 0)
+		$AnimatedSprite2D.flip_h = false
 	if direction == "LEFT" && global_position.x < startPoint.x - leftRange:
 		direction = "RIGHT"
 	if direction == "RIGHT" && global_position.x > startPoint.x +  rightRange:

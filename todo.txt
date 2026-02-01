@@ -2,8 +2,11 @@
 Sounds:
 	Do the same in enemy
 	Update dictionary for enemy sounds
-
+	Add sound colliders
 
 
 MOAR COMMUNICATION
-"Enter to continue" on the UI
+	Some images (showcase icons) appear after talking to people
+	Hitpoint visuals
+
+

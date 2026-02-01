@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://ds4vv2agvuudc"]
 
 [ext_resource type="Script" uid="uid://sbwbt33wba62" path="res://flying_mook.gd" id="1_bqw8s"]
-[ext_resource type="Texture2D" uid="uid://4wsnnimqvplx" path="res://Assets/characters/Jeff Angry.png" id="2_wmbaa"]
+[ext_resource type="Texture2D" uid="uid://xcpqyq8oxpak" path="res://Assets/characters/enemies/MunchMoth1.png" id="2_wmbaa"]
+[ext_resource type="Texture2D" uid="uid://bniwf3v6m8g7b" path="res://Assets/characters/enemies/MunchMoth2.png" id="3_jh8ya"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jh8ya"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_wmbaa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jh8ya")
 }],
 "loop": true,
 "name": &"default",
@@ -28,6 +32,7 @@ script = ExtResource("1_bqw8s")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1615610864]
 scale = Vector2(0.6328125, 0.59375)
 sprite_frames = SubResource("SpriteFrames_jh8ya")
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=216383958]
 shape = SubResource("RectangleShape2D_ypttl")

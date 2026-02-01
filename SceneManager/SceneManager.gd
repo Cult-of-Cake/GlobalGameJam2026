@@ -11,7 +11,7 @@ const incr_size = 0.1 # time in seconds between checking for a Wait to be cancel
 @export var sprite_path = "Assets/characters/"
 @export var font_path = "Assets/fonts/"
 @export var wait_after_dialogue : bool = true
-@export var startup_scene = ""
+@export var startup_scene = "Title"
 
 # ==== Main functions & variables =================================================================
 
@@ -47,7 +47,7 @@ func _ready():
 	LoadAllScripts()
 	FillCharacterArray()
 	mode = MODES.READY
-	if startup_scene != "":
+	if startup_scene != null and startup_scene != "":
 		BeginScene(startup_scene)
 
 func _physics_process(delta):
@@ -109,7 +109,7 @@ func LoadAllScripts():
 				LoadScript(script_name)
 		dir.list_dir_end()
 	else:
-		print("!!!Error opening " + script_path + "!!!")
+		print("!!!Error opening %s!!!" % script_path)
 
 func LoadScript(script_name):
 	print("   Loading ", script_name)
@@ -202,7 +202,8 @@ func Continue():
 	if mode == MODES.WAITING:
 		mode = MODES.RUNNING
 func _input(event):
-	if event.is_action_pressed("ui_skip") or event.is_action_pressed("ui_accept"):
+	if (event.is_action_pressed("ui_skip")
+		or event.is_action_pressed("ui_accept")):
 		Continue()
 	if event.is_action_pressed("ui_click") and visible == true:
 		Continue()
@@ -213,6 +214,7 @@ func _input(event):
 
 # The main one
 func BeginScene(script_name):
+	print("begin")
 	$BG_Image.visible = false
 	$BranchOptions.visible = false
 	$Character_Left.texture = null
@@ -406,3 +408,7 @@ func option_button_pressed(scene):
 #
 #func GetCharacter(abbr : String):
 #	pass
+
+
+func _on_texture_button_button_down() -> void:
+	get_tree().change_scene_to_file("res://Levels/Level_01.tscn")

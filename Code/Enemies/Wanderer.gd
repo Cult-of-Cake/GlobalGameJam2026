@@ -44,15 +44,6 @@ func _process(delta):
 	if foundMove && !punched:
 		velocity.x = currDir * wanderSpeed
 
-#func UpdateSprites():
-#		if currDir == LEFT:
-#			facing = FACING.LEFT
-#		else:
-#			facing = FACING.RIGHT
-#		$AnimatedSprite2D.sprite.flip_h = false if facing == FACING.LEFT else true
-#		print($AnimatedSprite2D.sprite.flip_h)
-	
-
 func _on_wall_finder_right_body_entered(body: Node2D) -> void:
 	if body.get_class() == "TileMap" || (body.has_method("is_enemy") && body.is_enemy()):
 	#if (body.has_method("is_enemy") && body.is_enemy()):
@@ -61,9 +52,7 @@ func _on_wall_finder_right_body_entered(body: Node2D) -> void:
 		currDir = LEFT
 
 func _on_wall_finder_left_body_entered(body: Node2D) -> void:
-	print("entered")
 	if body.get_class() == "TileMap" || (body.has_method("is_enemy") && body.is_enemy()):
 	#if (body.has_method("is_enemy") && body.is_enemy()):
-		print("happen")
 		velocity.x = wanderSpeed
 		currDir = RIGHT
