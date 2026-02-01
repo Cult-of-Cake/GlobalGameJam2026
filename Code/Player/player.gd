@@ -54,9 +54,9 @@ func _unhandled_input(event):
 	if event.get_class() == "InputEventKey":
 		if event.keycode == 4194326 && event.pressed == true:
 			if facing == Global.FACING.RIGHT:
-				$ThePunchZone.position.x = 43
+				$ThePunchZone.position.x = 48
 			else:
-				$ThePunchZone.position.x = -43
+				$ThePunchZone.position.x = -48
 			await get_tree().create_timer(0.1).timeout
 			POooooOONCH()
 
