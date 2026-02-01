@@ -55,6 +55,8 @@ var _cooldowns: Dictionary = {}
 
 func _ready():
 	Global.landed.connect(land)
+	Global.dialogue_started.connect(diag_started)
+	Global.dialogue_finished.connect(diag_finished)
 	
 	FormSetup()
 	hide_sprites()
@@ -109,6 +111,9 @@ func _unhandled_input(event):
 			POooooOONCH()
 
 func _physics_process(delta: float) -> void:
+	if isDialogGoing:
+		return
+	
 	# Tick down all audio group cooldowns each frame
 	for type in _cooldowns:
 		_cooldowns[type] = maxf(0.0, _cooldowns[type] - delta)
@@ -138,8 +143,7 @@ func _physics_process(delta: float) -> void:
 			
 	if (currPhysics == PHYSICS.JUMP or currPhysics == PHYSICS.FLY):
 		if not is_on_floor():
-			velocity += get_gravity() * delta
-				
+			velocity += get_gravity() * delta				
 	elif (currPhysics == PHYSICS.SWIM):
 		if not is_on_floor():
 			velocity += get_gravity() * delta / 3
@@ -174,10 +178,14 @@ func _physics_process(delta: float) -> void:
 				facing = Global.FACING.DOWN
 		else:
 			velocity.y = move_toward(velocity.y, 0, SPEED)
-		
+	
+	if position.x < 0:
+		position.x = 0
+		velocity.x = 0
+	
 	# Die code
 	if global_position.y > 2000:
-		get_tree().quit()
+		Die()
 
 	UpdateSprites()
 	move_and_slide()
@@ -266,6 +274,13 @@ func CheckFormSwap() -> void:
 func land():
 	hide_sprites()
 	$SpiderStanding.visible = true
+
+var isDialogGoing : bool = false
+func diag_started() -> void:
+	isDialogGoing = true
+func diag_finished() -> void:
+	isDialogGoing = false
+	
 
 func custom_on_ceiling():
 	var bodies = %SpiderCeiling.get_overlapping_bodies()
@@ -361,7 +376,9 @@ func SpriteRotate(sprite : Node, flip_h : bool, flip_v : bool = false, rotation 
 
 #endregion
 
-
+func Die() -> void:
+	position.x -= 500
+	position.y = 500
 
 #Audio group cooldown refill pool
 func _refill_pool(type: SfxType) -> void:
