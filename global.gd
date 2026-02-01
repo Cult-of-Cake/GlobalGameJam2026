@@ -2,10 +2,18 @@ extends Node
 
 enum FACING { LEFT, RIGHT, UP, DOWN } # Up and down are ONLY spider form
 #region signals
+@warning_ignore("unused_signal")
 signal landed()
 
+@warning_ignore("unused_signal")
 signal dialogue_started
+@warning_ignore("unused_signal")
 signal dialogue_finished
+
+@warning_ignore("unused_signal")
+signal controller_used
+@warning_ignore("unused_signal")
+signal keyboard_used
 
 #endregion
 
@@ -21,12 +29,3 @@ func SetVar(v, to):
 	Global.variables[v] = to
 	print(Global.variables)
 #endregion
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
