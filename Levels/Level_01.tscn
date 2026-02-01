@@ -16,6 +16,7 @@
 [ext_resource type="SpriteFrames" uid="uid://cdxky1x2m60fe" path="res://Assets/characters/friends/sign.tres" id="9_0vjly"]
 [ext_resource type="PackedScene" uid="uid://cft4e1k72yhum" path="res://AudioManager/audio_manager.tscn" id="9_80d54"]
 [ext_resource type="Texture2D" uid="uid://uho65kt5j0we" path="res://Assets/images/Background_1_BG.png" id="9_ufi5d"]
+[ext_resource type="Texture2D" uid="uid://bpgcbvvejmayf" path="res://Assets/gui/or.png" id="9_yt1eu"]
 [ext_resource type="SpriteFrames" uid="uid://t8bij5vbk4lo" path="res://Assets/characters/friends/stick.tres" id="10_5emyg"]
 [ext_resource type="Script" path="res://Code/LevelSign.gd" id="11_dih6j"]
 [ext_resource type="PackedScene" uid="uid://4i6oo50wk672" path="res://Levels/level_02.tscn" id="12_2rui6"]
@@ -61,7 +62,7 @@ Keyboard_Image = "Keyboard_W"
 Controller_Image = "Keyboard_W"
 
 [node name="E" type="Sprite2D" parent="Key Showcase" unique_id=1123708227]
-position = Vector2(2030.5095, 615.7551)
+position = Vector2(1989.4589, 615.7551)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("5_dvpsv")
 script = ExtResource("4_dvpsv")
@@ -91,6 +92,11 @@ texture = ExtResource("5_dvpsv")
 script = ExtResource("4_dvpsv")
 Keyboard_Image = "Keyboard_2"
 Controller_Image = "Keyboard_2"
+
+[node name="Or" type="Sprite2D" parent="Key Showcase" unique_id=1790705724]
+position = Vector2(2038.5195, 618.7735)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("9_yt1eu")
 
 [node name="Player" parent="." unique_id=1625906938 instance=ExtResource("2_chua2")]
 unique_name_in_owner = true
