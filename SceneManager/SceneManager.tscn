@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://br6imui04o0nk" path="res://Assets/fonts/MaidenOrange-Regular.ttf" id="6"]
 [ext_resource type="Texture2D" uid="uid://xp5jg28lnp5p" path="res://Assets/characters/Jeff.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://4wsnnimqvplx" path="res://Assets/characters/Jeff Angry.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://c1j3ij6oc8sal" path="res://Assets/images/placeholder/Spider_Render_MCL.png" id="8_rrhmh"]
 [ext_resource type="Texture2D" uid="uid://cmq6wcg7knd5s" path="res://Assets/images/Logo Only.png" id="13"]
 
 [sub_resource type="FontFile" id="1"]
@@ -182,6 +183,7 @@ offset_bottom = 206.0
 script = ExtResource("2")
 character_abbreviation = "M"
 character_full_name = "Merino"
+neutral_image = ExtResource("8_rrhmh")
 emotion_keywords = Array[String](["serious"])
 emotion_images = Array[Texture2D]([ExtResource("3")])
 dialogue_colour = Color(0.207843, 0.12549, 0.392157, 1)
