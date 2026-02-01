@@ -15,9 +15,10 @@ var direction
 var invincibleDuration = 2
 var stunDuration = 0.4
 
-#Audio
-enum SfxType { HURT, ATTACK, JUMP }
+# Audio stuff for things with multiple sounds
+enum SfxType { HURT, ATTACK, JUMP, FLAP }
 
+# Dictionary keeps track of which thing has which sounds
 const SFX_POOLS: Dictionary = {
 	SfxType.HURT: [
 		"res://Assets/audio/HurtSound1.wav",
@@ -32,6 +33,11 @@ const SFX_POOLS: Dictionary = {
 	SfxType.JUMP: [
 		"res://Assets/audio/JumpSound1.wav",
 		"res://Assets/audio/JumpSound2.wav",
+		"res://Assets/audio/JumpSound3.wav",
+	],
+	SfxType.FLAP: [
+		"res://Assets/audio/BirdFlap1.wav",
+		"res://Assets/audio/BirdFlap2.wav",
 	],
 }
 
@@ -39,10 +45,12 @@ var _pools: Dictionary = {}
 var _last_sounds: Dictionary = {}
 var _cooldowns: Dictionary = {}
 
+# Makes sure audio won't play in rapid succession and screw up
 @export var COOLDOWNS: Dictionary = {
 	SfxType.HURT: 0.8,
 	SfxType.ATTACK: 1,
 	SfxType.JUMP: 0.3,
+	SfxType.FLAP: 1,
 }
 
 func _ready():
@@ -53,7 +61,7 @@ func _ready():
 	activate_sprites()
 	show_sprite(%SpiderStanding)
 	
-	# Initialize state for every sound type
+	# Initialize state for every sound type for the grouped audio
 	for type in SFX_POOLS:
 		_pools[type] = []
 		_last_sounds[type] = ""
@@ -65,7 +73,7 @@ func is_player():
 
 func get_hit(damage: int, direction: Vector2, force: int):
 	
-	play_sound_group(SfxType.HURT)
+	play_sound_group(SfxType.HURT) #play damage sfx grouping
 	
 	if !invincible:
 		velocity = direction.normalized() * force
@@ -101,7 +109,7 @@ func _unhandled_input(event):
 			POooooOONCH()
 
 func _physics_process(delta: float) -> void:
-	# Tick down all cooldowns each frame
+	# Tick down all audio group cooldowns each frame
 	for type in _cooldowns:
 		_cooldowns[type] = maxf(0.0, _cooldowns[type] - delta)
 	
@@ -111,9 +119,11 @@ func _physics_process(delta: float) -> void:
 			if flyCount < FLY_MAX:
 				flyCount += 1
 				velocity.y = JUMP_VELOCITY * 1.5
+				play_sound_group(SfxType.FLAP) #play flying sfx grouping
 	elif (currPhysics == PHYSICS.JUMP):
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
+			play_sound_group(SfxType.JUMP) #play jump sfx grouping
 	
 	# Add the gravity.
 	if !metafloor && is_on_floor():
@@ -130,6 +140,7 @@ func _physics_process(delta: float) -> void:
 		if not is_on_floor():
 			print(velocity.y)
 			velocity += get_gravity() * delta
+				
 	elif (currPhysics == PHYSICS.SWIM):
 		if not is_on_floor():
 			velocity += get_gravity() * delta / 3
@@ -175,7 +186,7 @@ func _physics_process(delta: float) -> void:
 func POooooOONCH():
 	if(!punching && currForm == FORM.SNAKE):
 		punching = true;
-		play_sound_group(SfxType.ATTACK)
+		play_sound_group(SfxType.ATTACK) #play attack sfx grouping
 		%SnakePunching.stop()
 		%SnakePunching.play()
 		#Actual Punch is executed when the signal indicating the correct frame is received
@@ -222,10 +233,14 @@ func CheckFormSwap() -> void:
 		if currForm == FORM.SNAKE:
 			$CollisionShape2D.shape.radius = 35
 			$CollisionShape2D.shape.height = 130
-			%AudioManager.play_sfx("res://Assets/audio/SnakeMaskActivate.wav")
+			%AudioManager.play_sfx("res://Assets/audio/SnakeMaskActivate.wav") #play snake mask activation sfx
 		if currForm == FORM.SPIDER:
 			$CollisionShape2D.shape.radius = 27.5
 			$CollisionShape2D.shape.height = 55
+		if currForm == FORM.JELLYFISH:
+			%AudioManager.play_sfx("res://Assets/audio/BlubMaskActivate.wav") #play jellyfish mask activation sfx
+		if currForm == FORM.BIRD:
+			%AudioManager.play_sfx("res://Assets/audio/BirdMaskActivate.wav") #play bird mask activation sfx
 		
 		if (currPhysics != PHYSICS.FLY):
 			flyCount = 0
@@ -341,6 +356,7 @@ func _on_snake_punching_frame_changed() -> void:
 				body.get_punched(facing)
 				
 
+#Audio group cooldown refill pool
 func _refill_pool(type: SfxType) -> void:
 	var pool: Array = _pools[type]
 	pool.assign(SFX_POOLS[type])
@@ -354,6 +370,7 @@ func _refill_pool(type: SfxType) -> void:
 
 	_pools[type] = pool
 	
+# Play grouping of audio based on dictionary type called
 func play_sound_group(type: SfxType) -> void:
 	var cooldown: float = _cooldowns[type]
 	if cooldown > 0.0:
