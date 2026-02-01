@@ -62,7 +62,7 @@ size = Vector2(51, 32.5)
 size = Vector2(52.5, 33)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3g0b1"]
-size = Vector2(35, 35)
+size = Vector2(145, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2nk0t"]
 size = Vector2(137, 43)
@@ -80,6 +80,7 @@ libraries/ = SubResource("AnimationLibrary_2y4ht")
 position = Vector2(-62, 13)
 
 [node name="WallFinder" type="CollisionShape2D" parent="WallFinderLeft" unique_id=108727133]
+visible = false
 position = Vector2(-20.5, -3)
 shape = SubResource("RectangleShape2D_i1wbi")
 
@@ -87,14 +88,14 @@ shape = SubResource("RectangleShape2D_i1wbi")
 position = Vector2(34, 12)
 
 [node name="WallFinder" type="CollisionShape2D" parent="WallFinderRight" unique_id=1881624978]
+visible = false
 position = Vector2(25.25, 0)
 shape = SubResource("RectangleShape2D_2y4ht")
 
 [node name="PlayerBonker" type="Area2D" parent="." unique_id=55646579]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBonker" unique_id=461506179]
-position = Vector2(-0.5, -0.5)
+position = Vector2(-16, 10)
 shape = SubResource("RectangleShape2D_3g0b1")
 
 [node name="Raycasts" type="Node2D" parent="." unique_id=1300242030]
