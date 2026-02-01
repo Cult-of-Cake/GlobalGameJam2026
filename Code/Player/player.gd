@@ -146,7 +146,7 @@ func _on_snake_punching_frame_changed() -> void:
 enum FORM { SPIDER, SNAKE, BIRD, JELLYFISH }
 var currForm = FORM.SPIDER
 
-enum PHYSICS { JUMP, FLY, CRAWL, SWIM }
+enum PHYSICS { CRAWL , JUMP, FLY, SWIM }
 var formPhysics = [ PHYSICS.CRAWL, PHYSICS.JUMP, PHYSICS.FLY, PHYSICS.SWIM ]
 var currPhysics = formPhysics[currForm]
 
@@ -187,9 +187,16 @@ func CheckFormSwap() -> void:
 		if currForm == FORM.SNAKE:
 			$CollisionShape2D.shape.radius = 35
 			$CollisionShape2D.shape.height = 130
+		if currForm == FORM.BIRD:
+			$CollisionShape2D.shape.radius = 62
+			$CollisionShape2D.shape.height = 124
+		if currForm == FORM.JELLYFISH:
+			$CollisionShape2D.shape.radius = 44
+			$CollisionShape2D.shape.height = 140
 		if currForm == FORM.SPIDER:
 			$CollisionShape2D.shape.radius = 27.5
 			$CollisionShape2D.shape.height = 55
+		
 		
 		if (currPhysics != PHYSICS.FLY):
 			flyCount = 0
@@ -212,7 +219,7 @@ func IsFormAllowed(form : FORM):
 
 func CycleUntilAllowed(dir : int):
 	while true: # This forces at least one iteration, like a do-while (which Godot lacks)
-		currForm = (currForm as int + dir) % FORM.size() as FORM
+		currForm = (currForm as int + dir + 4) % FORM.size() as FORM
 		if IsFormAllowed(currForm):
 			break
 

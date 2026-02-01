@@ -22,7 +22,6 @@ config/icon="uid://h27oiuqkr4bh"
 
 [autoload]
 
-SoundManager="*res://addons/sound_manager/module/SoundManager.tscn"
 Global="*uid://dae50w7cob14a"
 
 [display]
