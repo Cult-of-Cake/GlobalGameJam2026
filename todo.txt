@@ -2,8 +2,8 @@
 Sounds:
 	Do the same in enemy
 	Update dictionary for enemy sounds
+	Add sound colliders
 
-Backgrounds
 
 MOAR COMMUNICATION
 	"or"
@@ -11,7 +11,4 @@ MOAR COMMUNICATION
 
 Non-climbable surfaces
 
-HP death
 
-
-Add sound colliders
