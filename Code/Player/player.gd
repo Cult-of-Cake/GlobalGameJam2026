@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -600.0
 
 var facing = Global.FACING.RIGHT
 var metafloor = true
@@ -85,7 +85,6 @@ func _physics_process(delta: float) -> void:
 			
 	if (currPhysics == PHYSICS.JUMP or currPhysics == PHYSICS.FLY):
 		if not is_on_floor():
-			pass
 			print(velocity.y)
 			velocity += get_gravity() * delta
 	elif (currPhysics == PHYSICS.SWIM):
@@ -94,7 +93,6 @@ func _physics_process(delta: float) -> void:
 	elif currPhysics == PHYSICS.CRAWL:
 		if stunned || !crawling:
 			velocity += get_gravity() * delta
-
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -112,7 +110,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		pass
 	if currPhysics == PHYSICS.CRAWL and crawling:
 		var updir := Input.get_axis("ui_up", "ui_down")
 		if updir && (%SpiderWallLeft.is_colliding() || %SpiderWallRight.is_colliding() || custom_on_ceiling()):

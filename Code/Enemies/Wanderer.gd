@@ -36,3 +36,13 @@ func _process(delta):
 			currDir *= -1 # Try the other way
 	if foundMove:
 		velocity.x = currDir * wanderSpeed #move_toward(currDir * speed, 0, speed)
+
+func _on_wall_finder_right_body_entered(body: Node2D) -> void:
+	if body.get_class() == "TileMap":
+		velocity.x = wanderSpeed * -1
+		currDir = LEFT
+
+func _on_wall_finder_left_body_entered(body: Node2D) -> void:
+	if body.get_class() == "TileMap":
+		velocity.x = wanderSpeed
+		currDir = RIGHT
