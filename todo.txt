@@ -9,8 +9,6 @@ MOAR COMMUNICATION
 	"or"
 	Some images (showcase icons) appear after talking to people
 
-flight - ask Jessie to communicate this
-
 Non-climbable surfaces
 
 HP death

@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://ds4vv2agvuudc" path="res://flying_mook.tscn" id="7_t7xqb"]
 [ext_resource type="PackedScene" uid="uid://c7dm13tuwl4c4" path="res://SceneManager/SceneManager.tscn" id="8_3k1mf"]
 [ext_resource type="Script" uid="uid://cbih5a3e085ns" path="res://Code/Enemies/Wanderer.gd" id="8_ffslo"]
-[ext_resource type="Script" uid="uid://diu3urcvjpvhl" path="res://Code/LevelSign.gd" id="8_t7xqb"]
+[ext_resource type="Script" path="res://Code/LevelSign.gd" id="8_t7xqb"]
 [ext_resource type="SpriteFrames" uid="uid://b1pjb38u2heqj" path="res://Assets/characters/friends/levelflag.tres" id="9_3k1mf"]
 [ext_resource type="PackedScene" uid="uid://cft4e1k72yhum" path="res://AudioManager/audio_manager.tscn" id="9_dnmew"]
 [ext_resource type="PackedScene" uid="uid://dqwkwarqpm680" path="res://a_friend.tscn" id="9_vkhwo"]
@@ -24,18 +24,18 @@ script = ExtResource("1_dnmew")
 
 [node name="Background1" type="TextureRect" parent="." unique_id=1326388335]
 offset_left = -5.0061874
-offset_top = -954.8229
+offset_top = -2277.8916
 offset_right = 4090.994
-offset_bottom = 45.177124
-scale = Vector2(2, 2)
+offset_bottom = 722.1084
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_t7xqb")
 
 [node name="Parallax" type="TextureRect" parent="." unique_id=720512233]
 offset_left = -5.0061874
-offset_top = -954.8229
+offset_top = -2277.8916
 offset_right = 4090.994
-offset_bottom = 45.177124
-scale = Vector2(2, 2)
+offset_bottom = 722.1084
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_t7xqb")
 
 [node name="Key Showcase" type="Node2D" parent="." unique_id=574902345]
