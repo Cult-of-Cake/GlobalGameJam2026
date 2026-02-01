@@ -41,23 +41,16 @@ default_font = SubResource("1")
 /fonts/Font = SubResource("1")
 
 [node name="SceneManager" type="CanvasLayer" unique_id=995662514]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 274.0
-grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("1")
 
 [node name="BG_Image" type="TextureRect" parent="." unique_id=956105179]
-layout_mode = 0
 offset_right = 1024.0
 offset_bottom = 600.0
 expand_mode = 1
 stretch_mode = 5
 
 [node name="AudioManager" parent="." unique_id=1900050100 instance=ExtResource("2_51u05")]
+unique_name_in_owner = true
 
 [node name="Game_Title" type="Sprite2D" parent="." unique_id=289730291]
 position = Vector2(512, 0)
@@ -73,7 +66,7 @@ centered = false
 visible = false
 modulate = Color(1, 1, 1, 0.8)
 custom_minimum_size = Vector2(1000, 120)
-layout_mode = 0
+anchors_preset = 9
 anchor_bottom = 1.0
 offset_left = 12.0
 offset_top = 470.0
@@ -82,7 +75,6 @@ offset_bottom = -10.0
 color = Color(0.333333, 0.133333, 0.133333, 1)
 
 [node name="Speaker_Text" type="Label" parent="." unique_id=1070371824]
-layout_mode = 0
 offset_left = 24.0
 offset_top = 482.0
 offset_right = 998.0
@@ -93,7 +85,7 @@ autowrap_mode = 2
 visible = false
 modulate = Color(1, 1, 1, 0.8)
 custom_minimum_size = Vector2(1000, 120)
-layout_mode = 0
+anchors_preset = 9
 anchor_bottom = 1.0
 offset_left = 20.0
 offset_top = 440.0
@@ -103,7 +95,6 @@ scale = Vector2(0.205, 0.25)
 color = Color(0.333333, 0.133333, 0.133333, 1)
 
 [node name="Nametag_text" type="Label" parent="." unique_id=1545474577]
-layout_mode = 0
 offset_left = 22.0
 offset_top = 440.0
 offset_right = 227.225
@@ -306,7 +297,7 @@ emotion_keywords = Array[String](["ANGRY"])
 emotion_images = Array[Texture2D]([ExtResource("8")])
 dialogue_fontname = "CaveatBrush-Regular.ttf"
 
-[node name="Merino" type="Control" parent="Characters" unique_id="Merino"]
+[node name="Merino" type="Control" parent="Characters" unique_id=2018708822]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 3.0
@@ -324,7 +315,7 @@ dialogue_fontname = "MaidenOrange-Regular.ttf"
 dialogue_fontsize = 28
 image_side = -1
 
-[node name="Stickle" type="Control" parent="Characters" unique_id="Stickle"]
+[node name="Stickle" type="Control" parent="Characters" unique_id=1604595550]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 3.0
@@ -342,7 +333,7 @@ dialogue_fontname = "MaidenOrange-Regular.ttf"
 dialogue_fontsize = 28
 image_side = -1
 
-[node name="Crewel" type="Control" parent="Characters" unique_id="Crewel"]
+[node name="Crewel" type="Control" parent="Characters" unique_id=798383442]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 3.0
@@ -360,7 +351,7 @@ dialogue_fontname = "MaidenOrange-Regular.ttf"
 dialogue_fontsize = 28
 image_side = -1
 
-[node name="Intarsia" type="Control" parent="Characters" unique_id="Intarsia"]
+[node name="Intarsia" type="Control" parent="Characters" unique_id=559956621]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 3.0
@@ -378,7 +369,7 @@ dialogue_fontname = "MaidenOrange-Regular.ttf"
 dialogue_fontsize = 28
 image_side = -1
 
-[node name="Douppion" type="Control" parent="Characters" unique_id="Douppion"]
+[node name="Douppion" type="Control" parent="Characters" unique_id=1500506686]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 3.0
@@ -396,9 +387,7 @@ dialogue_fontname = "MaidenOrange-Regular.ttf"
 dialogue_fontsize = 28
 image_side = -1
 
-
 [node name="BranchOptions" type="GridContainer" parent="." unique_id=989443343]
-layout_mode = 0
 offset_left = 357.0
 offset_top = 420.0
 offset_right = 667.0
