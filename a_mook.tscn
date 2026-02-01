@@ -101,13 +101,13 @@ shape = SubResource("RectangleShape2D_3g0b1")
 
 [node name="EdgeCheckerR" type="RayCast2D" parent="Raycasts" unique_id=340186985]
 unique_name_in_owner = true
-position = Vector2(93, 33)
-target_position = Vector2(0, 18)
+position = Vector2(74, 26)
+target_position = Vector2(0, 20)
 
 [node name="EdgeCheckerL" type="RayCast2D" parent="Raycasts" unique_id=1103997558]
 unique_name_in_owner = true
-position = Vector2(-116, 32)
-target_position = Vector2(0, 19)
+position = Vector2(-96, 26)
+target_position = Vector2(0, 20)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=592759732]
 position = Vector2(-15.5, 10.5)

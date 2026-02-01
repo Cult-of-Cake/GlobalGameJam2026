@@ -41,12 +41,6 @@ script = ExtResource("4_vrra7")
 startsLeft = true
 wanderSpeed = 40.0
 
-[node name="AMook2" parent="." unique_id=2138565092 instance=ExtResource("3_76pfe")]
-position = Vector2(333, 283)
-script = ExtResource("4_vrra7")
-startsLeft = true
-wanderSpeed = 40.0
-
 [node name="YappingJackass" parent="." unique_id=885884671 instance=ExtResource("5_sfdqf")]
 position = Vector2(189, 429)
 dialogue_script = "AngryFluff"
