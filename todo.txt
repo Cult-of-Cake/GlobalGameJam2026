@@ -6,4 +6,4 @@ Sounds:
 
 
 MOAR COMMUNICATION
-"Enter to continue" on the UI
+Shouldn't be able to start a new dialogue while already in one

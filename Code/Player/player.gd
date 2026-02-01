@@ -395,7 +395,7 @@ func SpriteRotate(sprite : Node, flip_h : bool, flip_v : bool = false, rotation 
 
 func Die() -> void:
 	position.x -= 500
-	position.y = 500
+	position.y = 1500
 
 #Audio group cooldown refill pool
 func _refill_pool(type: SfxType) -> void:
