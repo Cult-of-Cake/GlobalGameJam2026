@@ -55,10 +55,10 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i1wbi"]
-size = Vector2(26.5, 32.5)
+size = Vector2(13.25, 32.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2y4ht"]
-size = Vector2(29.25, 33)
+size = Vector2(12.625, 33)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3g0b1"]
 size = Vector2(145, 50)
@@ -78,21 +78,25 @@ libraries/ = SubResource("AnimationLibrary_ewajw")
 [node name="WallFinderLeft" type="Area2D" parent="." unique_id=1183658105]
 position = Vector2(-90, 13)
 collision_layer = 0
-collision_mask = 4
+collision_mask = 5
 
 [node name="WallFinder" type="CollisionShape2D" parent="WallFinderLeft" unique_id=108727133]
+position = Vector2(-6.625, 0)
 shape = SubResource("RectangleShape2D_i1wbi")
 
 [node name="WallFinderRight" type="Area2D" parent="." unique_id=822060177]
 position = Vector2(90, 12)
 collision_layer = 0
-collision_mask = 4
+collision_mask = 5
 
 [node name="WallFinder" type="CollisionShape2D" parent="WallFinderRight" unique_id=1881624978]
+position = Vector2(8.3125, 0)
 shape = SubResource("RectangleShape2D_2y4ht")
 
 [node name="PlayerBonker" type="Area2D" parent="." unique_id=55646579]
 position = Vector2(-15, 10)
+collision_layer = 0
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBonker" unique_id=461506179]
 shape = SubResource("RectangleShape2D_3g0b1")
