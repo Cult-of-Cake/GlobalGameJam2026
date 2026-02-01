@@ -6,6 +6,9 @@ var damage = 2
 var bonkPower = 200
 var punched = false
 
+func _ready() -> void:
+	$AnimatedSprite2D.play()
+
 func bonk():
 	var bodies = $PlayerBonker.get_overlapping_bodies()
 	for body in bodies:

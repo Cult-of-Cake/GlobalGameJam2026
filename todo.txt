@@ -1,4 +1,8 @@
 
+#1 Merge Tara's branch
+	Same in enemy
+	Update dictionary for enemy sounds
+
 
 Form shift checks if you "fit"
 

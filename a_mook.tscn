@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dddbiobk2r8ve" path="res://Assets/characters/enemies/mouse_walk1.png" id="2_3g0b1"]
 [ext_resource type="Texture2D" uid="uid://c3tu2ouees5n4" path="res://Assets/characters/enemies/mouse_walk2.png" id="3_2y4ht"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_i1wbi"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_3g0b1"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -17,43 +17,6 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
-
-[sub_resource type="Animation" id="Animation_i1wbi"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_3g0b1"]
-resource_name = "get hit"
-length = 1.0333333
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2y4ht"]
-_data = {
-&"RESET": SubResource("Animation_i1wbi"),
-&"get hit": SubResource("Animation_3g0b1")
-}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i1wbi"]
 size = Vector2(51, 32.5)
@@ -70,11 +33,8 @@ size = Vector2(137, 43)
 [node name="AMook" type="CharacterBody2D" unique_id=1041484247]
 script = ExtResource("1_t6wmc")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1844304917]
-sprite_frames = SubResource("SpriteFrames_i1wbi")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=2010358180]
-libraries/ = SubResource("AnimationLibrary_2y4ht")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=246644793]
+sprite_frames = SubResource("SpriteFrames_3g0b1")
 
 [node name="WallFinderLeft" type="Area2D" parent="." unique_id=1183658105]
 position = Vector2(-62, 13)
