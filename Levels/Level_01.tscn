@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://uho65kt5j0we" path="res://Assets/images/Background_1_BG.png" id="9_ufi5d"]
 [ext_resource type="Texture2D" uid="uid://bpgcbvvejmayf" path="res://Assets/gui/or.png" id="9_yt1eu"]
 [ext_resource type="SpriteFrames" uid="uid://t8bij5vbk4lo" path="res://Assets/characters/friends/stick.tres" id="10_5emyg"]
-[ext_resource type="Script" path="res://Code/LevelSign.gd" id="11_dih6j"]
+[ext_resource type="Script" uid="uid://diu3urcvjpvhl" path="res://Code/LevelSign.gd" id="11_dih6j"]
 [ext_resource type="PackedScene" uid="uid://4i6oo50wk672" path="res://Levels/level_02.tscn" id="12_2rui6"]
 [ext_resource type="SpriteFrames" uid="uid://b1pjb38u2heqj" path="res://Assets/characters/friends/levelflag.tres" id="13_2rui6"]
 
@@ -202,8 +202,9 @@ unique_name_in_owner = true
 [node name="MusicZone2" type="Area2D" parent="AudioManager" unique_id=1540613541]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AudioManager/MusicZone2" unique_id=1087493429]
-position = Vector2(1337.6533, 264.6137)
+position = Vector2(2820.486, 462.82245)
 shape = SubResource("RectangleShape2D_80d54")
+
 [editable path="NPCs/Sign"]
 [editable path="NPCs/Level Flag"]
 [editable path="NPCs/Flower"]
