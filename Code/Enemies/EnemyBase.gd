@@ -1,9 +1,13 @@
 extends CharacterBody2D
 class_name EnemyBase
 
-var hitpoints = 5
+@export var hitpoints = 5
 var damage = 2
 var bonkPower = 200
+var punched = false
+
+func _ready() -> void:
+	$AnimatedSprite2D.play()
 
 func bonk():
 	var bodies = $PlayerBonker.get_overlapping_bodies()
@@ -14,8 +18,12 @@ func bonk():
 
 func is_punchable():
 	return true
+	
+func is_enemy():
+	return true
 
 func get_punched(facing):
+	punched = true
 	$Sprite2D/AnimationPlayer.play("get hit")
 	var xMul
 	if(facing == Global.FACING.LEFT):
@@ -28,3 +36,5 @@ func get_punched(facing):
 	hitpoints = hitpoints - 1
 	if(hitpoints <= 0):
 		queue_free()
+	await get_tree().create_timer(0.5).timeout
+	punched = false;

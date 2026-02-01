@@ -138,7 +138,6 @@ func _physics_process(delta: float) -> void:
 			
 	if (currPhysics == PHYSICS.JUMP or currPhysics == PHYSICS.FLY):
 		if not is_on_floor():
-			print(velocity.y)
 			velocity += get_gravity() * delta
 				
 	elif (currPhysics == PHYSICS.SWIM):
@@ -191,15 +190,22 @@ func POooooOONCH():
 		%SnakePunching.play()
 		#Actual Punch is executed when the signal indicating the correct frame is received
 
+func _on_snake_punching_frame_changed() -> void:
+	if %SnakePunching.frame == 2:
+		var bodies = $ThePunchZone.get_overlapping_bodies()
+		for body in bodies:
+			if body.has_method("is_punchable") && body.is_punchable():
+				body.get_punched(facing)
+
 #region Forms
-enum FORM { SPIDER, BIRD, SNAKE, JELLYFISH }
+enum FORM { SPIDER, SNAKE, BIRD, JELLYFISH }
 var currForm = FORM.SPIDER
 
-enum PHYSICS { JUMP, FLY, CRAWL, SWIM }
-var formPhysics = [ PHYSICS.CRAWL, PHYSICS.FLY, PHYSICS.JUMP, PHYSICS.SWIM ]
+enum PHYSICS { CRAWL , JUMP, FLY, SWIM }
+var formPhysics = [ PHYSICS.CRAWL, PHYSICS.JUMP, PHYSICS.FLY, PHYSICS.SWIM ]
 var currPhysics = formPhysics[currForm]
 
-var formSpriteNames = [ "spider", "bird", "snake", "jellyfish" ]
+var formSpriteNames = [ "spider", "snake", "bird", "jellyfish" ]
 var formSprites = [] # Gets loaded on config
 
 var flyCount = 0
@@ -230,18 +236,22 @@ func CheckFormSwap() -> void:
 		currPhysics = formPhysics[currForm]
 		UpdateSprites()
 		
+		print(check_vertical_clearance())
+		check_horizontal_clearance()
+		
 		if currForm == FORM.SNAKE:
 			$CollisionShape2D.shape.radius = 35
 			$CollisionShape2D.shape.height = 130
 			%AudioManager.play_sfx("res://Assets/audio/SnakeMaskActivate.wav") #play snake mask activation sfx
-		if currForm == FORM.SPIDER:
-			$CollisionShape2D.shape.radius = 27.5
-			$CollisionShape2D.shape.height = 55
-		if currForm == FORM.JELLYFISH:
-			%AudioManager.play_sfx("res://Assets/audio/BlubMaskActivate.wav") #play jellyfish mask activation sfx
 		if currForm == FORM.BIRD:
+			$CollisionShape2D.shape.radius = 62
+			$CollisionShape2D.shape.height = 124
 			%AudioManager.play_sfx("res://Assets/audio/BirdMaskActivate.wav") #play bird mask activation sfx
-		
+		if currForm == FORM.JELLYFISH:
+			$CollisionShape2D.shape.radius = 44
+			$CollisionShape2D.shape.height = 140
+			%AudioManager.play_sfx("res://Assets/audio/BlubMaskActivate.wav") #play jellyfish mask activation sfx
+				
 		if (currPhysics != PHYSICS.FLY):
 			flyCount = 0
 
@@ -257,12 +267,13 @@ func custom_on_ceiling():
 	return false
 
 func IsFormAllowed(form : FORM):
-	var allowedForms = [ true, true, true, true] #Global.GetVar("hasSnake"), Global.GetVar("hasSpider") ]
+	var allowedForms = [ true, Global.GetVar("hasSnake"),
+		Global.GetVar("hasBird"), Global.GetVar("hasJelly") ]
 	return allowedForms[form]
 
 func CycleUntilAllowed(dir : int):
 	while true: # This forces at least one iteration, like a do-while (which Godot lacks)
-		currForm = (currForm as int + dir) % FORM.size() as FORM
+		currForm = (currForm as int + dir + 4) % FORM.size() as FORM
 		if IsFormAllowed(currForm):
 			break
 
@@ -385,3 +396,30 @@ func play_sound_group(type: SfxType) -> void:
 	_last_sounds[type] = path
 	%AudioManager.play_sfx(path)
 	_cooldowns[type] = COOLDOWNS[type]
+
+func check_vertical_clearance():
+	var overhead
+	var under
+	if !%CastUp.is_colliding():
+		overhead = 500
+	else:
+		overhead = global_position.y - %CastUp.get_collision_point().y
+	if !%CastDown.is_colliding():
+		under = 500
+	else:
+		under = %CastDown.get_collision_point().y - global_position.y
+	var clearance = overhead + under
+	return clearance
+func check_horizontal_clearance():
+	var left
+	var right
+	if !%CastLeft.is_colliding():
+		left = 500
+	else:
+		left =  global_position.x - %CastLeft.get_collision_point().x
+	if !%CastRight.is_colliding():
+		right = 500
+	else:
+		right = %CastRight.get_collision_point().x - global_position.x
+	return left + right
+

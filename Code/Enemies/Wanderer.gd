@@ -7,9 +7,8 @@ class_name EnemyWanderer
 const LEFT = -1
 const RIGHT = 1
 var currDir = -1 if startsLeft else 1
-
-func _ready():
-	pass
+enum FACING { LEFT, RIGHT }
+var facing
 
 func _physics_process(delta):
 	bonk()
@@ -24,6 +23,7 @@ func _process(delta):
 	
 	# Proceed
 	var foundMove = false
+	var prevDir = currDir
 	if currDir == LEFT:
 		if %EdgeCheckerL.is_colliding():
 			foundMove = true
@@ -34,15 +34,27 @@ func _process(delta):
 			foundMove = true
 		else:
 			currDir *= -1 # Try the other way
-	if foundMove:
-		velocity.x = currDir * wanderSpeed #move_toward(currDir * speed, 0, speed)
+	if currDir != prevDir:
+		print("Enemy changed")
+		UpdateSprites()
+	if foundMove && !punched:
+		velocity.x = currDir * wanderSpeed
+
+func UpdateSprites():
+		if currDir == LEFT:
+			facing = FACING.LEFT
+		else:
+			facing = FACING.RIGHT
+		$AnimatedSprite2D.sprite.flip_h = false if facing == FACING.LEFT else true
+		print($AnimatedSprite2D.sprite.flip_h)
+	
 
 func _on_wall_finder_right_body_entered(body: Node2D) -> void:
-	if body.get_class() == "TileMap":
+	if body.get_class() == "TileMap" || (body.has_method("is_enemy") && body.is_enemy()):
 		velocity.x = wanderSpeed * -1
 		currDir = LEFT
 
 func _on_wall_finder_left_body_entered(body: Node2D) -> void:
-	if body.get_class() == "TileMap":
+	if body.get_class() == "TileMap" || (body.has_method("is_enemy") && body.is_enemy()):
 		velocity.x = wanderSpeed
 		currDir = RIGHT

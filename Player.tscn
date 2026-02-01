@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://d3xksmwdntvb5"]
 
 [ext_resource type="Script" uid="uid://c5dwsndf37m8y" path="res://Code/Player/player.gd" id="1_kpjcp"]
-[ext_resource type="Texture2D" uid="uid://d3v3mnx53e2y7" path="res://Assets/characters/spider_walk1.png" id="2_wi0c6"]
-[ext_resource type="Texture2D" uid="uid://dib4vjak403bn" path="res://Assets/characters/spider_walk2.png" id="3_hp6x6"]
+[ext_resource type="Texture2D" uid="uid://bgmvy7b8bs1qu" path="res://Assets/characters/spider_walk1.png" id="2_wi0c6"]
+[ext_resource type="Texture2D" uid="uid://14825pghujjh" path="res://Assets/characters/spider_walk2.png" id="3_hp6x6"]
 [ext_resource type="Texture2D" uid="uid://f8dx5il5bksg" path="res://Assets/images/White_Background.png" id="3_kne1u"]
-[ext_resource type="Texture2D" uid="uid://jvjtbg17ul38" path="res://Assets/characters/snake_walk1.png" id="4_hp6x6"]
-[ext_resource type="Texture2D" uid="uid://bdxb66xqclr0u" path="res://Assets/characters/snake_walk2.png" id="5_3tkgg"]
-[ext_resource type="Texture2D" uid="uid://c6u7o4ub8chox" path="res://Assets/characters/snake_jump.png" id="6_wi0c6"]
-[ext_resource type="Texture2D" uid="uid://ur71pj3mftb3" path="res://Assets/characters/bird.png" id="7_hp6x6"]
-[ext_resource type="Texture2D" uid="uid://xavpvj7w4ufi" path="res://Assets/characters/jellyfish.png" id="8_3tkgg"]
-[ext_resource type="Texture2D" uid="uid://btmknf2y54s0n" path="res://Assets/characters/snake_punch1.png" id="9_l6ohk"]
-[ext_resource type="Texture2D" uid="uid://c6evqkf5bsa50" path="res://Assets/characters/snake_punch2.png" id="10_oudfo"]
-[ext_resource type="Texture2D" uid="uid://bpm72c8o8t28o" path="res://Assets/characters/snake_punch3.png" id="11_d6rpx"]
+[ext_resource type="Texture2D" uid="uid://curj68jyajc8g" path="res://Assets/characters/snake_walk1.png" id="4_hp6x6"]
+[ext_resource type="Texture2D" uid="uid://budgsvi0c0ad2" path="res://Assets/characters/snake_walk2.png" id="5_3tkgg"]
+[ext_resource type="Texture2D" uid="uid://t7gyswu4nkcd" path="res://Assets/characters/snake_jump.png" id="6_wi0c6"]
+[ext_resource type="Texture2D" uid="uid://g6rfbed1b30x" path="res://Assets/characters/bird.png" id="7_hp6x6"]
+[ext_resource type="Texture2D" uid="uid://deaeruh4mjhnv" path="res://Assets/characters/jellyfish.png" id="8_3tkgg"]
+[ext_resource type="Texture2D" uid="uid://chftut0d4d00g" path="res://Assets/characters/snake_punch1.png" id="9_l6ohk"]
+[ext_resource type="Texture2D" uid="uid://cqs3f867cyst4" path="res://Assets/characters/snake_punch2.png" id="10_oudfo"]
+[ext_resource type="Texture2D" uid="uid://bkq685n417r4q" path="res://Assets/characters/snake_punch3.png" id="11_d6rpx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l6ohk"]
 radius = 27.5
@@ -176,7 +176,6 @@ shape = SubResource("CapsuleShape2D_l6ohk")
 
 [node name="SpiderStanding" type="AnimatedSprite2D" parent="Animations" unique_id=2006195252]
 unique_name_in_owner = true
-visible = false
 sprite_frames = SubResource("SpriteFrames_r3kul")
 
 [node name="SpiderWalking" type="AnimatedSprite2D" parent="Animations" unique_id=9786302]
@@ -187,6 +186,7 @@ frame_progress = 0.91274816
 
 [node name="SnakeStanding" type="AnimatedSprite2D" parent="Animations" unique_id=2077674135]
 unique_name_in_owner = true
+visible = false
 sprite_frames = SubResource("SpriteFrames_5ncpa")
 
 [node name="SnakeWalking" type="AnimatedSprite2D" parent="Animations" unique_id=1041142884]
@@ -202,7 +202,6 @@ frame_progress = 0.92885756
 
 [node name="BirdFlying" type="AnimatedSprite2D" parent="Animations" unique_id=1179513440]
 unique_name_in_owner = true
-visible = false
 sprite_frames = SubResource("SpriteFrames_oudfo")
 
 [node name="JellyfishSwimming" type="AnimatedSprite2D" parent="Animations" unique_id=1251940073]
@@ -255,6 +254,29 @@ texture = ExtResource("3_kne1u")
 libraries/ = SubResource("AnimationLibrary_5ncpa")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2144803868]
+
+[node name="CastUp" type="RayCast2D" parent="." unique_id=927265114]
+unique_name_in_owner = true
+rotation = -3.1415927
+target_position = Vector2(0, 500)
+collision_mask = 4
+
+[node name="CastDown" type="RayCast2D" parent="." unique_id=184122281]
+unique_name_in_owner = true
+target_position = Vector2(0, 500)
+collision_mask = 4
+
+[node name="CastLeft" type="RayCast2D" parent="." unique_id=1075010257]
+unique_name_in_owner = true
+rotation = 1.5707964
+target_position = Vector2(0, 500)
+collision_mask = 4
+
+[node name="CastRight" type="RayCast2D" parent="." unique_id=870726006]
+unique_name_in_owner = true
+rotation = -1.5707964
+target_position = Vector2(0, 500)
+collision_mask = 4
 
 [connection signal="animation_finished" from="Animations/SnakePunching" to="." method="_on_snake_punching_animation_finished"]
 [connection signal="frame_changed" from="Animations/SnakePunching" to="." method="_on_snake_punching_frame_changed"]
