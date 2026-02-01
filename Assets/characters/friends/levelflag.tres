@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://b1pjb38u2heqj"]
+
+[ext_resource type="Texture2D" uid="uid://b64m7qgb4h81f" path="res://Assets/characters/friends/levelflag.png" id="1_fyelu"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fyelu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

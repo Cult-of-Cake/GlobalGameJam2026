@@ -5,16 +5,21 @@
 [ext_resource type="Texture2D" uid="uid://cycxv01lj5wpt" path="res://Assets/images/Background_1_FG.png" id="3_5emyg"]
 [ext_resource type="PackedScene" uid="uid://bp5n4liitxa4p" path="res://a_mook.tscn" id="3_gjko5"]
 [ext_resource type="Texture2D" uid="uid://bxxjhsi2y1ftp" path="res://Assets/gui/Keyboard_WASD.PNG" id="3_yxpqp"]
-[ext_resource type="Script" uid="uid://bmkkv4bjwmqb2" path="res://SceneManager/ShowcaseItem.gd" id="4_dvpsv"]
+[ext_resource type="Script" path="res://SceneManager/ShowcaseItem.gd" id="4_dvpsv"]
 [ext_resource type="Script" uid="uid://cbih5a3e085ns" path="res://Code/Enemies/Wanderer.gd" id="4_kvphc"]
 [ext_resource type="PackedScene" uid="uid://dqwkwarqpm680" path="res://a_friend.tscn" id="5_ahj24"]
 [ext_resource type="Texture2D" uid="uid://53wv43l01rlp" path="res://Assets/gui/Keyboard_W.PNG" id="5_dvpsv"]
 [ext_resource type="PackedScene" uid="uid://d0vrjkh3cj7md" path="res://Assets/tilesets/JoTiles.tscn" id="7_80d54"]
 [ext_resource type="PackedScene" uid="uid://c7dm13tuwl4c4" path="res://SceneManager/SceneManager.tscn" id="7_trksy"]
-[ext_resource type="SpriteFrames" uid="uid://cdxky1x2m60fe" path="res://Assets/characters/friends/sign.tres" id="9_0vjly"]
+[ext_resource type="SpriteFrames" path="res://Assets/characters/friends/sign.tres" id="9_0vjly"]
 [ext_resource type="PackedScene" uid="uid://cft4e1k72yhum" path="res://AudioManager/audio_manager.tscn" id="9_80d54"]
 [ext_resource type="Texture2D" uid="uid://uho65kt5j0we" path="res://Assets/images/Background_1_BG.png" id="9_ufi5d"]
 [ext_resource type="SpriteFrames" uid="uid://t8bij5vbk4lo" path="res://Assets/characters/friends/stick.tres" id="10_5emyg"]
+[ext_resource type="Script" path="res://Code/LevelSign.gd" id="11_dih6j"]
+[ext_resource type="PackedScene" uid="uid://4i6oo50wk672" path="res://Levels/level_02.tscn" id="12_2rui6"]
+[ext_resource type="SpriteFrames" uid="uid://b1pjb38u2heqj" path="res://Assets/characters/friends/levelflag.tres" id="13_2rui6"]
+[ext_resource type="SpriteFrames" path="res://Assets/characters/friends/stick.tres" id="10_5emyg"]
+[ext_resource type="SpriteFrames" path="res://Assets/characters/friends/snakesprite.tres" id="11_5emyg"]
 
 [node name="Level_01" type="Node2D" unique_id=590419832]
 scale = Vector2(0.99876404, 0.9939016)
@@ -48,7 +53,15 @@ Keyboard_Image = "Keyboard_WASD"
 Controller_Image = "Keyboard_WASD"
 
 [node name="W" type="Sprite2D" parent="Key Showcase" unique_id=1658416886]
-position = Vector2(1248.5431, 504.07404)
+position = Vector2(1267.5667, 498.03723)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_dvpsv")
+script = ExtResource("4_dvpsv")
+Keyboard_Image = "Keyboard_W"
+Controller_Image = "Keyboard_W"
+
+[node name="W2" type="Sprite2D" parent="Key Showcase" unique_id=1545378582]
+position = Vector2(2098.594, 1018.2095)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("5_dvpsv")
 script = ExtResource("4_dvpsv")
@@ -94,12 +107,16 @@ position = Vector2(0.00013887882, -44.270046)
 sprite_frames = ExtResource("9_0vjly")
 
 [node name="Level Flag" parent="NPCs" unique_id=1041484247 instance=ExtResource("5_ahj24")]
-position = Vector2(5024.21, 860.2461)
-dialogue_script = "level_01_sign"
+position = Vector2(5030.2173, 842.1356)
+script = ExtResource("11_dih6j")
+next_scene = ExtResource("12_2rui6")
 
 [node name="Sprite2D" parent="NPCs/Level Flag" index="0" unique_id=1844304917]
 position = Vector2(0.00013887882, -44.270046)
-sprite_frames = ExtResource("9_0vjly")
+sprite_frames = ExtResource("13_2rui6")
+
+[node name="DialogueShape2D" parent="NPCs/Level Flag/DialogueArea" parent_id_path=PackedInt32Array(1041484247, 123546345) index="0" unique_id=1394217004]
+scale = Vector2(2.9059997, 1)
 
 [node name="Flower" parent="NPCs" unique_id=2026901997 instance=ExtResource("5_ahj24")]
 position = Vector2(2184.7002, 307.87756)
@@ -116,6 +133,7 @@ dialogue_script = "level_01_g1_01"
 [node name="Sprite2D" parent="NPCs/Guardian" index="0" unique_id=1844304917]
 position = Vector2(-13.016088, 43.263836)
 scale = Vector2(0.2798515, 0.2798515)
+sprite_frames = ExtResource("11_5emyg")
 
 [node name="DialogueShape2D" parent="NPCs/Guardian/DialogueArea" parent_id_path=PackedInt32Array(491927411, 123546345) index="0" unique_id=1394217004]
 position = Vector2(-18.52295, 41.682556)
