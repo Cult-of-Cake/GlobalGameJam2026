@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://4i6oo50wk672"]
 
-[ext_resource type="Script" uid="uid://b4vyu7cnxpcba" path="res://Levels/level_01.gd" id="1_vkhwo"]
+[ext_resource type="Script" uid="uid://d2lbhxd7563gf" path="res://Levels/level_02.gd" id="1_dnmew"]
 [ext_resource type="PackedScene" uid="uid://d3xksmwdntvb5" path="res://Player.tscn" id="2_ljuhi"]
-[ext_resource type="Texture2D" uid="uid://dkfe5tiiflgdr" path="res://Assets/images/Background_2_BG.png" id="2_t7xqb"]
+[ext_resource type="Texture2D" uid="uid://ctu78wkibyk2" path="res://Assets/images/Background_2_BG.png" id="2_t7xqb"]
 [ext_resource type="PackedScene" uid="uid://d0vrjkh3cj7md" path="res://Assets/tilesets/JoTiles.tscn" id="3_3use3"]
-[ext_resource type="Texture2D" uid="uid://o36mxyeve0rx" path="res://Assets/images/Background_2_FG.png" id="3_t7xqb"]
+[ext_resource type="Texture2D" uid="uid://cd8smlxfi3maj" path="res://Assets/images/Background_2_FG.png" id="3_t7xqb"]
+[ext_resource type="Texture2D" uid="uid://53wv43l01rlp" path="res://Assets/gui/Keyboard_W.PNG" id="4_dnmew"]
 [ext_resource type="PackedScene" uid="uid://bp5n4liitxa4p" path="res://a_mook.tscn" id="5_4ion1"]
+[ext_resource type="Script" uid="uid://bmkkv4bjwmqb2" path="res://SceneManager/ShowcaseItem.gd" id="5_tld0e"]
 [ext_resource type="SpriteFrames" uid="uid://t8bij5vbk4lo" path="res://Assets/characters/friends/stick.tres" id="6_4ion1"]
 [ext_resource type="SpriteFrames" uid="uid://0pabga828cg2" path="res://Assets/characters/friends/birdguardian.tres" id="7_n6voa"]
 [ext_resource type="PackedScene" uid="uid://ds4vv2agvuudc" path="res://flying_mook.tscn" id="7_t7xqb"]
@@ -18,7 +20,7 @@
 
 [node name="Level_02" type="Node2D" unique_id=590419832]
 scale = Vector2(0.99876404, 0.9939016)
-script = ExtResource("1_vkhwo")
+script = ExtResource("1_dnmew")
 
 [node name="Background1" type="TextureRect" parent="." unique_id=1326388335]
 offset_left = -5.0061874
@@ -35,6 +37,25 @@ offset_right = 4090.994
 offset_bottom = 45.177124
 scale = Vector2(2, 2)
 texture = ExtResource("3_t7xqb")
+
+[node name="Key Showcase" type="Node2D" parent="." unique_id=574902345]
+position = Vector2(4.7742725e-07, 0)
+
+[node name="E" type="Sprite2D" parent="Key Showcase" unique_id=968989498]
+position = Vector2(4213.17, 1294.7128)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_dnmew")
+script = ExtResource("5_tld0e")
+Keyboard_Image = "Keyboard_E"
+Controller_Image = "Keyboard_E"
+
+[node name="2" type="Sprite2D" parent="Key Showcase" unique_id=881486710]
+position = Vector2(4270.241, 1294.7128)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_dnmew")
+script = ExtResource("5_tld0e")
+Keyboard_Image = "Keyboard_3"
+Controller_Image = "Keyboard_3"
 
 [node name="Player" parent="." unique_id=1625906938 instance=ExtResource("2_ljuhi")]
 unique_name_in_owner = true

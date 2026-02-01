@@ -234,7 +234,12 @@ const FLY_MAX = 3
 func FormSetup() -> void:
 	for n in formSpriteNames:
 		formSprites.append(SceneManager.GetTexture("res://Assets/characters/", n, ".png"))
+		
+func FixTheGoddamnSpiderBox() -> void:
+	$CollisionShape2D.shape.radius = FORM_SIZES[FORM.SPIDER][0]
+	$CollisionShape2D.shape.height = FORM_SIZES[FORM.SPIDER][1]	
 	
+
 func CheckFormSwap() -> void:
 	
 	var prevForm = currForm
