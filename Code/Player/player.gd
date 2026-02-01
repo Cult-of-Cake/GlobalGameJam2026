@@ -16,33 +16,56 @@ var invincibleDuration = 2
 var stunDuration = 0.4
 
 #Audio
-const HURT_SOUNDS := [
-	"res://Assets/audio/HurtSound1.wav",
-	"res://Assets/audio/HurtSound2.wav",
-	"res://Assets/audio/HurtSound3.wav",
-]
+enum SfxType { HURT, ATTACK, JUMP }
 
-var _hurt_pool: Array[String] = []
-var _last_hurt: String = ""
-var _hurt_cooldown: float = 0.0
+const SFX_POOLS: Dictionary = {
+	SfxType.HURT: [
+		"res://Assets/audio/HurtSound1.wav",
+		"res://Assets/audio/HurtSound2.wav",
+		"res://Assets/audio/HurtSound3.wav",
+	],
+	SfxType.ATTACK: [
+		"res://Assets/audio/AttackSound1.wav",
+		"res://Assets/audio/AttackSound2.wav",
+		"res://Assets/audio/AttackSound3.wav",
+	],
+	SfxType.JUMP: [
+		"res://Assets/audio/JumpSound1.wav",
+		"res://Assets/audio/JumpSound2.wav",
+	],
+}
 
-@export var HURT_COOLDOWN: float = 0.8  # adjust based on sound length
+var _pools: Dictionary = {}
+var _last_sounds: Dictionary = {}
+var _cooldowns: Dictionary = {}
+
+@export var COOLDOWNS: Dictionary = {
+	SfxType.HURT: 0.8,
+	SfxType.ATTACK: 1,
+	SfxType.JUMP: 0.3,
+}
 
 func _ready():
-	_refill_hurt_pool()
 	Global.landed.connect(land)
 	
 	FormSetup()
 	hide_sprites()
 	activate_sprites()
 	show_sprite(%SpiderStanding)
+	
+	# Initialize state for every sound type
+	for type in SFX_POOLS:
+		_pools[type] = []
+		_last_sounds[type] = ""
+		_cooldowns[type] = 0.0
+		_refill_pool(type)
 
 func is_player():
 	return true
 
 func get_hit(damage: int, direction: Vector2, force: int):
 	
-	play_hurt_sfx()
+	play_sound_group(SfxType.HURT)
 	
 	if !invincible:
 		velocity = direction.normalized() * force
@@ -78,7 +101,9 @@ func _unhandled_input(event):
 			POooooOONCH()
 
 func _physics_process(delta: float) -> void:
-	_hurt_cooldown = max(0.0, _hurt_cooldown - delta)
+	# Tick down all cooldowns each frame
+	for type in _cooldowns:
+		_cooldowns[type] = maxf(0.0, _cooldowns[type] - delta)
 	
 	# Handle player-induced upward velocity
 	if (currPhysics == PHYSICS.FLY):
@@ -150,6 +175,7 @@ func _physics_process(delta: float) -> void:
 func POooooOONCH():
 	if(!punching && currForm == FORM.SNAKE):
 		punching = true;
+		play_sound_group(SfxType.ATTACK)
 		%SnakePunching.stop()
 		%SnakePunching.play()
 		#Actual Punch is executed when the signal indicating the correct frame is received
@@ -315,24 +341,30 @@ func _on_snake_punching_frame_changed() -> void:
 				body.get_punched(facing)
 				
 
-func _refill_hurt_pool() -> void:
-	_hurt_pool.assign(HURT_SOUNDS)
-	_hurt_pool.shuffle()
+func _refill_pool(type: SfxType) -> void:
+	var pool: Array = _pools[type]
+	pool.assign(SFX_POOLS[type])
+	pool.shuffle()
 
-	if _last_hurt != "" and _hurt_pool.size() > 1 and _hurt_pool[0] == _last_hurt:
-		var tmp := _hurt_pool[0]
-		_hurt_pool[0] = _hurt_pool[1]
-		_hurt_pool[1] = tmp
+	var last_sound: String = _last_sounds[type]
+	if last_sound != "" and pool.size() > 1 and pool[0] == last_sound:
+		var tmp: String = pool[0]
+		pool[0] = pool[1]
+		pool[1] = tmp
 
+	_pools[type] = pool
+	
+func play_sound_group(type: SfxType) -> void:
+	var cooldown: float = _cooldowns[type]
+	if cooldown > 0.0:
+		return
 
-func play_hurt_sfx() -> void:
-	if _hurt_cooldown > 0.0:
-		return  # skip if still on cooldown
+	var pool: Array = _pools[type]
+	if pool.is_empty():
+		_refill_pool(type)
+		pool = _pools[type]
 
-	if _hurt_pool.is_empty():
-		_refill_hurt_pool()
-
-	var path: String = _hurt_pool.pop_front()
-	_last_hurt = path
+	var path: String = pool.pop_front()
+	_last_sounds[type] = path
 	%AudioManager.play_sfx(path)
-	_hurt_cooldown = HURT_COOLDOWN
+	_cooldowns[type] = COOLDOWNS[type]
