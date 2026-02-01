@@ -121,6 +121,7 @@ scale = Vector2(3.0261383, 1)
 [node name="SceneManager" parent="." unique_id=995662514 instance=ExtResource("8_3k1mf")]
 unique_name_in_owner = true
 visible = false
+startup_scene = ""
 
 [node name="AudioManager" parent="." unique_id=1900050100 instance=ExtResource("9_dnmew")]
 unique_name_in_owner = true
