@@ -6,5 +6,4 @@ Sounds:
 
 
 MOAR COMMUNICATION
-
-Pause movement on dialogue, "Enter to continue" on the UI
+"Enter to continue" on the UI
