@@ -18,7 +18,7 @@ script = ExtResource("1_vn7jf")
 unique_name_in_owner = true
 z_index = 20
 z_as_relative = false
-position = Vector2(2309, 869)
+position = Vector2(735, 254)
 
 [node name="JoTiles" parent="." unique_id=120009848 instance=ExtResource("7_80d54")]
 z_index = 10
