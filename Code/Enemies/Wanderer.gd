@@ -17,8 +17,12 @@ func _physics_process(delta):
 	move_and_slide()
 	if currDir == 1:
 		$AnimatedSprite2D.flip_h = true
+		$CollisionShape2D.position.x = 15
+		$PlayerBonker.position.x = 15
 	else:
 		$AnimatedSprite2D.flip_h = false
+		$CollisionShape2D.position.x = -15
+		$PlayerBonker.position.x = -15
 
 func _process(delta):
 	# Guards
@@ -50,6 +54,7 @@ func _process(delta):
 	
 
 func _on_wall_finder_right_body_entered(body: Node2D) -> void:
+	print("entered")
 	if body.get_class() == "TileMap" || (body.has_method("is_enemy") && body.is_enemy()):
 		velocity.x = wanderSpeed * -1
 		currDir = LEFT

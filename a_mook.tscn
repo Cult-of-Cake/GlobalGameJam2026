@@ -18,11 +18,47 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_3g0b1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2y4ht"]
+resource_name = "get hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0.8784314), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ewajw"]
+_data = {
+&"RESET": SubResource("Animation_3g0b1"),
+&"get hit": SubResource("Animation_2y4ht")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i1wbi"]
-size = Vector2(51, 32.5)
+size = Vector2(26.5, 32.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2y4ht"]
-size = Vector2(52.5, 33)
+size = Vector2(29.25, 33)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3g0b1"]
 size = Vector2(145, 50)
@@ -36,26 +72,29 @@ script = ExtResource("1_t6wmc")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=246644793]
 sprite_frames = SubResource("SpriteFrames_3g0b1")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D" unique_id=1104221742]
+libraries/ = SubResource("AnimationLibrary_ewajw")
+
 [node name="WallFinderLeft" type="Area2D" parent="." unique_id=1183658105]
-position = Vector2(-62, 13)
+position = Vector2(-90, 13)
+collision_layer = 0
+collision_mask = 4
 
 [node name="WallFinder" type="CollisionShape2D" parent="WallFinderLeft" unique_id=108727133]
-visible = false
-position = Vector2(-20.5, -3)
 shape = SubResource("RectangleShape2D_i1wbi")
 
 [node name="WallFinderRight" type="Area2D" parent="." unique_id=822060177]
-position = Vector2(34, 12)
+position = Vector2(90, 12)
+collision_layer = 0
+collision_mask = 4
 
 [node name="WallFinder" type="CollisionShape2D" parent="WallFinderRight" unique_id=1881624978]
-visible = false
-position = Vector2(25.25, 0)
 shape = SubResource("RectangleShape2D_2y4ht")
 
 [node name="PlayerBonker" type="Area2D" parent="." unique_id=55646579]
+position = Vector2(-15, 10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBonker" unique_id=461506179]
-position = Vector2(-16, 10)
 shape = SubResource("RectangleShape2D_3g0b1")
 
 [node name="Raycasts" type="Node2D" parent="." unique_id=1300242030]
@@ -71,7 +110,7 @@ position = Vector2(-96, 26)
 target_position = Vector2(0, 20)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=592759732]
-position = Vector2(-15.5, 10.5)
+position = Vector2(-15, 10.5)
 shape = SubResource("RectangleShape2D_2nk0t")
 
 [connection signal="body_entered" from="WallFinderLeft" to="." method="_on_wall_finder_left_body_entered"]

@@ -24,7 +24,7 @@ func is_enemy():
 
 func get_punched(facing):
 	punched = true
-	$Sprite2D/AnimationPlayer.play("get hit")
+	$AnimatedSprite2D/AnimationPlayer.play("get hit")
 	var xMul
 	if(facing == Global.FACING.LEFT):
 		xMul = -1
