@@ -85,7 +85,6 @@ func _physics_process(delta: float) -> void:
 			
 	if (currPhysics == PHYSICS.JUMP or currPhysics == PHYSICS.FLY):
 		if not is_on_floor():
-			print(velocity.y)
 			velocity += get_gravity() * delta
 	elif (currPhysics == PHYSICS.SWIM):
 		if not is_on_floor():
@@ -174,6 +173,9 @@ func CheckFormSwap() -> void:
 		print ("Changed form to %s" % currForm)
 		currPhysics = formPhysics[currForm]
 		UpdateSprites()
+		
+		check_vertical_clearance()
+		check_horizontal_clearance()
 		
 		if currForm == FORM.SNAKE:
 			$CollisionShape2D.shape.radius = 35
@@ -288,6 +290,31 @@ func _on_snake_punching_animation_finished() -> void:
 		punching = false;
 		hide_sprites()
 
+func check_vertical_clearance():
+	var overhead
+	var under
+	if !%CastUp.is_colliding():
+		overhead = 500
+	else:
+		overhead = global_position.y - %CastUp.get_collision_point().y
+	if !%CastDown.is_colliding():
+		under = 500
+	else:
+		under = %CastDown.get_collision_point().y - global_position.y
+	var clearance = overhead + under
+	return clearance
+func check_horizontal_clearance():
+	var left
+	var right
+	if !%CastLeft.is_colliding():
+		left = 500
+	else:
+		left =  global_position.x - %CastLeft.get_collision_point().x
+	if !%CastRight.is_colliding():
+		right = 500
+	else:
+		right = %CastRight.get_collision_point().x - global_position.x
+	return left + right
 
 func _on_snake_punching_frame_changed() -> void:
 	if %SnakePunching.frame == 2:
