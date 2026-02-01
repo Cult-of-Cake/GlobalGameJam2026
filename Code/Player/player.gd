@@ -135,6 +135,13 @@ func POooooOONCH():
 		%SnakePunching.play()
 		#Actual Punch is executed when the signal indicating the correct frame is received
 
+func _on_snake_punching_frame_changed() -> void:
+	if %SnakePunching.frame == 2:
+		var bodies = $ThePunchZone.get_overlapping_bodies()
+		for body in bodies:
+			if body.has_method("is_punchable") && body.is_punchable():
+				body.get_punched(facing)
+
 #region Forms
 enum FORM { SPIDER, BIRD, SNAKE, JELLYFISH }
 var currForm = FORM.SPIDER
@@ -175,7 +182,7 @@ func CheckFormSwap() -> void:
 		UpdateSprites()
 		
 		check_vertical_clearance()
-		print(check_horizontal_clearance())
+		(check_horizontal_clearance())
 		
 		if currForm == FORM.SNAKE:
 			$CollisionShape2D.shape.radius = 35
@@ -314,10 +321,3 @@ func check_horizontal_clearance():
 	else:
 		right = %CastRight.get_collision_point().x - global_position.x
 	return left + right
-
-func _on_snake_punching_frame_changed() -> void:
-	if %SnakePunching.frame == 2:
-		var bodies = $ThePunchZone.get_overlapping_bodies()
-		for body in bodies:
-			if body.has_method("is_punchable") && body.is_punchable():
-				body.get_punched(facing)
