@@ -14,6 +14,10 @@
 [ext_resource type="SpriteFrames" path="res://Assets/characters/friends/sign.tres" id="9_0vjly"]
 [ext_resource type="PackedScene" uid="uid://cft4e1k72yhum" path="res://AudioManager/audio_manager.tscn" id="9_80d54"]
 [ext_resource type="Texture2D" uid="uid://uho65kt5j0we" path="res://Assets/images/Background_1_BG.png" id="9_ufi5d"]
+[ext_resource type="SpriteFrames" uid="uid://t8bij5vbk4lo" path="res://Assets/characters/friends/stick.tres" id="10_5emyg"]
+[ext_resource type="Script" path="res://Code/LevelSign.gd" id="11_dih6j"]
+[ext_resource type="PackedScene" uid="uid://4i6oo50wk672" path="res://Levels/level_02.tscn" id="12_2rui6"]
+[ext_resource type="SpriteFrames" uid="uid://b1pjb38u2heqj" path="res://Assets/characters/friends/levelflag.tres" id="13_2rui6"]
 [ext_resource type="SpriteFrames" path="res://Assets/characters/friends/stick.tres" id="10_5emyg"]
 [ext_resource type="SpriteFrames" path="res://Assets/characters/friends/snakesprite.tres" id="11_5emyg"]
 
@@ -103,12 +107,16 @@ position = Vector2(0.00013887882, -44.270046)
 sprite_frames = ExtResource("9_0vjly")
 
 [node name="Level Flag" parent="NPCs" unique_id=1041484247 instance=ExtResource("5_ahj24")]
-position = Vector2(5024.21, 860.2461)
-dialogue_script = "level_01_sign"
+position = Vector2(5030.2173, 842.1356)
+script = ExtResource("11_dih6j")
+next_scene = ExtResource("12_2rui6")
 
 [node name="Sprite2D" parent="NPCs/Level Flag" index="0" unique_id=1844304917]
 position = Vector2(0.00013887882, -44.270046)
-sprite_frames = ExtResource("9_0vjly")
+sprite_frames = ExtResource("13_2rui6")
+
+[node name="DialogueShape2D" parent="NPCs/Level Flag/DialogueArea" parent_id_path=PackedInt32Array(1041484247, 123546345) index="0" unique_id=1394217004]
+scale = Vector2(2.9059997, 1)
 
 [node name="Flower" parent="NPCs" unique_id=2026901997 instance=ExtResource("5_ahj24")]
 position = Vector2(2184.7002, 307.87756)
