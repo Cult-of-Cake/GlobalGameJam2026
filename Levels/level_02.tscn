@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bp5n4liitxa4p" path="res://a_mook.tscn" id="5_4ion1"]
 [ext_resource type="Script" uid="uid://bmkkv4bjwmqb2" path="res://SceneManager/ShowcaseItem.gd" id="5_tld0e"]
 [ext_resource type="SpriteFrames" uid="uid://t8bij5vbk4lo" path="res://Assets/characters/friends/stick.tres" id="6_4ion1"]
+[ext_resource type="Texture2D" uid="uid://bpgcbvvejmayf" path="res://Assets/gui/or.png" id="6_tld0e"]
 [ext_resource type="SpriteFrames" uid="uid://0pabga828cg2" path="res://Assets/characters/friends/birdguardian.tres" id="7_n6voa"]
 [ext_resource type="PackedScene" uid="uid://ds4vv2agvuudc" path="res://flying_mook.tscn" id="7_t7xqb"]
 [ext_resource type="PackedScene" uid="uid://c7dm13tuwl4c4" path="res://SceneManager/SceneManager.tscn" id="8_3k1mf"]
@@ -43,12 +44,17 @@ texture = ExtResource("3_t7xqb")
 position = Vector2(4.7742725e-07, 0)
 
 [node name="E" type="Sprite2D" parent="Key Showcase" unique_id=968989498]
-position = Vector2(4213.17, 1294.7128)
+position = Vector2(4168.152, 1294.8967)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_dnmew")
 script = ExtResource("5_tld0e")
 Keyboard_Image = "Keyboard_E"
 Controller_Image = "Keyboard_E"
+
+[node name="Or" type="Sprite2D" parent="Key Showcase" unique_id=1343250140]
+position = Vector2(4219.215, 1294.8967)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("6_tld0e")
 
 [node name="2" type="Sprite2D" parent="Key Showcase" unique_id=881486710]
 position = Vector2(4270.241, 1294.7128)
