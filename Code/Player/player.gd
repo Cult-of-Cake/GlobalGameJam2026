@@ -15,18 +15,68 @@ var direction
 var invincibleDuration = 2
 var stunDuration = 0.4
 
+# Audio stuff for things with multiple sounds
+enum SfxType { HURT, ATTACK, JUMP, FLAP }
+
+# Dictionary keeps track of which thing has which sounds
+const SFX_POOLS: Dictionary = {
+	SfxType.HURT: [
+		"res://Assets/audio/HurtSound1.wav",
+		"res://Assets/audio/HurtSound2.wav",
+		"res://Assets/audio/HurtSound3.wav",
+	],
+	SfxType.ATTACK: [
+		"res://Assets/audio/AttackSound1.wav",
+		"res://Assets/audio/AttackSound2.wav",
+		"res://Assets/audio/AttackSound3.wav",
+	],
+	SfxType.JUMP: [
+		"res://Assets/audio/JumpSound1.wav",
+		"res://Assets/audio/JumpSound2.wav",
+		"res://Assets/audio/JumpSound3.wav",
+	],
+	SfxType.FLAP: [
+		"res://Assets/audio/BirdFlap1.wav",
+		"res://Assets/audio/BirdFlap2.wav",
+	],
+}
+
+var _pools: Dictionary = {}
+var _last_sounds: Dictionary = {}
+var _cooldowns: Dictionary = {}
+
+# Makes sure audio won't play in rapid succession and screw up
+@export var COOLDOWNS: Dictionary = {
+	SfxType.HURT: 0.8,
+	SfxType.ATTACK: 1,
+	SfxType.JUMP: 0.3,
+	SfxType.FLAP: 1,
+}
+
 func _ready():
 	Global.landed.connect(land)
+	Global.dialogue_started.connect(diag_started)
+	Global.dialogue_finished.connect(diag_finished)
 	
 	FormSetup()
 	hide_sprites()
 	activate_sprites()
 	show_sprite(%SpiderStanding)
+	
+	# Initialize state for every sound type for the grouped audio
+	for type in SFX_POOLS:
+		_pools[type] = []
+		_last_sounds[type] = ""
+		_cooldowns[type] = 0.0
+		_refill_pool(type)
 
 func is_player():
 	return true
 
 func get_hit(damage: int, direction: Vector2, force: int):
+	
+	play_sound_group(SfxType.HURT) #play damage sfx grouping
+	
 	if !invincible:
 		velocity = direction.normalized() * force
 		become_invincible()
@@ -61,6 +111,12 @@ func _unhandled_input(event):
 			POooooOONCH()
 
 func _physics_process(delta: float) -> void:
+	if isDialogGoing:
+		return
+	
+	# Tick down all audio group cooldowns each frame
+	for type in _cooldowns:
+		_cooldowns[type] = maxf(0.0, _cooldowns[type] - delta)
 	
 	# Handle player-induced upward velocity
 	if (currPhysics == PHYSICS.FLY):
@@ -68,9 +124,11 @@ func _physics_process(delta: float) -> void:
 			if flyCount < FLY_MAX:
 				flyCount += 1
 				velocity.y = JUMP_VELOCITY * 1.5
+				play_sound_group(SfxType.FLAP) #play flying sfx grouping
 	elif (currPhysics == PHYSICS.JUMP):
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
+			play_sound_group(SfxType.JUMP) #play jump sfx grouping
 	
 	# Add the gravity.
 	if !metafloor && is_on_floor():
@@ -85,7 +143,7 @@ func _physics_process(delta: float) -> void:
 			
 	if (currPhysics == PHYSICS.JUMP or currPhysics == PHYSICS.FLY):
 		if not is_on_floor():
-			velocity += get_gravity() * delta
+			velocity += get_gravity() * delta				
 	elif (currPhysics == PHYSICS.SWIM):
 		if not is_on_floor():
 			velocity += get_gravity() * delta / 3
@@ -120,10 +178,14 @@ func _physics_process(delta: float) -> void:
 				facing = Global.FACING.DOWN
 		else:
 			velocity.y = move_toward(velocity.y, 0, SPEED)
-		
+	
+	if position.x < 0:
+		position.x = 0
+		velocity.x = 0
+	
 	# Die code
 	if global_position.y > 2000:
-		get_tree().quit()
+		Die()
 
 	UpdateSprites()
 	move_and_slide()
@@ -131,9 +193,15 @@ func _physics_process(delta: float) -> void:
 func POooooOONCH():
 	if(!punching && currForm == FORM.SNAKE):
 		punching = true;
+		play_sound_group(SfxType.ATTACK) #play attack sfx grouping
 		%SnakePunching.stop()
 		%SnakePunching.play()
 		#Actual Punch is executed when the signal indicating the correct frame is received
+
+
+func _on_snake_punching_animation_finished() -> void:
+		punching = false;
+		hide_sprites()
 
 func _on_snake_punching_frame_changed() -> void:
 	if %SnakePunching.frame == 2:
@@ -142,7 +210,14 @@ func _on_snake_punching_frame_changed() -> void:
 			if body.has_method("is_punchable") && body.is_punchable():
 				body.get_punched(facing)
 
+
 #region Forms
+var FORM_SIZES = [
+	[27,55],   #Spider
+	[35,130],  #Snake
+	[62,124],  #Bird
+	[44,140]]  #Jellyfish
+
 enum FORM { SPIDER, SNAKE, BIRD, JELLYFISH }
 var currForm = FORM.SPIDER
 
@@ -181,29 +256,35 @@ func CheckFormSwap() -> void:
 		currPhysics = formPhysics[currForm]
 		UpdateSprites()
 		
-		print(check_vertical_clearance())
-		check_horizontal_clearance()
+
 		
-		if currForm == FORM.SNAKE:
-			$CollisionShape2D.shape.radius = 35
-			$CollisionShape2D.shape.height = 130
-		if currForm == FORM.BIRD:
-			$CollisionShape2D.shape.radius = 62
-			$CollisionShape2D.shape.height = 124
-		if currForm == FORM.JELLYFISH:
-			$CollisionShape2D.shape.radius = 44
-			$CollisionShape2D.shape.height = 140
 		if currForm == FORM.SPIDER:
-			$CollisionShape2D.shape.radius = 27.5
-			$CollisionShape2D.shape.height = 55
-		
-		
+			$CollisionShape2D.shape.radius = FORM_SIZES[FORM.SPIDER][0]
+			$CollisionShape2D.shape.height = FORM_SIZES[FORM.SPIDER][1]		
+		if currForm == FORM.SNAKE:
+			$CollisionShape2D.shape.radius = FORM_SIZES[FORM.SNAKE][0]
+			$CollisionShape2D.shape.height = FORM_SIZES[FORM.SNAKE][1]
+		if currForm == FORM.BIRD:
+			$CollisionShape2D.shape.radius = FORM_SIZES[FORM.BIRD][0]
+			$CollisionShape2D.shape.height = FORM_SIZES[FORM.BIRD][1]
+		if currForm == FORM.JELLYFISH:
+			$CollisionShape2D.shape.radius = FORM_SIZES[FORM.JELLYFISH][0]
+			$CollisionShape2D.shape.height = FORM_SIZES[FORM.JELLYFISH][1]
+
+
 		if (currPhysics != PHYSICS.FLY):
 			flyCount = 0
 
 func land():
 	hide_sprites()
 	$SpiderStanding.visible = true
+
+var isDialogGoing : bool = false
+func diag_started() -> void:
+	isDialogGoing = true
+func diag_finished() -> void:
+	isDialogGoing = false
+	
 
 func custom_on_ceiling():
 	var bodies = %SpiderCeiling.get_overlapping_bodies()
@@ -213,8 +294,21 @@ func custom_on_ceiling():
 	return false
 
 func IsFormAllowed(form : FORM):
-	var allowedForms = [ true, Global.GetVar("hasSnake"),
+	var globalForms = [ true, Global.GetVar("hasSnake"),
 		Global.GetVar("hasBird"), Global.GetVar("hasJelly") ]
+	
+	var clearance = [check_horizontal_clearance(), check_vertical_clearance()]
+	
+	var allowedForms = [true]
+	var index = 1;
+	while(index < globalForms.size()): 		
+		print("%d,%d,%s" % [(clearance[0] - FORM_SIZES[index][0]), (clearance[1] - FORM_SIZES[index][1]), globalForms[index]])
+		allowedForms.push_back((
+			((clearance[0] - FORM_SIZES[index][0]) > 0)
+			&& ((clearance[1] - FORM_SIZES[index][1]) > 0)
+			&& bool(globalForms[index])
+		))
+		index = index + 1
 	return allowedForms[form]
 
 func CycleUntilAllowed(dir : int):
@@ -299,10 +393,39 @@ func SpriteRotate(sprite : Node, flip_h : bool, flip_v : bool = false, rotation 
 
 #endregion
 
+func Die() -> void:
+	position.x -= 500
+	position.y = 500
 
-func _on_snake_punching_animation_finished() -> void:
-		punching = false;
-		hide_sprites()
+#Audio group cooldown refill pool
+func _refill_pool(type: SfxType) -> void:
+	var pool: Array = _pools[type]
+	pool.assign(SFX_POOLS[type])
+	pool.shuffle()
+
+	var last_sound: String = _last_sounds[type]
+	if last_sound != "" and pool.size() > 1 and pool[0] == last_sound:
+		var tmp: String = pool[0]
+		pool[0] = pool[1]
+		pool[1] = tmp
+
+	_pools[type] = pool
+	
+# Play grouping of audio based on dictionary type called
+func play_sound_group(type: SfxType) -> void:
+	var cooldown: float = _cooldowns[type]
+	if cooldown > 0.0:
+		return
+
+	var pool: Array = _pools[type]
+	if pool.is_empty():
+		_refill_pool(type)
+		pool = _pools[type]
+
+	var path: String = pool.pop_front()
+	_last_sounds[type] = path
+	%AudioManager.play_sfx(path)
+	_cooldowns[type] = COOLDOWNS[type]
 
 func check_vertical_clearance():
 	var overhead

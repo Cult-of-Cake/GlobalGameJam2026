@@ -3,6 +3,10 @@ extends Node
 enum FACING { LEFT, RIGHT, UP, DOWN } # Up and down are ONLY spider form
 #region signals
 signal landed()
+
+signal dialogue_started
+signal dialogue_finished
+
 #endregion
 
 #region Variables

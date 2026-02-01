@@ -1,12 +1,10 @@
 
-#1 Merge Tara's branch
-	Same in enemy
+Sounds:
+	Do the same in enemy
 	Update dictionary for enemy sounds
 
 
-Form shift checks if you "fit"
 
-Dying - start of current level only?
 MOAR COMMUNICATION
 
 Pause movement on dialogue, "Enter to continue" on the UI

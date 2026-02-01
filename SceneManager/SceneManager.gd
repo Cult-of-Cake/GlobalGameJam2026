@@ -13,12 +13,6 @@ const incr_size = 0.1 # time in seconds between checking for a Wait to be cancel
 @export var wait_after_dialogue : bool = true
 @export var startup_scene = ""
 
-# ==== Signals ====================================================================================
-
-signal dialogue_started
-signal dialogue_finished
-
-
 # ==== Main functions & variables =================================================================
 
 enum MODES { INIT, READY, RUNNING, STOPPING, WAITING }
@@ -225,7 +219,7 @@ func BeginScene(script_name):
 	$Character_Right.texture = null
 	$Game_Title.position = Vector2(0,0)
 	
-	dialogue_started.emit()
+	Global.dialogue_started.emit()
 	
 	title_slide = false
 	var num = 0
@@ -394,7 +388,7 @@ func BeginScene(script_name):
 		print("==== Finished! ====")
 		visible = false
 		mode = MODES.READY
-		dialogue_finished.emit()
+		Global.dialogue_finished.emit()
 		
 
 
