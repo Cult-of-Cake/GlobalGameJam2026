@@ -187,6 +187,7 @@ frame_progress = 0.91274816
 
 [node name="SnakeStanding" type="AnimatedSprite2D" parent="Animations" unique_id=2077674135]
 unique_name_in_owner = true
+visible = false
 sprite_frames = SubResource("SpriteFrames_5ncpa")
 
 [node name="SnakeWalking" type="AnimatedSprite2D" parent="Animations" unique_id=1041142884]
@@ -255,6 +256,25 @@ texture = ExtResource("3_kne1u")
 libraries/ = SubResource("AnimationLibrary_5ncpa")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2144803868]
+
+[node name="CastUp" type="RayCast2D" parent="." unique_id=927265114]
+unique_name_in_owner = true
+rotation = -3.1415927
+target_position = Vector2(0, 500)
+
+[node name="CastDown" type="RayCast2D" parent="." unique_id=184122281]
+unique_name_in_owner = true
+target_position = Vector2(0, 500)
+
+[node name="CastLeft" type="RayCast2D" parent="." unique_id=1075010257]
+unique_name_in_owner = true
+rotation = 1.5707964
+target_position = Vector2(0, 500)
+
+[node name="CastRight" type="RayCast2D" parent="." unique_id=870726006]
+unique_name_in_owner = true
+rotation = -1.5707964
+target_position = Vector2(0, 500)
 
 [connection signal="animation_finished" from="Animations/SnakePunching" to="." method="_on_snake_punching_animation_finished"]
 [connection signal="frame_changed" from="Animations/SnakePunching" to="." method="_on_snake_punching_frame_changed"]
