@@ -3,12 +3,13 @@
 [ext_resource type="Script" uid="uid://w6w5k7hpn0vl" path="res://SceneManager/SceneManager.gd" id="1"]
 [ext_resource type="Script" uid="uid://cixcopuuh8tpk" path="res://SceneManager/SceneCharacter.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://cft4e1k72yhum" path="res://AudioManager/audio_manager.tscn" id="2_51u05"]
-[ext_resource type="Texture2D" uid="uid://c2k6fp5q62qvf" path="res://Assets/characters/treefoot_serious.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://dftnbpbkyhnv7" path="res://Assets/gui/option_button.png" id="5"]
-[ext_resource type="FontFile" uid="uid://br6imui04o0nk" path="res://Assets/fonts/MaidenOrange-Regular.ttf" id="6"]
-[ext_resource type="Texture2D" uid="uid://xp5jg28lnp5p" path="res://Assets/characters/Jeff.png" id="7"]
-[ext_resource type="Texture2D" uid="uid://4wsnnimqvplx" path="res://Assets/characters/Jeff Angry.png" id="8"]
-[ext_resource type="Texture2D" uid="uid://cmq6wcg7knd5s" path="res://Assets/images/Logo Only.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://ccffgvlb53ia8" path="res://Assets/characters/treefoot_serious.png" id="3"]
+[ext_resource type="Script" uid="uid://bmkkv4bjwmqb2" path="res://SceneManager/ShowcaseItem.gd" id="4_rrhmh"]
+[ext_resource type="Texture2D" uid="uid://cecwlpb65odp6" path="res://Assets/gui/option_button.png" id="5"]
+[ext_resource type="FontFile" uid="uid://cd003tbqa866s" path="res://Assets/fonts/MaidenOrange-Regular.ttf" id="6"]
+[ext_resource type="Texture2D" uid="uid://cyl1obcd25y74" path="res://Assets/characters/Jeff.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://bi0yat5uwik7c" path="res://Assets/characters/Jeff Angry.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://cysryrhnkslcu" path="res://Assets/images/Logo Only.png" id="13"]
 
 [sub_resource type="FontFile" id="1"]
 fallbacks = Array[Font]([ExtResource("6"), ExtResource("6")])
@@ -58,7 +59,6 @@ centered = false
 centered = false
 
 [node name="Speaker_Background" type="ColorRect" parent="." unique_id=1405147047]
-visible = false
 modulate = Color(1, 1, 1, 0.8)
 custom_minimum_size = Vector2(1000, 120)
 anchors_preset = 9
@@ -75,6 +75,11 @@ offset_top = 482.0
 offset_right = 998.0
 offset_bottom = 578.0
 autowrap_mode = 2
+
+[node name="Showcase_Icon" type="Sprite2D" parent="." unique_id=178848562]
+script = ExtResource("4_rrhmh")
+Keyboard_Image = "Keyboard_ENTER"
+Controller_Image = "Keyboard_ENTER"
 
 [node name="Nametag_Background" type="ColorRect" parent="." unique_id=718579555]
 visible = false
