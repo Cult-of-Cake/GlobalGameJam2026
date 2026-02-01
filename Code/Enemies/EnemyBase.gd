@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name EnemyBase
 
-var hitpoints = 5
+@export var hitpoints = 5
 var damage = 2
 var bonkPower = 200
 

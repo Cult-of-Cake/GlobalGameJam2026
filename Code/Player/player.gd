@@ -137,14 +137,14 @@ func POooooOONCH():
 		#Actual Punch is executed when the signal indicating the correct frame is received
 
 #region Forms
-enum FORM { SPIDER, BIRD, SNAKE, JELLYFISH }
+enum FORM { SPIDER, SNAKE, BIRD, JELLYFISH }
 var currForm = FORM.SPIDER
 
 enum PHYSICS { JUMP, FLY, CRAWL, SWIM }
-var formPhysics = [ PHYSICS.CRAWL, PHYSICS.FLY, PHYSICS.JUMP, PHYSICS.SWIM ]
+var formPhysics = [ PHYSICS.CRAWL, PHYSICS.JUMP, PHYSICS.FLY, PHYSICS.SWIM ]
 var currPhysics = formPhysics[currForm]
 
-var formSpriteNames = [ "spider", "bird", "snake", "jellyfish" ]
+var formSpriteNames = [ "spider", "snake", "bird", "jellyfish" ]
 var formSprites = [] # Gets loaded on config
 
 var flyCount = 0
@@ -197,7 +197,8 @@ func custom_on_ceiling():
 	return false
 
 func IsFormAllowed(form : FORM):
-	var allowedForms = [ true, true, true, true] #Global.GetVar("hasSnake"), Global.GetVar("hasSpider") ]
+	var allowedForms = [ true, Global.GetVar("hasSnake"),
+		Global.GetVar("hasBird"), Global.GetVar("hasJelly") ]
 	return allowedForms[form]
 
 func CycleUntilAllowed(dir : int):
