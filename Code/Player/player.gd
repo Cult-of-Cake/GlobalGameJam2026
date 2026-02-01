@@ -15,7 +15,21 @@ var direction
 var invincibleDuration = 2
 var stunDuration = 0.4
 
+#Audio
+const HURT_SOUNDS := [
+	"res://Assets/audio/HurtSound1.wav",
+	"res://Assets/audio/HurtSound2.wav",
+	"res://Assets/audio/HurtSound3.wav",
+]
+
+var _hurt_pool: Array[String] = []
+var _last_hurt: String = ""
+var _hurt_cooldown: float = 0.0
+
+@export var HURT_COOLDOWN: float = 0.8  # adjust based on sound length
+
 func _ready():
+	_refill_hurt_pool()
 	Global.landed.connect(land)
 	
 	FormSetup()
@@ -27,6 +41,9 @@ func is_player():
 	return true
 
 func get_hit(damage: int, direction: Vector2, force: int):
+	
+	play_hurt_sfx()
+	
 	if !invincible:
 		velocity = direction.normalized() * force
 		become_invincible()
@@ -61,6 +78,7 @@ func _unhandled_input(event):
 			POooooOONCH()
 
 func _physics_process(delta: float) -> void:
+	_hurt_cooldown = max(0.0, _hurt_cooldown - delta)
 	
 	# Handle player-induced upward velocity
 	if (currPhysics == PHYSICS.FLY):
@@ -178,6 +196,7 @@ func CheckFormSwap() -> void:
 		if currForm == FORM.SNAKE:
 			$CollisionShape2D.shape.radius = 35
 			$CollisionShape2D.shape.height = 130
+			%AudioManager.play_sfx("res://Assets/audio/SnakeMaskActivate.wav")
 		if currForm == FORM.SPIDER:
 			$CollisionShape2D.shape.radius = 27.5
 			$CollisionShape2D.shape.height = 55
@@ -294,3 +313,26 @@ func _on_snake_punching_frame_changed() -> void:
 		for body in bodies:
 			if body.has_method("is_punchable") && body.is_punchable():
 				body.get_punched(facing)
+				
+
+func _refill_hurt_pool() -> void:
+	_hurt_pool.assign(HURT_SOUNDS)
+	_hurt_pool.shuffle()
+
+	if _last_hurt != "" and _hurt_pool.size() > 1 and _hurt_pool[0] == _last_hurt:
+		var tmp := _hurt_pool[0]
+		_hurt_pool[0] = _hurt_pool[1]
+		_hurt_pool[1] = tmp
+
+
+func play_hurt_sfx() -> void:
+	if _hurt_cooldown > 0.0:
+		return  # skip if still on cooldown
+
+	if _hurt_pool.is_empty():
+		_refill_hurt_pool()
+
+	var path: String = _hurt_pool.pop_front()
+	_last_hurt = path
+	%AudioManager.play_sfx(path)
+	_hurt_cooldown = HURT_COOLDOWN
