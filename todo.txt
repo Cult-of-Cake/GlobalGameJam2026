@@ -3,12 +3,13 @@ Sounds:
 	Do the same in enemy
 	Update dictionary for enemy sounds
 
+Backgrounds
 
 MOAR COMMUNICATION
 	"or"
 	Some images (showcase icons) appear after talking to people
 
-infinite flight
+flight - ask Jessie to communicate this
 
 Non-climbable surfaces
 
