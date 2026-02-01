@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://t8bij5vbk4lo"]
+
+[ext_resource type="Texture2D" uid="uid://bk33y64udisps" path="res://Assets/characters/friends/Stickle.png" id="1_w3muv"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_w3muv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

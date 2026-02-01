@@ -4,85 +4,25 @@
 [ext_resource type="PackedScene" uid="uid://d3xksmwdntvb5" path="res://Player.tscn" id="2_chua2"]
 [ext_resource type="PackedScene" uid="uid://bp5n4liitxa4p" path="res://a_mook.tscn" id="3_gjko5"]
 [ext_resource type="Texture2D" uid="uid://bxxjhsi2y1ftp" path="res://Assets/gui/Keyboard_WASD.PNG" id="3_yxpqp"]
-[ext_resource type="Script" uid="uid://bmkkv4bjwmqb2" path="res://SceneManager/ShowcaseItem.gd" id="4_dvpsv"]
+[ext_resource type="Script" path="res://SceneManager/ShowcaseItem.gd" id="4_dvpsv"]
 [ext_resource type="Script" uid="uid://cbih5a3e085ns" path="res://Code/Enemies/Wanderer.gd" id="4_kvphc"]
 [ext_resource type="PackedScene" uid="uid://dqwkwarqpm680" path="res://a_friend.tscn" id="5_ahj24"]
 [ext_resource type="Texture2D" uid="uid://53wv43l01rlp" path="res://Assets/gui/Keyboard_W.PNG" id="5_dvpsv"]
 [ext_resource type="PackedScene" uid="uid://d0vrjkh3cj7md" path="res://Assets/tilesets/JoTiles.tscn" id="7_80d54"]
 [ext_resource type="PackedScene" uid="uid://c7dm13tuwl4c4" path="res://SceneManager/SceneManager.tscn" id="7_trksy"]
 [ext_resource type="PackedScene" uid="uid://cft4e1k72yhum" path="res://AudioManager/audio_manager.tscn" id="9_80d54"]
-[ext_resource type="Texture2D" uid="uid://bk33y64udisps" path="res://Assets/characters/friends/Stickle.png" id="9_ou0sf"]
+[ext_resource type="SpriteFrames" uid="uid://t8bij5vbk4lo" path="res://stick.tres" id="9_ou0sf"]
 [ext_resource type="Texture2D" uid="uid://uho65kt5j0we" path="res://Assets/images/Background_1_BG.png" id="9_ufi5d"]
-[ext_resource type="Texture2D" uid="uid://c5rr36y3rybey" path="res://Assets/characters/friends/snake_guardian.png" id="10_0vjly"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_0vjly"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("9_ou0sf")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="Animation" id="Animation_i1wbi"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_3g0b1"]
-resource_name = "get hit"
-length = 1.0333333
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5emyg"]
-_data = {
-&"RESET": SubResource("Animation_i1wbi"),
-&"get hit": SubResource("Animation_3g0b1")
-}
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_5emyg"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("10_0vjly")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [node name="Level_01" type="Node2D" unique_id=590419832]
 scale = Vector2(0.99876404, 0.9939016)
 script = ExtResource("1_vn7jf")
 
 [node name="Background1" type="TextureRect" parent="." unique_id=384345521]
-offset_left = 7.0086617
-offset_top = -73.447914
-offset_right = 4103.009
-offset_bottom = 918.55206
+offset_left = -501.62
+offset_top = 2651.168
+offset_right = 3594.38
+offset_bottom = 3643.168
 scale = Vector2(2, 2)
 texture = ExtResource("9_ufi5d")
 
@@ -147,29 +87,27 @@ layer_0/tile_data = PackedInt32Array(589839, 131072, 2, 589840, 196608, 2, 58984
 position = Vector2(1330.6445, 644.9331)
 dialogue_script = "level_01_sign"
 
+[node name="Sprite2D" parent="NPCs/Sign" index="0" unique_id=1844304917]
+position = Vector2(0.00013887882, -44.270046)
+sprite_frames = ExtResource("9_ou0sf")
+
 [node name="Flower" parent="NPCs" unique_id=1041484247 instance=ExtResource("5_ahj24")]
 position = Vector2(2184.7002, 307.87756)
 dialogue_script = "level_01_stickle_01"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="NPCs/Flower" unique_id=568299571]
-scale = Vector2(0.4, 0.4)
-sprite_frames = SubResource("SpriteFrames_0vjly")
-autoplay = "default"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="NPCs/Flower/Sprite" unique_id=278156325]
-libraries/ = SubResource("AnimationLibrary_5emyg")
+[node name="Sprite2D" parent="NPCs/Flower" index="0" unique_id=1844304917]
+sprite_frames = ExtResource("9_ou0sf")
 
 [node name="Guardian" parent="NPCs" unique_id=491927411 instance=ExtResource("5_ahj24")]
 position = Vector2(2208.73, 630.84717)
 dialogue_script = "level_01_g1_01"
 
-[node name="Sprite" type="AnimatedSprite2D" parent="NPCs/Guardian" unique_id=971813245]
-scale = Vector2(0.4, 0.4)
-sprite_frames = SubResource("SpriteFrames_5emyg")
-autoplay = "default"
+[node name="Sprite2D" parent="NPCs/Guardian" index="0" unique_id=1844304917]
+position = Vector2(-13.016088, 43.263836)
+scale = Vector2(0.2798515, 0.2798515)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="NPCs/Guardian/Sprite" unique_id=2141287488]
-libraries/ = SubResource("AnimationLibrary_5emyg")
+[node name="DialogueShape2D" parent="NPCs/Guardian/DialogueArea" parent_id_path=PackedInt32Array(491927411, 123546345) index="0" unique_id=1394217004]
+position = Vector2(-18.52295, 41.682556)
 
 [node name="Enemies" type="Node2D" parent="." unique_id=95553413]
 
@@ -214,3 +152,7 @@ visible = false
 
 [node name="AudioManager" parent="." unique_id=1900050100 instance=ExtResource("9_80d54")]
 unique_name_in_owner = true
+
+[editable path="NPCs/Sign"]
+[editable path="NPCs/Flower"]
+[editable path="NPCs/Guardian"]
