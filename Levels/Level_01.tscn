@@ -9,15 +9,17 @@
 [ext_resource type="Script" uid="uid://cbih5a3e085ns" path="res://Code/Enemies/Wanderer.gd" id="4_kvphc"]
 [ext_resource type="PackedScene" uid="uid://dqwkwarqpm680" path="res://a_friend.tscn" id="5_ahj24"]
 [ext_resource type="Texture2D" uid="uid://53wv43l01rlp" path="res://Assets/gui/Keyboard_W.PNG" id="5_dvpsv"]
+[ext_resource type="Texture2D" uid="uid://crlbaxkr413oa" path="res://Assets/gui/Keyboard_CTRL.PNG" id="7_4cdli"]
 [ext_resource type="PackedScene" uid="uid://d0vrjkh3cj7md" path="res://Assets/tilesets/JoTiles.tscn" id="7_80d54"]
 [ext_resource type="PackedScene" uid="uid://c7dm13tuwl4c4" path="res://SceneManager/SceneManager.tscn" id="7_trksy"]
+[ext_resource type="Texture2D" uid="uid://cwaskmrl2qds" path="res://Assets/gui/Keyboard_SPACE.PNG" id="8_8336u"]
 [ext_resource type="SpriteFrames" uid="uid://cdxky1x2m60fe" path="res://Assets/characters/friends/sign.tres" id="9_0vjly"]
 [ext_resource type="PackedScene" uid="uid://cft4e1k72yhum" path="res://AudioManager/audio_manager.tscn" id="9_80d54"]
 [ext_resource type="Texture2D" uid="uid://uho65kt5j0we" path="res://Assets/images/Background_1_BG.png" id="9_ufi5d"]
 [ext_resource type="SpriteFrames" uid="uid://t8bij5vbk4lo" path="res://Assets/characters/friends/stick.tres" id="10_5emyg"]
 [ext_resource type="Script" path="res://Code/LevelSign.gd" id="11_dih6j"]
 [ext_resource type="PackedScene" uid="uid://4i6oo50wk672" path="res://Levels/level_02.tscn" id="12_2rui6"]
-[ext_resource type="SpriteFrames" path="res://Assets/characters/friends/levelflag.tres" id="13_2rui6"]
+[ext_resource type="SpriteFrames" uid="uid://b1pjb38u2heqj" path="res://Assets/characters/friends/levelflag.tres" id="13_2rui6"]
 
 [node name="Level_01" type="Node2D" unique_id=590419832]
 scale = Vector2(0.99876404, 0.9939016)
@@ -65,6 +67,22 @@ texture = ExtResource("5_dvpsv")
 script = ExtResource("4_dvpsv")
 Keyboard_Image = "Keyboard_E"
 Controller_Image = "Keyboard_E"
+
+[node name="Fight" type="Sprite2D" parent="Key Showcase" unique_id=681881893]
+position = Vector2(2529.126, 790.82275)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("7_4cdli")
+script = ExtResource("4_dvpsv")
+Keyboard_Image = "Keyboard_CTRL"
+Controller_Image = "Keyboard_CTRL"
+
+[node name="Jump" type="Sprite2D" parent="Key Showcase" unique_id=2037974874]
+position = Vector2(4605.6924, 740.5159)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("8_8336u")
+script = ExtResource("4_dvpsv")
+Keyboard_Image = "Keyboard_SPACE"
+Controller_Image = "Keyboard_SPACE"
 
 [node name="2" type="Sprite2D" parent="Key Showcase" unique_id=194774697]
 position = Vector2(2087.5806, 615.7551)
