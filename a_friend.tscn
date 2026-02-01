@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dqwkwarqpm680"]
 
 [ext_resource type="Script" uid="uid://btuabf1mcjadg" path="res://Code/Enemies/FriendBase.gd" id="1_lxemx"]
-[ext_resource type="SpriteFrames" uid="uid://bxttjmmvon6lw" path="res://snakesprite.tres" id="2_lxemx"]
+[ext_resource type="SpriteFrames" uid="uid://bxttjmmvon6lw" path="res://Assets/characters/friends/snakesprite.tres" id="2_lxemx"]
 
 [sub_resource type="Animation" id="Animation_i1wbi"]
 length = 0.001
@@ -52,6 +52,7 @@ script = ExtResource("1_lxemx")
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1844304917]
 scale = Vector2(0.4, 0.4)
 sprite_frames = ExtResource("2_lxemx")
+autoplay = "default"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=2010358180]
 libraries/ = SubResource("AnimationLibrary_2y4ht")

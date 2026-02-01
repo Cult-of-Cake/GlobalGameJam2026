@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://cdxky1x2m60fe"]
+
+[ext_resource type="Texture2D" uid="uid://gltutxu1to6s" path="res://Assets/characters/friends/sign.png" id="1_wkyvw"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wkyvw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
