@@ -34,7 +34,9 @@ func _process(delta):
 			foundMove = true
 		else:
 			currDir *= -1 # Try the other way
+			print("This shouldn't be happening")
 	if foundMove && !punched:
+		print("currDir %s" %currDir)
 		velocity.x = currDir * wanderSpeed
 
 func _on_wall_finder_right_body_entered(body: Node2D) -> void:
@@ -44,6 +46,5 @@ func _on_wall_finder_right_body_entered(body: Node2D) -> void:
 
 func _on_wall_finder_left_body_entered(body: Node2D) -> void:
 	if body.get_class() == "TileMap" || (body.has_method("is_enemy") && body.is_enemy()):
-		print("This happened involving body %s" %body)
 		velocity.x = wanderSpeed
 		currDir = RIGHT
