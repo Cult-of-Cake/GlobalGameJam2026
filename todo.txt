@@ -2,7 +2,7 @@
 
 Form shift checks if you "fit"
 
-Dying
+Dying - start of current level only?
 MOAR COMMUNICATION
 
 Pause movement on dialogue, "Enter to continue" on the UI
