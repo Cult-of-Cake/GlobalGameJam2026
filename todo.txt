@@ -9,3 +9,5 @@ MOAR COMMUNICATION
 Non-climbable surfaces
 
 LEVEL 2
+
+HP death
