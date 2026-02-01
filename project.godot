@@ -23,6 +23,7 @@ config/icon="uid://h27oiuqkr4bh"
 [autoload]
 
 Global="*uid://dae50w7cob14a"
+AudioManager="*uid://cft4e1k72yhum"
 
 [display]
 

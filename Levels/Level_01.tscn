@@ -22,6 +22,9 @@
 [ext_resource type="PackedScene" uid="uid://4i6oo50wk672" path="res://Levels/level_02.tscn" id="12_2rui6"]
 [ext_resource type="SpriteFrames" uid="uid://b1pjb38u2heqj" path="res://Assets/characters/friends/levelflag.tres" id="13_2rui6"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_80d54"]
+size = Vector2(50, 1000)
+
 [node name="Level_01" type="Node2D" unique_id=590419832]
 scale = Vector2(0.99876404, 0.9939016)
 script = ExtResource("1_vn7jf")
@@ -196,6 +199,11 @@ startup_scene = ""
 [node name="AudioManager" parent="." unique_id=1900050100 instance=ExtResource("9_80d54")]
 unique_name_in_owner = true
 
+[node name="MusicZone2" type="Area2D" parent="AudioManager" unique_id=1540613541]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AudioManager/MusicZone2" unique_id=1087493429]
+position = Vector2(1337.6533, 264.6137)
+shape = SubResource("RectangleShape2D_80d54")
 [editable path="NPCs/Sign"]
 [editable path="NPCs/Level Flag"]
 [editable path="NPCs/Flower"]
