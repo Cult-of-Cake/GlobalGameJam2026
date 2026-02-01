@@ -10,13 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://c7dm13tuwl4c4" path="res://SceneManager/SceneManager.tscn" id="7_trksy"]
 
 [node name="Level_01" type="Node2D" unique_id=590419832]
+scale = Vector2(0.99876404, 0.9939016)
 script = ExtResource("1_vn7jf")
 
 [node name="Player" parent="." unique_id=1625906938 instance=ExtResource("2_chua2")]
 unique_name_in_owner = true
 z_index = 20
 z_as_relative = false
-position = Vector2(735, 254)
+position = Vector2(2309, 869)
 
 [node name="JoTiles" parent="." unique_id=120009848 instance=ExtResource("7_80d54")]
 z_index = 10
