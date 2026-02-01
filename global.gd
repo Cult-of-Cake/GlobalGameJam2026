@@ -22,11 +22,12 @@ func SetVar(v, to):
 	print(Global.variables)
 #endregion
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
+#region Controls
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+# Dictionary keeps track of control images e.g. WASD
+enum CONTROL_TYPE { KEYBOARD, CONTROLLER }
+const SHOWCASE_MOVEMENT = ["Keyboard_WASD", "Keyboard_WASD"]
+const SHOWCASE_DIALOGUE = ["Keyboard_Enter", "Keyboard_Enter"]
+
+#endregion
