@@ -2,11 +2,17 @@
 
 [ext_resource type="Script" uid="uid://b4vyu7cnxpcba" path="res://Levels/level_01.gd" id="1_vkhwo"]
 [ext_resource type="PackedScene" uid="uid://d3xksmwdntvb5" path="res://Player.tscn" id="2_ljuhi"]
+[ext_resource type="Texture2D" uid="uid://dkfe5tiiflgdr" path="res://Assets/images/Background_2_BG.png" id="2_t7xqb"]
 [ext_resource type="PackedScene" uid="uid://d0vrjkh3cj7md" path="res://Assets/tilesets/JoTiles.tscn" id="3_3use3"]
+[ext_resource type="Texture2D" uid="uid://o36mxyeve0rx" path="res://Assets/images/Background_2_FG.png" id="3_t7xqb"]
 [ext_resource type="PackedScene" uid="uid://bp5n4liitxa4p" path="res://a_mook.tscn" id="5_4ion1"]
+[ext_resource type="SpriteFrames" uid="uid://t8bij5vbk4lo" path="res://Assets/characters/friends/stick.tres" id="6_4ion1"]
+[ext_resource type="SpriteFrames" uid="uid://0pabga828cg2" path="res://Assets/characters/friends/birdguardian.tres" id="7_n6voa"]
 [ext_resource type="PackedScene" uid="uid://ds4vv2agvuudc" path="res://flying_mook.tscn" id="7_t7xqb"]
 [ext_resource type="PackedScene" uid="uid://c7dm13tuwl4c4" path="res://SceneManager/SceneManager.tscn" id="8_3k1mf"]
 [ext_resource type="Script" uid="uid://cbih5a3e085ns" path="res://Code/Enemies/Wanderer.gd" id="8_ffslo"]
+[ext_resource type="Script" path="res://Code/LevelSign.gd" id="8_t7xqb"]
+[ext_resource type="SpriteFrames" uid="uid://b1pjb38u2heqj" path="res://Assets/characters/friends/levelflag.tres" id="9_3k1mf"]
 [ext_resource type="PackedScene" uid="uid://cft4e1k72yhum" path="res://AudioManager/audio_manager.tscn" id="9_dnmew"]
 [ext_resource type="PackedScene" uid="uid://dqwkwarqpm680" path="res://a_friend.tscn" id="9_vkhwo"]
 
@@ -14,11 +20,27 @@
 scale = Vector2(0.99876404, 0.9939016)
 script = ExtResource("1_vkhwo")
 
+[node name="Background1" type="TextureRect" parent="." unique_id=1326388335]
+offset_left = -5.0061874
+offset_top = -954.8229
+offset_right = 4090.994
+offset_bottom = 45.177124
+scale = Vector2(2, 2)
+texture = ExtResource("2_t7xqb")
+
+[node name="Parallax" type="TextureRect" parent="." unique_id=720512233]
+offset_left = -5.0061874
+offset_top = -954.8229
+offset_right = 4090.994
+offset_bottom = 45.177124
+scale = Vector2(2, 2)
+texture = ExtResource("3_t7xqb")
+
 [node name="Player" parent="." unique_id=1625906938 instance=ExtResource("2_ljuhi")]
 unique_name_in_owner = true
 z_index = 20
 z_as_relative = false
-position = Vector2(3058.7805, -1457.8909)
+position = Vector2(589.7289, 248.51555)
 
 [node name="JoTiles" parent="." unique_id=120009848 instance=ExtResource("3_3use3")]
 z_index = 10
@@ -41,6 +63,33 @@ leftRange = 250
 rightRange = 250
 
 [node name="NPCs" type="Node2D" parent="." unique_id=1805314255]
+
+[node name="Stickle" parent="NPCs" unique_id=1105462167 instance=ExtResource("9_vkhwo")]
+position = Vector2(906.11993, 21.128853)
+dialogue_script = "level_02_stickle_01"
+
+[node name="Sprite2D" parent="NPCs/Stickle" index="0" unique_id=1844304917]
+sprite_frames = ExtResource("6_4ion1")
+
+[node name="Guardian" parent="NPCs" unique_id=1068624878 instance=ExtResource("9_vkhwo")]
+position = Vector2(4431.477, 1476.0012)
+dialogue_script = "level_02_g2_01"
+
+[node name="Sprite2D" parent="NPCs/Guardian" index="0" unique_id=1844304917]
+position = Vector2(0, -106.6504)
+sprite_frames = ExtResource("7_n6voa")
+
+[node name="Level Flag" parent="NPCs" unique_id=1143747380 instance=ExtResource("9_vkhwo")]
+position = Vector2(5188.4126, -1876.4435)
+script = ExtResource("8_t7xqb")
+next_scene = null
+
+[node name="Sprite2D" parent="NPCs/Level Flag" index="0" unique_id=1844304917]
+position = Vector2(0, -14.085656)
+sprite_frames = ExtResource("9_3k1mf")
+
+[node name="DialogueShape2D" parent="NPCs/Level Flag/DialogueArea" parent_id_path=PackedInt32Array(1143747380, 123546345) index="0" unique_id=1394217004]
+scale = Vector2(3.0261383, 1)
 
 [node name="SceneManager" parent="." unique_id=995662514 instance=ExtResource("8_3k1mf")]
 unique_name_in_owner = true
@@ -91,13 +140,6 @@ startsLeft = true
 wanderSpeed = 40.0
 hitpoints = 2
 
-[node name="AFriend" parent="." unique_id=1105462167 instance=ExtResource("9_vkhwo")]
-position = Vector2(906.11993, 69.42337)
-dialogue_script = "level_02_stickle_01"
-
-[node name="AFriend2" parent="." unique_id=1068624878 instance=ExtResource("9_vkhwo")]
-position = Vector2(4431.477, 1476.0012)
-dialogue_script = "level_02_g2_01"
-
-[node name="AFriend3" parent="." unique_id=1143747380 instance=ExtResource("9_vkhwo")]
-position = Vector2(5188.4126, -1876.4434)
+[editable path="NPCs/Stickle"]
+[editable path="NPCs/Guardian"]
+[editable path="NPCs/Level Flag"]

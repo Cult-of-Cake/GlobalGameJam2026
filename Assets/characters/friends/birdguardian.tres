@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://0pabga828cg2"]
+
+[ext_resource type="Texture2D" uid="uid://dub5lvg2byphy" path="res://Assets/characters/friends/bird_guardian.png" id="1_bwalo"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_bwalo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
