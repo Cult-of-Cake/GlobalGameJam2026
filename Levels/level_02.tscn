@@ -11,6 +11,8 @@
 [ext_resource type="SpriteFrames" uid="uid://t8bij5vbk4lo" path="res://Assets/characters/friends/stick.tres" id="6_4ion1"]
 [ext_resource type="SpriteFrames" path="res://Assets/characters/friends/birdguardian.tres" id="7_n6voa"]
 [ext_resource type="PackedScene" uid="uid://ds4vv2agvuudc" path="res://flying_mook.tscn" id="7_t7xqb"]
+[ext_resource type="SpriteFrames" path="res://Assets/characters/friends/stick.tres" id="6_4ion1"]
+[ext_resource type="PackedScene" path="res://flying_mook.tscn" id="7_t7xqb"]
 [ext_resource type="PackedScene" uid="uid://c7dm13tuwl4c4" path="res://SceneManager/SceneManager.tscn" id="8_3k1mf"]
 [ext_resource type="Script" uid="uid://cbih5a3e085ns" path="res://Code/Enemies/Wanderer.gd" id="8_ffslo"]
 [ext_resource type="Script" path="res://Code/LevelSign.gd" id="8_t7xqb"]

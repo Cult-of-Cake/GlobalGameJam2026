@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://rotjf8gt3fhq"]
+
+[ext_resource type="Texture2D" uid="uid://c5rr36y3rybey" path="res://Assets/characters/friends/snake_guardian.png" id="1_62a1m"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_62a1m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
