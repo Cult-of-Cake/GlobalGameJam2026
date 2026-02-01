@@ -77,6 +77,8 @@ offset_bottom = 578.0
 autowrap_mode = 2
 
 [node name="Showcase_Icon" type="Sprite2D" parent="." unique_id=178848562]
+position = Vector2(953, 607)
+scale = Vector2(0.1, 0.1)
 script = ExtResource("4_rrhmh")
 Keyboard_Image = "Keyboard_ENTER"
 Controller_Image = "Keyboard_ENTER"
