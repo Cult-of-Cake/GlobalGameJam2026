@@ -176,7 +176,6 @@ shape = SubResource("CapsuleShape2D_l6ohk")
 
 [node name="SpiderStanding" type="AnimatedSprite2D" parent="Animations" unique_id=2006195252]
 unique_name_in_owner = true
-visible = false
 sprite_frames = SubResource("SpriteFrames_r3kul")
 
 [node name="SpiderWalking" type="AnimatedSprite2D" parent="Animations" unique_id=9786302]
@@ -187,6 +186,7 @@ frame_progress = 0.91274816
 
 [node name="SnakeStanding" type="AnimatedSprite2D" parent="Animations" unique_id=2077674135]
 unique_name_in_owner = true
+visible = false
 sprite_frames = SubResource("SpriteFrames_5ncpa")
 
 [node name="SnakeWalking" type="AnimatedSprite2D" parent="Animations" unique_id=1041142884]
