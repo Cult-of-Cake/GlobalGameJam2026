@@ -3,9 +3,11 @@ Sounds:
 	Do the same in enemy
 	Update dictionary for enemy sounds
 
-SceneManager global so the sounds don't die
 
 MOAR COMMUNICATION
-Shouldn't be able to start a new dialogue while already in one
 
 Non-climbable surfaces
+
+LEVEL 2
+
+HP death

@@ -47,7 +47,7 @@ func _ready():
 	LoadAllScripts()
 	FillCharacterArray()
 	mode = MODES.READY
-	if startup_scene != "":
+	if startup_scene != null and startup_scene != "":
 		BeginScene(startup_scene)
 
 func _physics_process(delta):
@@ -109,7 +109,7 @@ func LoadAllScripts():
 				LoadScript(script_name)
 		dir.list_dir_end()
 	else:
-		print("!!!Error opening " + script_path + "!!!")
+		print("!!!Error opening %s!!!" % script_path)
 
 func LoadScript(script_name):
 	print("   Loading ", script_name)
@@ -202,7 +202,8 @@ func Continue():
 	if mode == MODES.WAITING:
 		mode = MODES.RUNNING
 func _input(event):
-	if event.is_action_pressed("ui_skip") or event.is_action_pressed("ui_accept"):
+	if (event.is_action_pressed("ui_skip")
+		or event.is_action_pressed("ui_accept")):
 		Continue()
 	if event.is_action_pressed("ui_click") and visible == true:
 		Continue()
