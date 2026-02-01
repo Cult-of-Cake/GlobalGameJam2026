@@ -38,11 +38,12 @@ func _process(delta):
 		velocity.x = currDir * wanderSpeed
 
 func _on_wall_finder_right_body_entered(body: Node2D) -> void:
-	if body.get_class() == "TileMap":
+	if body.get_class() == "TileMap" || (body.has_method("is_enemy") && body.is_enemy()):
 		velocity.x = wanderSpeed * -1
 		currDir = LEFT
 
 func _on_wall_finder_left_body_entered(body: Node2D) -> void:
-	if body.get_class() == "TileMap":
+	if body.get_class() == "TileMap" || (body.has_method("is_enemy") && body.is_enemy()):
+		print("This happened involving body %s" %body)
 		velocity.x = wanderSpeed
 		currDir = RIGHT

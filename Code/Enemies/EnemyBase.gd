@@ -15,6 +15,9 @@ func bonk():
 
 func is_punchable():
 	return true
+	
+func is_enemy():
+	return true
 
 func get_punched(facing):
 	punched = true

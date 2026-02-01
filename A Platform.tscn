@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://d3xksmwdntvb5" path="res://Player.tscn" id="2_sryta"]
 [ext_resource type="PackedScene" uid="uid://bp5n4liitxa4p" path="res://a_mook.tscn" id="3_76pfe"]
 [ext_resource type="Script" uid="uid://cbih5a3e085ns" path="res://Code/Enemies/Wanderer.gd" id="4_vrra7"]
-[ext_resource type="PackedScene" path="res://flying_mook.tscn" id="5_ifn1m"]
-[ext_resource type="PackedScene" path="res://a_friend.tscn" id="5_sfdqf"]
+[ext_resource type="PackedScene" uid="uid://ds4vv2agvuudc" path="res://flying_mook.tscn" id="5_ifn1m"]
+[ext_resource type="PackedScene" uid="uid://dqwkwarqpm680" path="res://a_friend.tscn" id="5_sfdqf"]
 [ext_resource type="PackedScene" uid="uid://c7dm13tuwl4c4" path="res://SceneManager/SceneManager.tscn" id="6_6gkw1"]
 
 [sub_resource type="GDScript" id="GDScript_r3783"]
@@ -37,6 +37,12 @@ position = Vector2(738, 261)
 
 [node name="AMook" parent="." unique_id=1041484247 instance=ExtResource("3_76pfe")]
 position = Vector2(438, 271)
+script = ExtResource("4_vrra7")
+startsLeft = true
+wanderSpeed = 40.0
+
+[node name="AMook2" parent="." unique_id=2138565092 instance=ExtResource("3_76pfe")]
+position = Vector2(333, 283)
 script = ExtResource("4_vrra7")
 startsLeft = true
 wanderSpeed = 40.0
