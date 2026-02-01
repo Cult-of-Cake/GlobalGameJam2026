@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://w6w5k7hpn0vl" path="res://SceneManager/SceneManager.gd" id="1"]
 [ext_resource type="Script" uid="uid://cixcopuuh8tpk" path="res://SceneManager/SceneCharacter.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://cft4e1k72yhum" path="res://AudioManager/audio_manager.tscn" id="2_51u05"]
 [ext_resource type="Texture2D" uid="uid://c2k6fp5q62qvf" path="res://Assets/characters/treefoot_serious.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://dftnbpbkyhnv7" path="res://Assets/gui/option_button.png" id="5"]
 [ext_resource type="FontFile" uid="uid://br6imui04o0nk" path="res://Assets/fonts/MaidenOrange-Regular.ttf" id="6"]
@@ -44,9 +43,6 @@ offset_right = 1024.0
 offset_bottom = 600.0
 expand_mode = 1
 stretch_mode = 5
-
-[node name="AudioManager" parent="." unique_id=1900050100 instance=ExtResource("2_51u05")]
-unique_name_in_owner = true
 
 [node name="Game_Title" type="Sprite2D" parent="." unique_id=289730291]
 position = Vector2(512, 0)
