@@ -2,4 +2,7 @@
 
 Form shift checks if you "fit"
 
-Bird can only be switched to in the air, dies if it lands
+Dying
+MOAR COMMUNICATION
+
+Pause movement on dialogue, "Enter to continue" on the UI
