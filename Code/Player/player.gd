@@ -317,7 +317,7 @@ func IsFormAllowed(form : FORM):
 	while(index < globalForms.size()): 		
 		print("%d,%d,%s" % [(clearance[0] - FORM_SIZES[index][0]), (clearance[1] - FORM_SIZES[index][1]), globalForms[index]])
 		allowedForms.push_back((
-			((clearance[0] - FORM_SIZES[index][0]) > 0)
+			((clearance[0] - (2* FORM_SIZES[index][0])) > 0)
 			&& ((clearance[1] - FORM_SIZES[index][1]) > 0)
 			&& bool(globalForms[index])
 		))
