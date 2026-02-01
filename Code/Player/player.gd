@@ -175,7 +175,7 @@ func CheckFormSwap() -> void:
 		UpdateSprites()
 		
 		check_vertical_clearance()
-		check_horizontal_clearance()
+		print(check_horizontal_clearance())
 		
 		if currForm == FORM.SNAKE:
 			$CollisionShape2D.shape.radius = 35

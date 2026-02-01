@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bf32mm0eia7uw"]
 
-[ext_resource type="Texture2D" uid="uid://dne317labwpo3" path="res://Assets/images/Tilesets/Tileset.png" id="1_excx3"]
+[ext_resource type="Texture2D" uid="uid://dmq61mdsjqjl2" path="res://Assets/images/Tilesets/Tileset.png" id="1_excx3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yvdyk"]
 texture = ExtResource("1_excx3")
@@ -548,7 +548,7 @@ texture = ExtResource("1_excx3")
 21:15/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_ky4aj"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 5
 sources/0 = SubResource("TileSetAtlasSource_yvdyk")
 
 [node name="ATileset" type="TileMap" unique_id=78659264]
