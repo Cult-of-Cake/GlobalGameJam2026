@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="GGJ 2026"
-run/main_scene="uid://f1ybcp7koxbd"
+run/main_scene="uid://dg3bhoadc53th"
 config/features=PackedStringArray("4.6")
 run/max_fps=30
 config/icon="uid://h27oiuqkr4bh"
