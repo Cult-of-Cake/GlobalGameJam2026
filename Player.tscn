@@ -250,22 +250,24 @@ visible = false
 sprite_frames = SubResource("SpriteFrames_rv870")
 
 [node name="Raycasts" type="Node2D" parent="." unique_id=1428850002]
-visible = false
 
 [node name="SpiderWallLeft" type="RayCast2D" parent="Raycasts" unique_id=1946089268]
 unique_name_in_owner = true
 position = Vector2(-4, 0)
 target_position = Vector2(-39, 0)
+collision_mask = 8
 
 [node name="SpiderWallRight" type="RayCast2D" parent="Raycasts" unique_id=2052355990]
 unique_name_in_owner = true
 position = Vector2(1, 1)
 target_position = Vector2(48, -1)
+collision_mask = 8
 
 [node name="SpiderCeiling" type="Area2D" parent="Raycasts" unique_id=456458722]
 unique_name_in_owner = true
 position = Vector2(0.9999962, 0)
 scale = Vector2(-667.26263, 1156.6473)
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Raycasts/SpiderCeiling" unique_id=460038400]
 position = Vector2(0.0014986516, -0.031718828)
@@ -276,6 +278,7 @@ shape = SubResource("RectangleShape2D_wi0c6")
 position = Vector2(48, 8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ThePunchZone" unique_id=140186958]
+visible = false
 shape = SubResource("RectangleShape2D_xhfnw")
 
 [node name="Sprite2D" type="Sprite2D" parent="ThePunchZone" unique_id=41963774]
