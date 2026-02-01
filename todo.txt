@@ -2,17 +2,13 @@
 Sounds:
 	Do the same in enemy
 	Update dictionary for enemy sounds
+	Add sound colliders
 
 
 MOAR COMMUNICATION
 	"or"
 	Some images (showcase icons) appear after talking to people
 
-infinite flight
-
 Non-climbable surfaces
 
-HP death
 
-
-Add sound colliders

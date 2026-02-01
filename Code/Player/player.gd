@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -600.0
+const MAX_HITPOINTS = 5
 
 var facing = Global.FACING.RIGHT
 var metafloor = true
@@ -11,6 +12,8 @@ var invincible = false
 var stunned = false
 var crawling
 var direction
+var starting_position : Vector2 # Set in _ready
+var hitpoints = MAX_HITPOINTS
 
 var invincibleDuration = 2
 var stunDuration = 0.4
@@ -62,6 +65,7 @@ func _ready():
 	hide_sprites()
 	activate_sprites()
 	show_sprite(%SpiderStanding)
+	starting_position = position
 	
 	# Initialize state for every sound type for the grouped audio
 	for type in SFX_POOLS:
@@ -79,8 +83,12 @@ func get_hit(damage: int, direction: Vector2, force: int):
 	
 	if !invincible:
 		velocity = direction.normalized() * force
-		become_invincible()
-		become_stunned()
+		hitpoints -= damage
+		if (hitpoints <= 0):
+			Die()
+		else:
+			become_invincible()
+			become_stunned()
 		
 
 func become_invincible():
@@ -405,8 +413,7 @@ func SpriteRotate(sprite : Node, flip_h : bool, flip_v : bool = false, rotation 
 #endregion
 
 func Die() -> void:
-	position.x -= 500
-	position.y = 1500
+	position = starting_position
 
 #Audio group cooldown refill pool
 func _refill_pool(type: SfxType) -> void:

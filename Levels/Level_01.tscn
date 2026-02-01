@@ -26,19 +26,19 @@ scale = Vector2(0.99876404, 0.9939016)
 script = ExtResource("1_vn7jf")
 
 [node name="Background1" type="TextureRect" parent="." unique_id=384345521]
-offset_left = -5.006195
-offset_top = -78.47859
+offset_left = -5.0061874
+offset_top = -2311.094
 offset_right = 4090.994
-offset_bottom = 913.5214
-scale = Vector2(2, 2)
+offset_bottom = 688.906
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("9_ufi5d")
 
 [node name="Parallax" type="TextureRect" parent="." unique_id=366578885]
-offset_left = -5.006195
-offset_top = -78.47859
+offset_left = -5.0061874
+offset_top = -2311.094
 offset_right = 4090.994
-offset_bottom = 921.5214
-scale = Vector2(2, 2)
+offset_bottom = 688.906
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_5emyg")
 
 [node name="Key Showcase" type="Node2D" parent="." unique_id=46187778]
