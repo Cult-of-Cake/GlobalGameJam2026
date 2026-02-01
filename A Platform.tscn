@@ -34,7 +34,7 @@ layer_0/tile_data = PackedInt32Array(1835018, 131072, 8, 1835019, 131072, 8, 183
 
 [node name="Player" parent="." unique_id=1625906938 instance=ExtResource("2_sryta")]
 unique_name_in_owner = true
-position = Vector2(738, 261)
+position = Vector2(1083, 129)
 
 [node name="AMook" parent="." unique_id=1041484247 instance=ExtResource("3_76pfe")]
 position = Vector2(438, 271)
@@ -47,7 +47,7 @@ position = Vector2(189, 429)
 dialogue_script = "AngryFluff"
 
 [node name="FlyingMook" parent="." unique_id=2118646747 instance=ExtResource("5_ifn1m")]
-position = Vector2(588, 104)
+position = Vector2(608, -364)
 leftRange = 200
 rightRange = 400
 
