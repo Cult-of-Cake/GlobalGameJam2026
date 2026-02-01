@@ -198,6 +198,8 @@ startup_scene = ""
 
 [node name="AudioManager" parent="." unique_id=1900050100 instance=ExtResource("9_80d54")]
 unique_name_in_owner = true
+mute = false
+crossfade_time_ms = 2000.0
 
 [node name="MusicZone2" type="Area2D" parent="AudioManager" unique_id=1540613541]
 
