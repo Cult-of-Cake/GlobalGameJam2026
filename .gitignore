@@ -7,9 +7,6 @@ export_presets.cfg
 .godot/
 .nomedia
 
-# These seem to be re-importing every GD time I open the game
-*.import
-
 # Imported translations (automatically generated from CSV files)
 *.translation
 
