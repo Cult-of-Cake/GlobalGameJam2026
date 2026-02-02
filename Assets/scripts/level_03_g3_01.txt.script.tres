@@ -1,9 +1,18 @@
-[gd_resource type="Resource" script_class="SceneManagerScript" format=3 uid="uid://dvhpvq5jlh8le"]
+[gd_resource type="Resource" script_class="SceneManagerScript" format=3 uid="uid://6rifggup80cb"]
 
 [ext_resource type="Script" uid="uid://70i45fiiwwde" path="res://Assets/scripts/resource_scenes.gd" id="1_1m78f"]
 
 [resource]
 script = ExtResource("1_1m78f")
 script_source_file = "res://Assets/scripts/level_03_g3_01.txt"
+script_content = "M: Hello? Mask Guardian...?
+G3: I am Douppion of the Silk Rivers.
+M: Oh, uh -- hi! I'm Merino!
+G3: Merino the Feltweaver... I see. You have two other Masks of Creativity, and now you need mine.
+M: I've been fighting off enemies and fixing up Craftskan, but I need to be able to do the same here.
+M: If I can cross the silk waters, and maybe even the hot glue lava in the volcanoes up ahead, maybe I can save Craftskan.
+G3: Weaving the fibres of the world back together... That is what we exist to do.
+G3: I will grant you the Yarn Jelly Mask. Use it to swim and pass the waters that stand in your way.
+M: Oh! Thank you! I won't be long!
+"
 metadata/_custom_type_script = "uid://70i45fiiwwde"
-

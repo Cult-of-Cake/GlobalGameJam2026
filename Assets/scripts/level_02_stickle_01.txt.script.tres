@@ -1,9 +1,17 @@
-[gd_resource type="Resource" script_class="SceneManagerScript" format=3 uid="uid://yb6t46jd3n2f"]
+[gd_resource type="Resource" script_class="SceneManagerScript" format=3 uid="uid://cm45ej2bpapf3"]
 
 [ext_resource type="Script" uid="uid://70i45fiiwwde" path="res://Assets/scripts/resource_scenes.gd" id="1_1m78f"]
 
 [resource]
 script = ExtResource("1_1m78f")
 script_source_file = "res://Assets/scripts/level_02_stickle_01.txt"
+script_content = "P: Hey, it's me, Stickle! Your friend!
+P: You did a great job back there!
+M: Thanks a lot! What are you doing in the Woolly Jungle? Are you on a journey too?
+P: Of course! I want to try and help you find all the masks to save our world.
+P: I did find a map saying there's one around here somewhere.
+P: But even when you've got it, it can be pretty hard to get around all these yarn trees.
+P: Everything's so high up, even for someone who can jump and climb like you...
+M: Don't worry. With the Masks of Creativity, there's got to be a way up there.
+"
 metadata/_custom_type_script = "uid://70i45fiiwwde"
-

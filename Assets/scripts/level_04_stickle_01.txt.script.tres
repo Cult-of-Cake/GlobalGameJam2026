@@ -1,9 +1,15 @@
-[gd_resource type="Resource" script_class="SceneManagerScript" format=3 uid="uid://bcn1f0k5mybso"]
+[gd_resource type="Resource" script_class="SceneManagerScript" format=3 uid="uid://457imur11gtf"]
 
 [ext_resource type="Script" uid="uid://70i45fiiwwde" path="res://Assets/scripts/resource_scenes.gd" id="1_1m78f"]
 
 [resource]
 script = ExtResource("1_1m78f")
 script_source_file = "res://Assets/scripts/level_04_stickle_01.txt"
+script_content = "M: Not long now.
+P: We're really going to the Hot Glue Volcano...?
+P: It's so hot, and it looks so dangerous!
+M: Don't worry, you don't have to come. I can handle this alone.
+P: We've already been through so much. I know you can do it!
+M: Especially with these masks. Wait for me, Stickle! I'll save Craftskan for sure!
+"
 metadata/_custom_type_script = "uid://70i45fiiwwde"
-
