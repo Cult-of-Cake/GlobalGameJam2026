@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bobaeg05f020h" path="res://Code/Title.gd" id="1_ehtth"]
 [ext_resource type="Texture2D" uid="uid://b2cislscroaoi" path="res://Assets/images/Title.png" id="2_yiu5k"]
-[ext_resource type="Texture2D" uid="uid://cecwlpb65odp6" path="res://Assets/gui/option_button.png" id="5_yxog7"]
-[ext_resource type="FontFile" uid="uid://cd003tbqa866s" path="res://Assets/fonts/MaidenOrange-Regular.ttf" id="6_fj31j"]
+[ext_resource type="Texture2D" uid="uid://dftnbpbkyhnv7" path="res://Assets/gui/option_button.png" id="5_yxog7"]
+[ext_resource type="FontFile" uid="uid://br6imui04o0nk" path="res://Assets/fonts/MaidenOrange-Regular.ttf" id="6_fj31j"]
 [ext_resource type="PackedScene" uid="uid://c7dm13tuwl4c4" path="res://SceneManager/SceneManager.tscn" id="20_0gd1v"]
 
 [sub_resource type="FontFile" id="1"]
