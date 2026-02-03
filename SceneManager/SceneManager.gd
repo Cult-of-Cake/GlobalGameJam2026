@@ -117,20 +117,20 @@ func LoadScript(script_name):
 	if all_scripts.has(script_name):
 		return
 	# Open and read the file
-	var fname = script_path + "/" + script_name + ".txt"
-	var file = FileAccess.open(fname, FileAccess.READ)
+	var fname = script_path + "/" + script_name + ".txt.script.tres"
+	var file : SceneManagerScript = ResourceLoader.load(fname)
 	if file == null:
 		print ("Error opening file %s: %s" % [fname, FileAccess.get_open_error()])
 		return
-	file.seek(0)
+	var file_content = file.script_content.split("\n")
 	# Init vars for this loop
 	var current_line : String
 	var line_count = 0 # For reporting errors
 	var command_array = []
 	var do_wait = ScriptCommand.new("...") # We might need this a bunch
 	# Every line in this file will correspond to some type of command - play audio, show dialogue, etc
-	while !file.eof_reached():
-		current_line = file.get_line()
+	while line_count < file_content.size():
+		current_line = file_content[line_count]
 		line_count += 1 # Human-readable, so first line is 1
 		var command : ScriptCommand
 		command = ScriptCommand.new(current_line)
