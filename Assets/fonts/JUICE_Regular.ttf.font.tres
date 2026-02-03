@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SceneManagerFontLoader" format=3]
+
+[ext_resource type="FontFile" path="JUICE_Regular.ttf" id="1_tk6wd"]
+[ext_resource type="Script" uid="uid://dnllgw7spvwxn" path="res://Assets/fonts/SceneManagerFontLoader.gd" id="2_hdq6h"]
+
+[resource]
+script = ExtResource("2_hdq6h")
+fontfile = ExtResource("1_tk6wd")
+metadata/_custom_type_script = "uid://dnllgw7spvwxn"
+

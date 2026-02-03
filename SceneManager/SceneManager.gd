@@ -344,7 +344,7 @@ func BeginScene(script_name):
 						$Character_Right.texture = c.GetEmotionTexture(cmd.dial_emotion)
 					#elif cmd.image_location == cmd.IMAGE_LOCATION.CENTER:
 					#	$Character_Center.texture = c.GetEmotionTexture(cmd.dial_emotion)
-					var font = GetFont(font_path, c.dialogue_fontname, "")
+					var font : FontFile = c.dialogue_fontname
 					font.fixed_size = c.dialogue_fontsize
 					box.set("theme_override_fonts/font", font)
 					$Nametag_text.set("theme_override_fonts/font", font)
