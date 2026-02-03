@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SceneManagerImageLoader" format=3]
+
+[ext_resource type="Script" uid="uid://beggfky6128m" path="res://SceneManagerImageLoader.gd" id="1_1ivwu"]
+[ext_resource type="Texture2D" path="res://Assets/gui/Keyboard_1.PNG" id="2_uauhc"]
+
+[resource]
+script = ExtResource("1_1ivwu")
+texture_image = ExtResource("2_uauhc")
+metadata/_custom_type_script = "uid://beggfky6128m"
+

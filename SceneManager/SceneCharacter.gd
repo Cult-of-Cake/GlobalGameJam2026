@@ -10,7 +10,8 @@ class_name SceneCharacter
 @export var dialogue_colour : Color
 @export var dialogue_shadow : Color
 @export var dialogue_background : Color
-@export var dialogue_fontname : String
+@export var dialogue_fontloader : SceneManagerFontLoader
+var dialogue_fontname : FontFile
 @export var dialogue_fontsize : int
 @export var image_side : int
 
@@ -19,6 +20,7 @@ class_name SceneCharacter
 var emotions = {}
 
 func _ready():
+	dialogue_fontname = dialogue_fontloader.fontfile
 	var size = min(emotion_keywords.size(), emotion_images.size())
 	var i = 0
 

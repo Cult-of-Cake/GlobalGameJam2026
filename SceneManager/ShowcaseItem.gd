@@ -15,4 +15,5 @@ func On_Keyboard_Used():
 	
 func SetSprite(img):
 	print("Setting image " + img)
-	texture = SceneManager.GetTexture("res://Assets/gui/", img, ".PNG")
+	var texture_resource : SceneManagerImageLoader = ResourceLoader.load("res://Assets/gui/" + img + ".PNG.image.tres")
+	texture = texture_resource.texture_image
