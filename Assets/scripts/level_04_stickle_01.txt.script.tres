@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="SceneManagerScript" format=3 uid="uid://457imur11gtf"]
 
-[ext_resource type="Script" uid="uid://70i45fiiwwde" path="res://Code/Tools/resource_scenes.gd" id="1_1m78f"]
+[ext_resource type="Script" uid="uid://70i45fiiwwde" path="res://Code/Tools/SceneManagerScript.gd" id="1_rgody"]
 
 [resource]
-script = ExtResource("1_1m78f")
+script = ExtResource("1_rgody")
 script_source_file = "res://Assets/scripts/level_04_stickle_01.txt"
 script_content = "M: Not long now.
 P: We're really going to the Hot Glue Volcano...?
