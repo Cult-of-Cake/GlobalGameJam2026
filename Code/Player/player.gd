@@ -19,7 +19,7 @@ var invincibleDuration = 2
 var stunDuration = 0.4
 
 # Audio stuff for things with multiple sounds
-enum SfxType { HURT, ATTACK, JUMP, FLAP }
+enum SfxType { HURT, ATTACK, JUMP, FLAP, SWIM }
 
 # Dictionary keeps track of which thing has which sounds
 const SFX_POOLS: Dictionary = {
@@ -42,6 +42,9 @@ const SFX_POOLS: Dictionary = {
 		"res://Assets/audio/BirdFlap1.wav",
 		"res://Assets/audio/BirdFlap2.wav",
 	],
+	SfxType.SWIM: [
+		"res://Assets/audio/Jellyfish Move.wav",
+	],
 }
 
 var _pools: Dictionary = {}
@@ -54,6 +57,7 @@ var _cooldowns: Dictionary = {}
 	SfxType.ATTACK: 1,
 	SfxType.JUMP: 0.3,
 	SfxType.FLAP: 1,
+	SfxType.SWIM: 0.6,
 }
 
 func _ready():
@@ -137,6 +141,10 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
 			play_sound_group(SfxType.JUMP) #play jump sfx grouping
+	elif (currPhysics == PHYSICS.SWIM):
+		if Input.is_action_just_pressed("jump"):
+			velocity.y = JUMP_VELOCITY / 3
+			play_sound_group(SfxType.SWIM) #play swim sfx grouping
 	
 	# Add the gravity.
 	if !metafloor && is_on_floor():
@@ -151,7 +159,7 @@ func _physics_process(delta: float) -> void:
 			
 	if (currPhysics == PHYSICS.JUMP or currPhysics == PHYSICS.FLY):
 		if not is_on_floor():
-			velocity += get_gravity() * delta				
+			velocity += get_gravity() * delta
 	elif (currPhysics == PHYSICS.SWIM):
 		if not is_on_floor():
 			velocity += get_gravity() * delta / 3
