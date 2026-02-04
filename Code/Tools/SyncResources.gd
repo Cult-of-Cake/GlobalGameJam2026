@@ -1,7 +1,6 @@
 @tool
 extends EditorScript
 
-
 func _run() -> void:
 	var script_folder := "res://Assets/scripts/"
 	var script_resources = Array(DirAccess.get_files_at(script_folder)).filter(\

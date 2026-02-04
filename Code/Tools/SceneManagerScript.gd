@@ -1,6 +1,6 @@
 @tool
 extends Resource
-class_name MySceneManagerScript
+class_name SceneManagerScript
 
 @export var script_source_file: String
 @export_multiline var script_content: String:
@@ -13,7 +13,9 @@ func load_script() -> void:
 	print(script_source_file)
 	var file = FileAccess.open(script_source_file,FileAccess.READ)
 	var content = file.get_as_text()
-	script_content = content
+	var content_clean = content.replace("\r", "")
+	script_content = content_clean
+	file.close()
 	print(script_content)
 	
 
