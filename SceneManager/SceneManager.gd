@@ -131,6 +131,8 @@ func LoadScript(script_name):
 	# Every line in this file will correspond to some type of command - play audio, show dialogue, etc
 	while line_count < file_content.size():
 		current_line = file_content[line_count]
+		current_line = current_line.replace("\n", "")
+		current_line = current_line.replace("\r", "")
 		line_count += 1 # Human-readable, so first line is 1
 		var command : ScriptCommand
 		command = ScriptCommand.new(current_line)
@@ -138,12 +140,17 @@ func LoadScript(script_name):
 			print ("Invalid command found in %s at line %s" % [script_name, line_count])
 			print ("Error message was: %s" % command.error_message)
 		elif command.isCommand():
+			#print ("Adding command: %s" % command.original_line)
 			command_array.append(command)
 			# If set as such in configuration, dialogue automatically waits before moving on
 			# It will be skippable by clicking / pressing certain keys and will stop if there's
 			# an accompanying sound effect that completes
 			if wait_after_dialogue and command.command_type == command.TYPE.DIALOGUE:
 				command_array.append(do_wait)
+		else:
+			if command.original_line:
+				print ("!!! Skipped command: %s !!!" % command.original_line)
+			
 	# And, save it
 	print("   Loaded %d commands" % command_array.size())
 	all_scripts[script_name] = command_array
@@ -253,7 +260,9 @@ func BeginScene(script_name):
 				var player : AudioStreamPlayer
 				if cmd.file_ext == "wav":
 					# Ensure that we have 16-bit (can downgrade in Audacity)
-					$AudioManager.play_sfx("res://" + GetAudio(audio_path, cmd.file_name, "." + cmd.file_ext))
+					var audiopath = "res://%s%s.%s" % [audio_path, cmd.file_name, cmd.file_ext]
+					print("Playing SFX %s" % audiopath)
+					%AudioManager.play_sfx(audio_path)
 				elif cmd.file_ext == "ogg":
 					$AudioManager.play_bgm("res://" + GetAudio(audio_path, cmd.file_name, "." + cmd.file_ext))
 				#if player != null:
