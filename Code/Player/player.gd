@@ -275,9 +275,11 @@ func CheckFormSwap() -> void:
 			$CollisionShape2D.shape.radius = FORM_SIZES[FORM.SPIDER][0]
 			$CollisionShape2D.shape.height = FORM_SIZES[FORM.SPIDER][1]		
 		if currForm == FORM.SNAKE:
+			play_single_sound("SnakeMaskActivate")
 			$CollisionShape2D.shape.radius = FORM_SIZES[FORM.SNAKE][0]
 			$CollisionShape2D.shape.height = FORM_SIZES[FORM.SNAKE][1]
 		if currForm == FORM.BIRD:
+			play_single_sound("BirdMaskActivate")
 			$CollisionShape2D.shape.radius = FORM_SIZES[FORM.BIRD][0]
 			$CollisionShape2D.shape.height = FORM_SIZES[FORM.BIRD][1]
 		if currForm == FORM.JELLYFISH:
@@ -444,6 +446,11 @@ func play_sound_group(type: SfxType) -> void:
 	_last_sounds[type] = path
 	%AudioManager.play_sfx(path)
 	_cooldowns[type] = COOLDOWNS[type]
+
+func play_single_sound(filename : String) -> void:
+	var path = "res://%s%s.wav" % [%SceneManager.audio_path, filename]
+	#print("Playing sound %s" % path)
+	%AudioManager.play_sfx(path)
 
 func check_vertical_clearance():
 	var overhead
