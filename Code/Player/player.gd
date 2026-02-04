@@ -422,6 +422,7 @@ func SpriteRotate(sprite : Node, flip_h : bool, flip_v : bool = false, rotation 
 #endregion
 
 func Die() -> void:
+	play_single_sound("DeathSound")
 	position = starting_position
 	hitpoints = MAX_HITPOINTS
 
