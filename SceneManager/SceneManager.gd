@@ -105,7 +105,7 @@ func LoadAllScripts():
 			if fname == "":
 				break
 			if not fname.begins_with(".") and not fname.begins_with("_"):
-				var script_name = fname.substr(0, fname.rfind("."))
+				var script_name = fname.substr(0, fname.find("."))
 				LoadScript(script_name)
 		dir.list_dir_end()
 	else:
