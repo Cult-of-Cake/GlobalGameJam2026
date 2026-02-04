@@ -1,6 +1,6 @@
 @tool
 extends Resource
-class_name SceneManagerScript
+class_name MySceneManagerScript
 
 @export var script_source_file: String
 @export_multiline var script_content: String:

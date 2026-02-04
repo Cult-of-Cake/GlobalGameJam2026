@@ -118,7 +118,7 @@ func LoadScript(script_name):
 		return
 	# Open and read the file
 	var fname = script_path + "/" + script_name + ".txt.script.tres"
-	var file : SceneManagerScript = ResourceLoader.load(fname)
+	var file : MySceneManagerScript = ResourceLoader.load(fname)
 	if file == null:
 		print ("Error opening file %s: %s" % [fname, FileAccess.get_open_error()])
 		return
