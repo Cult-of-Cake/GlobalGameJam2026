@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="SceneManagerScript" format=3 uid="uid://trhjsi083oh1"]
+[gd_resource type="Resource" format=3 uid="uid://trhjsi083oh1"]
 
-[ext_resource type="Script" uid="uid://70i45fiiwwde" path="res://Assets/scripts/resource_scenes.gd" id="1_1m78f"]
+[ext_resource type="Script" uid="uid://70i45fiiwwde" path="res://Code/Tools/resource_scenes.gd" id="1_1m78f"]
 
 [resource]
 script = ExtResource("1_1m78f")
@@ -16,5 +16,6 @@ G2: Yes. Or a way to do what you couldn't do before.
 G2: Crewel trusted you, so... Try this, the Bag Bird Mask. I expect you to reach greater heights with this.
 G2: But know this: in my weakened state, this mask will only allow you to jump thrice, not fly forever.
 $hasBird=1
+MaskObtain.wav
 "
 metadata/_custom_type_script = "uid://70i45fiiwwde"

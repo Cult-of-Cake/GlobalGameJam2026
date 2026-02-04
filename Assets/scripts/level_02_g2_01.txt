@@ -9,3 +9,4 @@ G2: Yes. Or a way to do what you couldn't do before.
 G2: Crewel trusted you, so... Try this, the Bag Bird Mask. I expect you to reach greater heights with this.
 G2: But know this: in my weakened state, this mask will only allow you to jump thrice, not fly forever.
 $hasBird=1
+MaskObtain.wav

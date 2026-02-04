@@ -5,3 +5,5 @@ G1: I've guarded this mask for a long time, waiting for a Feltweaver to appear i
 G1: And it's certainly in trouble now. But you have survived long enough to proceed this far...
 G1: I grant you the Sock Snake Mask. With that, you can fight the creatures that have seized upon this land in its vulnerable state.
 $hasSnake=1
+MaskObtain.wav
+M: With the Sock Snake Mask, I can use my Head Punch!!
