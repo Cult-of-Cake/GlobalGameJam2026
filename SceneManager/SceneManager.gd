@@ -262,9 +262,11 @@ func BeginScene(script_name):
 					# Ensure that we have 16-bit (can downgrade in Audacity)
 					var audiopath = "res://%s%s.%s" % [audio_path, cmd.file_name, cmd.file_ext]
 					print("Playing SFX %s" % audiopath)
-					%AudioManager.play_sfx(audio_path)
+					%AudioManager.play_sfx(audiopath)
 				elif cmd.file_ext == "ogg":
-					$AudioManager.play_bgm("res://" + GetAudio(audio_path, cmd.file_name, "." + cmd.file_ext))
+					var audiopath = "res://%s%s.%s" % [audio_path, cmd.file_name, cmd.file_ext]
+					print("Playing SFX %s" % audiopath)
+					$AudioManager.play_bgm(audiopath)
 				#if player != null:
 					#player.stream = GetAudio(audio_path, cmd.file_name, "." + cmd.file_ext)
 					#player.stop()
