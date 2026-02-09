@@ -55,6 +55,14 @@ texture = ExtResource("13")
 [node name="Hideable" type="Node2D" parent="." unique_id=1471274169]
 unique_name_in_owner = true
 
+[node name="Character_Left" type="Sprite2D" parent="Hideable" unique_id=1578710270]
+unique_name_in_owner = true
+centered = false
+
+[node name="Character_Right" type="Sprite2D" parent="Hideable" unique_id=2000391008]
+unique_name_in_owner = true
+centered = false
+
 [node name="Speaker_Background" type="ColorRect" parent="Hideable" unique_id=1405147047]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.8)
@@ -105,14 +113,6 @@ offset_bottom = 470.0
 scale = Vector2(0.792113, 0.858631)
 horizontal_alignment = 1
 vertical_alignment = 2
-
-[node name="Character_Left" type="Sprite2D" parent="Hideable" unique_id=1578710270]
-unique_name_in_owner = true
-centered = false
-
-[node name="Character_Right" type="Sprite2D" parent="Hideable" unique_id=2000391008]
-unique_name_in_owner = true
-centered = false
 
 [node name="Characters" type="Node2D" parent="." unique_id=12806447]
 
