@@ -30,7 +30,9 @@ func SetVar(v, to):
 	print(Global.variables)
 #endregion
 
-#region SFX
+#region Audio
+
+var isBGMon = false
 
 enum SfxType {
 	# Player

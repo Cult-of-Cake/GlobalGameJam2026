@@ -16,12 +16,16 @@ func _ready():
 	setup_layered_music()
 	setup_music_zones()
 	setup_sound_groups()
+	StartBGMusic()
 
 #region Main Audio Manager
 
 func StartBGMusic():
-	# Set default zone instantly (no crossfade)
-	set_zone_instant("default")
+	print("StartBGMusic (%s)" % Global.isBGMon)
+	if !Global.isBGMon:
+		# Set default zone instantly (no crossfade)
+		set_zone_instant("default")
+		Global.isBGMon = true
 
 # Play individual sound effects
 func play_sfx(sound_path: String):
