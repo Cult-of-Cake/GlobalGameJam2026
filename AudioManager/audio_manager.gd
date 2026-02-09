@@ -15,10 +15,17 @@ var active_zones := []
 func _ready():
 	setup_layered_music()
 	setup_music_zones()
+	setup_sound_groups()
+	StartBGMusic()
+
+#region Main Audio Manager
 
 func StartBGMusic():
-	# Set default zone instantly (no crossfade)
-	set_zone_instant("default")
+	print("StartBGMusic (%s)" % Global.isBGMon)
+	if !Global.isBGMon:
+		# Set default zone instantly (no crossfade)
+		set_zone_instant("default")
+		Global.isBGMon = true
 
 # Play individual sound effects
 func play_sfx(sound_path: String):
@@ -242,3 +249,61 @@ func change_music_zone(zone_name: String):
 			for layer_id in layer_volumes.keys():
 				sync_stream.set_sync_stream_volume(layer_id, layer_volumes[layer_id])
 				print("    Layer ", layer_id, " set to ", layer_volumes[layer_id], " dB instantly")
+
+#endregion
+
+#region Sound Groups
+
+# Audio stuff for things with multiple sounds
+
+var _pools: Dictionary = {}
+var _last_sounds: Dictionary = {}
+var _cooldowns: Dictionary = {}
+
+func setup_sound_groups() -> void:
+	# Initialize state for every sound type for the grouped audio
+	for type in Global.SFX_POOLS:
+		_pools[type] = []
+		_last_sounds[type] = ""
+		_cooldowns[type] = 0.0
+		_refill_pool(type)
+
+
+func _physics_process(delta: float) -> void:
+	# Tick down all audio group cooldowns each frame
+	for type in _cooldowns:
+		_cooldowns[type] = maxf(0.0, _cooldowns[type] - delta)
+
+
+#Audio group cooldown refill pool
+func _refill_pool(type: Global.SfxType) -> void:
+	var pool: Array = _pools[type]
+	pool.assign(Global.SFX_POOLS[type])
+	pool.shuffle()
+
+	var last_sound: String = _last_sounds[type]
+	if last_sound != "" and pool.size() > 1 and pool[0] == last_sound:
+		var tmp: String = pool[0]
+		pool[0] = pool[1]
+		pool[1] = tmp
+
+	_pools[type] = pool
+	
+# Play grouping of audio based on dictionary type called
+func play_sound_group(type: Global.SfxType) -> void:
+	var cooldown: float = _cooldowns[type]
+	if cooldown > 0.0:
+		return
+
+	var pool: Array = _pools[type]
+	if pool.is_empty():
+		_refill_pool(type)
+		pool = _pools[type]
+
+	var path: String = pool.pop_front()
+	_last_sounds[type] = path
+	play_sfx(path)
+	_cooldowns[type] = Global.COOLDOWNS[type]
+
+
+#endregion

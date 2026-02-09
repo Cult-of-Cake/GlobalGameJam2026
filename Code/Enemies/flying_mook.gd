@@ -1,0 +1,30 @@
+extends EnemyBase
+
+@export var leftRange :int
+@export var rightRange : int
+
+var startPoint : Vector2
+var direction = "LEFT"
+var speed = 300
+
+func _ready():
+	startPoint = global_position
+
+func _physics_process(delta):
+	if direction == "LEFT":
+		velocity = Vector2(-1 * speed, 0)
+		$AnimatedSprite2D.flip_h = true
+	if direction == "RIGHT":
+		velocity = Vector2(speed, 0)
+		$AnimatedSprite2D.flip_h = false
+	if direction == "LEFT" && global_position.x < startPoint.x - leftRange:
+		direction = "RIGHT"
+	if direction == "RIGHT" && global_position.x > startPoint.x +  rightRange:
+		direction = "LEFT"
+	move_and_slide()
+	bonk()
+
+func make_hurt_sound():
+	AudioManager.play_sound_group(Global.SfxType.MOTH_MAIN) #play damage sfx grouping
+func make_regular_sound():
+	AudioManager.play_sound_group(Global.SfxType.MOTH_MAIN) #play damage sfx grouping

@@ -7,8 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://dftnbpbkyhnv7" path="res://Assets/gui/option_button.png" id="5"]
 [ext_resource type="FontFile" uid="uid://br6imui04o0nk" path="res://Assets/fonts/MaidenOrange-Regular.ttf" id="6"]
 [ext_resource type="Resource" uid="uid://dagwgdk8kog8l" path="res://Assets/fonts/MaidenOrange-Regular.ttf.font.tres" id="6_sqnnq"]
-[ext_resource type="Texture2D" uid="uid://xp5jg28lnp5p" path="res://Assets/characters/Jeff.png" id="7"]
-[ext_resource type="Texture2D" uid="uid://4wsnnimqvplx" path="res://Assets/characters/Jeff Angry.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://bpetyajkbbuyv" path="res://Assets/characters/Spooder_Headshot.png" id="9_lcihg"]
 [ext_resource type="Texture2D" uid="uid://ce1yb8tgjt8d6" path="res://Assets/characters/Stickle_Headshot.png" id="10_d008f"]
 [ext_resource type="Texture2D" uid="uid://c5rr36y3rybey" path="res://Assets/characters/friends/snake_guardian.png" id="11_sqnnq"]
@@ -54,13 +52,10 @@ stretch_mode = 5
 position = Vector2(512, 0)
 texture = ExtResource("13")
 
-[node name="Character_Left" type="Sprite2D" parent="." unique_id=1578710270]
-centered = false
+[node name="Hideable" type="Node2D" parent="." unique_id=1471274169]
+unique_name_in_owner = true
 
-[node name="Character_Right" type="Sprite2D" parent="." unique_id=2000391008]
-centered = false
-
-[node name="Speaker_Background" type="ColorRect" parent="." unique_id=1405147047]
+[node name="Speaker_Background" type="ColorRect" parent="Hideable" unique_id=1405147047]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.8)
 custom_minimum_size = Vector2(1000, 120)
@@ -69,24 +64,26 @@ anchor_bottom = 1.0
 offset_left = 12.0
 offset_top = 470.0
 offset_right = 1012.0
-offset_bottom = -10.0
+offset_bottom = 590.0
 color = Color(0.333333, 0.133333, 0.133333, 1)
 
-[node name="Speaker_Text" type="Label" parent="." unique_id=1070371824]
+[node name="Speaker_Text" type="Label" parent="Hideable" unique_id=1070371824]
+unique_name_in_owner = true
 offset_left = 24.0
 offset_top = 482.0
 offset_right = 998.0
 offset_bottom = 578.0
 autowrap_mode = 2
 
-[node name="Showcase_Icon" type="Sprite2D" parent="." unique_id=178848562]
+[node name="Showcase_Icon" type="Sprite2D" parent="Hideable" unique_id=178848562]
 position = Vector2(953, 607)
 scale = Vector2(0.1, 0.1)
 script = ExtResource("4_rrhmh")
 Keyboard_Image = "Keyboard_ENTER"
 Controller_Image = "Keyboard_ENTER"
 
-[node name="Nametag_Background" type="ColorRect" parent="." unique_id=718579555]
+[node name="Nametag_Background" type="ColorRect" parent="Hideable" unique_id=718579555]
+unique_name_in_owner = true
 visible = false
 modulate = Color(1, 1, 1, 0.8)
 custom_minimum_size = Vector2(1000, 120)
@@ -95,11 +92,12 @@ anchor_bottom = 1.0
 offset_left = 20.0
 offset_top = 440.0
 offset_right = 1020.0
-offset_bottom = -40.0
+offset_bottom = 560.0
 scale = Vector2(0.205, 0.25)
 color = Color(0.333333, 0.133333, 0.133333, 1)
 
-[node name="Nametag_text" type="Label" parent="." unique_id=1545474577]
+[node name="Nametag_text" type="Label" parent="Hideable" unique_id=1545474577]
+unique_name_in_owner = true
 offset_left = 22.0
 offset_top = 440.0
 offset_right = 227.225
@@ -107,6 +105,14 @@ offset_bottom = 470.0
 scale = Vector2(0.792113, 0.858631)
 horizontal_alignment = 1
 vertical_alignment = 2
+
+[node name="Character_Left" type="Sprite2D" parent="Hideable" unique_id=1578710270]
+unique_name_in_owner = true
+centered = false
+
+[node name="Character_Right" type="Sprite2D" parent="Hideable" unique_id=2000391008]
+unique_name_in_owner = true
+centered = false
 
 [node name="Characters" type="Node2D" parent="." unique_id=12806447]
 
@@ -170,18 +176,6 @@ dialogue_background = Color(1, 1, 1, 1)
 dialogue_fontloader = ExtResource("6_sqnnq")
 dialogue_fontsize = 28
 image_side = 1
-
-[node name="Jeff" type="Control" parent="Characters" unique_id=1993726293]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("2")
-character_abbreviation = "JEFF"
-neutral_image = ExtResource("7")
-emotion_keywords = Array[String](["ANGRY"])
-emotion_images = Array[Texture2D]([ExtResource("8")])
-dialogue_fontloader = ExtResource("6_sqnnq")
 
 [node name="Merino" type="Control" parent="Characters" unique_id=2018708822]
 layout_mode = 3

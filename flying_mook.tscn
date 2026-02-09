@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://ds4vv2agvuudc"]
 
-[ext_resource type="Script" uid="uid://sbwbt33wba62" path="res://flying_mook.gd" id="1_bqw8s"]
+[ext_resource type="Script" uid="uid://sbwbt33wba62" path="res://Code/Enemies/flying_mook.gd" id="1_bqw8s"]
 [ext_resource type="Texture2D" uid="uid://xcpqyq8oxpak" path="res://Assets/characters/enemies/MunchMoth1.png" id="2_wmbaa"]
 [ext_resource type="Texture2D" uid="uid://bniwf3v6m8g7b" path="res://Assets/characters/enemies/MunchMoth2.png" id="3_jh8ya"]
+
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jh8ya"]
 animations = [{
