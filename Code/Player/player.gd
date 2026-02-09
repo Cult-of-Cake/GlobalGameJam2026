@@ -238,6 +238,7 @@ func CheckFormSwap() -> void:
 			$CollisionShape2D.shape.radius = FORM_SIZES[FORM.BIRD][0]
 			$CollisionShape2D.shape.height = FORM_SIZES[FORM.BIRD][1]
 		if currForm == FORM.JELLYFISH:
+			%SceneManager.play_single_sound("BlubMaskActivate")
 			$CollisionShape2D.shape.radius = FORM_SIZES[FORM.JELLYFISH][0]
 			$CollisionShape2D.shape.height = FORM_SIZES[FORM.JELLYFISH][1]
 
