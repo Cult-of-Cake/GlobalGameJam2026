@@ -23,3 +23,8 @@ func _physics_process(delta):
 		direction = "LEFT"
 	move_and_slide()
 	bonk()
+
+func make_hurt_sound():
+	AudioManager.play_sound_group(Global.SfxType.MOTH_MAIN) #play damage sfx grouping
+func make_regular_sound():
+	AudioManager.play_sound_group(Global.SfxType.MOTH_MAIN) #play damage sfx grouping

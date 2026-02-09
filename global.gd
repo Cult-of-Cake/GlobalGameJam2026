@@ -29,3 +29,59 @@ func SetVar(v, to):
 	Global.variables[v] = to
 	print(Global.variables)
 #endregion
+
+#region SFX
+
+enum SfxType {
+	# Player
+	HURT, ATTACK, JUMP, FLAP, SWIM,
+	# Enemies
+	MOUSE_MAIN, MOTH_MAIN,
+}
+
+# Dictionary keeps track of which thing has which sounds
+const SFX_POOLS: Dictionary = {
+	SfxType.HURT: [
+		"res://Assets/audio/HurtSound1.wav",
+		"res://Assets/audio/HurtSound2.wav",
+		"res://Assets/audio/HurtSound3.wav",
+	],
+	SfxType.ATTACK: [
+		"res://Assets/audio/AttackSound1.wav",
+		"res://Assets/audio/AttackSound2.wav",
+		"res://Assets/audio/AttackSound3.wav",
+	],
+	SfxType.JUMP: [
+		"res://Assets/audio/JumpSound1.wav",
+		"res://Assets/audio/JumpSound2.wav",
+		"res://Assets/audio/JumpSound3.wav",
+	],
+	SfxType.FLAP: [
+		"res://Assets/audio/BirdFlap1.wav",
+		"res://Assets/audio/BirdFlap2.wav",
+	],
+	SfxType.SWIM: [
+		"res://Assets/audio/Jellyfish Move.wav",
+	],
+	SfxType.MOUSE_MAIN: [
+		"res://Assets/audio/MouseChitter1.wav",
+		"res://Assets/audio/MouseChitter2.wav",
+	],
+	SfxType.MOTH_MAIN: [
+		"res://Assets/audio/MothFlutter1.wav",
+		"res://Assets/audio/MothFlutter2.wav",
+	],
+}
+
+# Makes sure audio won't play in rapid succession and screw up
+@export var COOLDOWNS: Dictionary = {
+	SfxType.HURT: 0.8,
+	SfxType.ATTACK: 1,
+	SfxType.JUMP: 0.3,
+	SfxType.FLAP: 1,
+	SfxType.SWIM: 0.6,
+	SfxType.MOUSE_MAIN: 0.8,
+	SfxType.MOTH_MAIN: 0.8,
+}
+
+#endregion

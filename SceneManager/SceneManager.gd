@@ -43,7 +43,9 @@ var displacementFactor = 1.0
 var homePosition
 
 func _ready():
-	visible = false
+	print("SceneManager.ready")
+	visible = true
+	%Hideable.visible = false
 	LoadAllScripts()
 	FillCharacterArray()
 	mode = MODES.READY
@@ -118,7 +120,7 @@ func LoadScript(script_name):
 		return
 	# Open and read the file
 	var fname = script_path + "/" + script_name + ".txt.script.tres"
-	var file : MySceneManagerScript = ResourceLoader.load(fname)
+	var file : SceneManagerScript = ResourceLoader.load(fname)
 	if file == null:
 		print ("Error opening file %s: %s" % [fname, FileAccess.get_open_error()])
 		return
@@ -212,10 +214,10 @@ func _input(event):
 	if (event.is_action_pressed("ui_skip")
 		or event.is_action_pressed("ui_accept")):
 		Continue()
-	if event.is_action_pressed("ui_click") and visible == true:
+	if event.is_action_pressed("ui_click") and %Hideable.visible == true:
 		Continue()
 	if event.is_action_pressed("ui_debug_scenes"):
-		visible = false
+		%Hideable.visible = false
 		mode = MODES.READY
 
 
@@ -224,8 +226,8 @@ func BeginScene(script_name):
 	print("begin")
 	$BG_Image.visible = false
 	$BranchOptions.visible = false
-	$Character_Left.texture = null
-	$Character_Right.texture = null
+	%Character_Left.texture = null
+	%Character_Right.texture = null
 	$Game_Title.position = Vector2(0,0)
 	
 	Global.dialogue_started.emit()
@@ -236,7 +238,7 @@ func BeginScene(script_name):
 		if (num > 0): # The first one will serve as a template
 			$BranchOptions.remove_child(opt)
 		num += 1
-	visible = true
+	%Hideable.visible = true
 	
 	# Get our array of commands
 	if !all_scripts.has(script_name):
@@ -260,9 +262,7 @@ func BeginScene(script_name):
 				var player : AudioStreamPlayer
 				if cmd.file_ext == "wav":
 					# Ensure that we have 16-bit (can downgrade in Audacity)
-					var audiopath = "res://%s%s.%s" % [audio_path, cmd.file_name, cmd.file_ext]
-					print("Playing SFX %s" % audiopath)
-					%AudioManager.play_sfx(audiopath)
+					play_single_sound(cmd.file_name)
 				elif cmd.file_ext == "ogg":
 					var audiopath = "res://%s%s.%s" % [audio_path, cmd.file_name, cmd.file_ext]
 					print("Playing SFX %s" % audiopath)
@@ -316,19 +316,19 @@ func BeginScene(script_name):
 				if cmd.image_location != null and cmd.image_location != cmd.IMAGE_LOCATION.UNDEFINED:
 					match cmd.image_location:
 						cmd.IMAGE_LOCATION.LEFT:
-							$Character_Left.texture = null
+							%Character_Left.texture = null
 						cmd.IMAGE_LOCATION.RIGHT:
-							$Character_Right.texture = null
+							%Character_Right.texture = null
 						#cmd.IMAGE_LOCATION.CENTER:
 						#	$Character_Center.texture = null
 				if cmd.target != null:
 					print("Hiding " + cmd.target)
 					get_node(cmd.target).visible = false
 			cmd.TYPE.DIALOGUE:
-				$Nametag_Background.visible = false
-				$Nametag_text.visible = false
-				$Speaker_Background.visible = true
-				var box = get_node("Speaker_Text")
+				%Nametag_Background.visible = false
+				%Nametag_text.visible = false
+				%Speaker_Background.visible = true
+				var box = %Speaker_Text
 				box.text = cmd.dial_line
 				# This is quick-and-dirty, we'll want some scaffolding around this
 				if !characters.has(cmd.dial_character):
@@ -340,34 +340,34 @@ func BeginScene(script_name):
 					   (c != $Characters/NobodyRight) &&
 					   (c != $Characters/TEXT) && 
 					   (c != $Characters/Monologue)):
-						$Speaker_Background.visible = true
-						$Speaker_Text.visible = true
-						$Nametag_Background.visible = true
-						$Nametag_text.visible = true
-						$Nametag_text.text = c.character_full_name
+						%Speaker_Background.visible = true
+						%Speaker_Text.visible = true
+						%Nametag_Background.visible = true
+						%Nametag_text.visible = true
+						%Nametag_text.text = c.character_full_name
 					# Override the previous location?
 					if cmd.image_location != cmd.IMAGE_LOCATION.UNDEFINED:
 						c.image_side = cmd.image_location
 					# Display on appropriate side
 					if c.image_side == cmd.IMAGE_LOCATION.LEFT:
-						$Character_Left.texture = c.GetEmotionTexture(cmd.dial_emotion)
+						%Character_Left.texture = c.GetEmotionTexture(cmd.dial_emotion)
 					elif c.image_side == cmd.IMAGE_LOCATION.RIGHT:
-						$Character_Right.texture = c.GetEmotionTexture(cmd.dial_emotion)
+						%Character_Right.texture = c.GetEmotionTexture(cmd.dial_emotion)
 					#elif cmd.image_location == cmd.IMAGE_LOCATION.CENTER:
 					#	$Character_Center.texture = c.GetEmotionTexture(cmd.dial_emotion)
 					var font : FontFile = c.dialogue_fontname
 					font.fixed_size = c.dialogue_fontsize
 					box.set("theme_override_fonts/font", font)
-					$Nametag_text.set("theme_override_fonts/font", font)
+					%Nametag_text.set("theme_override_fonts/font", font)
 					box.set("theme_override_colors/font_color", c.dialogue_colour)
-					$Nametag_text.set("theme_override_colors/font_color", c.dialogue_colour)
+					%Nametag_text.set("theme_override_colors/font_color", c.dialogue_colour)
 					if c.dialogue_shadow != c.dialogue_colour:
 						box.set("theme_override_colors/font_shadow_color", c.dialogue_shadow)
-						$Nametag_text.set("theme_override_colors/font_shadow_color", c.dialogue_shadow)
+						%Nametag_text.set("theme_override_colors/font_shadow_color", c.dialogue_shadow)
 					var box_back = c.dialogue_background
 					box_back.a8 = 224
-					$Speaker_Background.color = box_back
-					$Nametag_Background.color = box_back
+					%Speaker_Background.color = box_back
+					%Nametag_Background.color = box_back
 			cmd.TYPE.EVENT:
 				if(cmd.event == "SHAKE"):
 					vibratingObject = get_node(cmd.target)
@@ -399,11 +399,15 @@ func BeginScene(script_name):
 	
 	else:
 		print("==== Finished! ====")
-		visible = false
+		%Hideable.visible = false
 		mode = MODES.READY
 		Global.dialogue_finished.emit()
 		
 
+func play_single_sound(filename : String) -> void:
+	var path = "res://%s%s.wav" % [audio_path, filename]
+	#print("Playing sound %s" % path)
+	AudioManager.play_sfx(path)
 
 # === Loading and retrieving characters / emotions ================================================
 

@@ -1,12 +1,23 @@
 
-Sounds:
-	Do the same in enemy
-	Update dictionary for enemy sounds
-	Add sound colliders
-
 
 MOAR COMMUNICATION
 	Some images (showcase icons) appear after talking to people
 	Hitpoint visuals
 
 
+
+
+Sounds
+
+T	AttackSound
+T	BirdFlap
+v	BirdMask
+v	DeathSound
+T	HurtSound
+?	Jellyfish Move
+T	JumpSound
+v	MaskObtain
+v	MothFlutter
+v	MouseChitter
+v	SnakeMask
+	

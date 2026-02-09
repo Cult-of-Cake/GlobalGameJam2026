@@ -56,3 +56,8 @@ func _on_wall_finder_left_body_entered(body: Node2D) -> void:
 	#if (body.has_method("is_enemy") && body.is_enemy()):
 		velocity.x = wanderSpeed
 		currDir = RIGHT
+
+func make_hurt_sound():
+	AudioManager.play_sound_group(Global.SfxType.MOTH_MAIN) #play damage sfx grouping
+func make_regular_sound():
+	AudioManager.play_sound_group(Global.SfxType.MOTH_MAIN) #play damage sfx grouping
