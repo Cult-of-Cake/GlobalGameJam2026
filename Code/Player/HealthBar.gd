@@ -8,19 +8,14 @@ func SetMaxHealth(max : int):
 	SetHealth(MAX_HEALTH)
 
 func SetHealth(h : int) -> void:
-	print("Setting health to %d" % MAX_HEALTH)
-	#for obj in %HealthContainer.get_children():
-		#.remove_child()
 	while %HealthContainer.get_child_count() > 0:
 		%HealthContainer.remove_child(%HealthContainer.get_child(0))
-	
 	for i in range(0, h):
 		AddHeart(%TemplateFull)
 	for i in range(h, MAX_HEALTH):
 		AddHeart(%TemplateEmpty)
 	
 func AddHeart(template):
-	print("Adding heart")
 	var heart = template.duplicate()
 	heart.visible = true
 	%HealthContainer.add_child(heart)
