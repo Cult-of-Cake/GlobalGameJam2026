@@ -28,6 +28,16 @@ func GetVar(v):
 func SetVar(v, to):
 	Global.variables[v] = to
 	print(Global.variables)
+	for obj : VisibleByVar in ObjsVisibleByVar:
+		if obj.ConnectToVariable == v:
+			obj.UpdateVisibility()
+
+var ObjsVisibleByVar : Array[VisibleByVar] = []
+func ConnectMeToVar(obj):
+	ObjsVisibleByVar.append(obj)
+func DisconnectFromVar(obj):
+	ObjsVisibleByVar.erase(obj)
+
 #endregion
 
 #region Audio

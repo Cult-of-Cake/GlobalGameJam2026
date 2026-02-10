@@ -29,6 +29,8 @@ func _ready():
 	activate_sprites()
 	show_sprite(%SpiderStanding)
 	starting_position = position
+	
+	%PlayerHealthBar.SetMaxHealth(MAX_HITPOINTS)
 
 
 func is_player():
@@ -46,6 +48,7 @@ func get_hit(damage: int, direction: Vector2, force: int):
 		else:
 			become_invincible()
 			become_stunned()
+			%PlayerHealthBar.SetHealth(hitpoints)
 		
 
 func become_invincible():
@@ -238,6 +241,7 @@ func CheckFormSwap() -> void:
 			$CollisionShape2D.shape.radius = FORM_SIZES[FORM.BIRD][0]
 			$CollisionShape2D.shape.height = FORM_SIZES[FORM.BIRD][1]
 		if currForm == FORM.JELLYFISH:
+			%SceneManager.play_single_sound("BlubMaskActivate")
 			$CollisionShape2D.shape.radius = FORM_SIZES[FORM.JELLYFISH][0]
 			$CollisionShape2D.shape.height = FORM_SIZES[FORM.JELLYFISH][1]
 
@@ -369,9 +373,11 @@ func SpriteRotate(sprite : Node, flip_h : bool, flip_v : bool = false, rotation 
 #endregion
 
 func Die() -> void:
+	become_invincible() # or else you might continue to take damage from whatever source
 	%SceneManager.play_single_sound("DeathSound")
 	position = starting_position
 	hitpoints = MAX_HITPOINTS
+	%PlayerHealthBar.SetHealth(hitpoints)
 
 func check_vertical_clearance():
 	var overhead

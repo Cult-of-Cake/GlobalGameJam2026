@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tab1v0h7pu8d"
-path="res://.godot/imported/Title Screen - Logo.png-06b1fc5a5df76dc648b0bce14ac4c2ab.ctex"
+uid="uid://vtvkgeqx57pc"
+path="res://.godot/imported/heart_empty.png-fd50e134b6d080a5753bcc7cf81b4f1a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/images/Title Screen - Logo.png"
-dest_files=["res://.godot/imported/Title Screen - Logo.png-06b1fc5a5df76dc648b0bce14ac4c2ab.ctex"]
+source_file="res://Assets/images/heart_empty.png"
+dest_files=["res://.godot/imported/heart_empty.png-fd50e134b6d080a5753bcc7cf81b4f1a.ctex"]
 
 [params]
 
