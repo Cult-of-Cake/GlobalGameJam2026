@@ -11,7 +11,14 @@ class_name SceneManagerScript
 
 func load_script() -> void: 
 	print(script_source_file)
-	var file = FileAccess.open(script_source_file,FileAccess.READ)
+	var file : FileAccess
+	if script_source_file.begins_with("uid"):
+		var parsed_uid := ResourceUID.text_to_id(script_source_file)
+		var parsed_path := ResourceUID.get_id_path(parsed_uid)
+		file = FileAccess.open(parsed_path,FileAccess.READ)
+		print(parsed_path)
+	else: 
+		file = FileAccess.open(script_source_file,FileAccess.READ)
 	var content = file.get_as_text()
 	var content_clean = content.replace("\r", "")
 	script_content = content_clean

@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_1m78f")
-script_source_file = "res://Assets/scripts/level_01_sign.txt"
+script_source_file = "uid://c08l0e4xv0x3w"
 script_content = "M: Welcome to the Dye-Stick Meadow, the first metre of Craftskan!"
 metadata/_custom_type_script = "uid://70i45fiiwwde"

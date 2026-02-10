@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_1m78f")
-script_source_file = "res://Assets/scripts/level_03_g3_01.txt"
+script_source_file = "uid://br0ieji03hmcv"
 script_content = "M: Hello? Mask Guardian...?
 G3: I am Douppion of the Silk Rivers.
 M: Oh, uh -- hi! I'm Merino!

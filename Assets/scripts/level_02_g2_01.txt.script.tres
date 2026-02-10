@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_1m78f")
-script_source_file = "res://Assets/scripts/level_02_g2_01.txt"
+script_source_file = "uid://cak2078w0l6vx"
 script_content = "M: Are you the next Guardian?
 G2: Who seeks Intarsia of the Woolly Jungle?
 G2: Oh, a Feltweaver... You have Crewel's mask?

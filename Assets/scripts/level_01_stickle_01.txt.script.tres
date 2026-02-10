@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_lfydq")
-script_source_file = "res://Assets/scripts/level_01_stickle_01.txt"
+script_source_file = "uid://dsfpogh2bvpkw"
 script_content = "P: Hi! I'm Stickle. The happiest flower! ...I swear I'm a flower!
 P: You're a Feltweaver, right?
 M: Uh-huh. I'm Merino. I was called out of my sock den because this world was in trouble.

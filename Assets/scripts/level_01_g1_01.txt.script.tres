@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_h2x3p")
-script_source_file = "res://Assets/scripts/level_01_g1_01.txt"
+script_source_file = "uid://bf3ag528m5stg"
 script_content = "G1: A Feltweaver... Do you seek the Sock Snake Mask?
 M: Hello! Are you its guardian?
 G1: Indeed. I am Crewel of the Dye-Stick Meadow.

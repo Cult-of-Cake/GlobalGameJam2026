@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_rp702")
-script_source_file = "res://Assets/scripts/level_01_mask_aq_01.txt"
+script_source_file = "uid://crgscio0dx7fe"
 script_content = "M: With the Sock Snake Mask, I can use my Head Punch!
 "
 metadata/_custom_type_script = "uid://70i45fiiwwde"
