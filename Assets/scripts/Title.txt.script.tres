@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_enkmy")
-script_source_file = "res://Assets/scripts/Title.txt"
+script_source_file = "uid://cxpvmolks8vbk"
 metadata/_custom_type_script = "uid://70i45fiiwwde"

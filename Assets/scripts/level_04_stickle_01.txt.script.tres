@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_rgody")
-script_source_file = "res://Assets/scripts/level_04_stickle_01.txt"
+script_source_file = "uid://bjqymuovmc8eq"
 script_content = "M: Not long now.
 P: We're really going to the Hot Glue Volcano...?
 P: It's so hot, and it looks so dangerous!

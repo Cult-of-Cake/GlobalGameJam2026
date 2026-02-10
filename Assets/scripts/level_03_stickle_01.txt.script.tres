@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_1m78f")
-script_source_file = "res://Assets/scripts/level_03_stickle_01.txt"
+script_source_file = "uid://cq2s2mlkn4byr"
 script_content = "P: Wow, the Silk Rivers look pretty amazing...
 M: Yeah, but they'll look a lot better when they're fixed. I can see fraying and holes out there already.
 P: I wonder if there's a Mask of Creativity to swim? All I can do is float, since I'm made of wood.
