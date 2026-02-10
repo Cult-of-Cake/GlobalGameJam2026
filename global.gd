@@ -1,6 +1,16 @@
 extends Node
 
 enum FACING { LEFT, RIGHT, UP, DOWN } # Up and down are ONLY spider form
+enum FORM { SPIDER, SNAKE, BIRD, JELLYFISH } # Global list of all forms associated with a number
+var FORM_CONTROL_NAMES : Dictionary[FORM,String] = FORM.keys().reduce(
+	func(acc: Dictionary[FORM,String],cur: String) -> Dictionary[FORM,String]:
+		var key = FORM[cur]
+		var value: String = "form_" + cur.to_lower()
+		acc[key] = value
+		return acc
+,{} as Dictionary[FORM,String])
+
+
 #region signals
 @warning_ignore("unused_signal")
 signal landed()
