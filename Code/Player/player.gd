@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -600.0
@@ -81,20 +81,25 @@ func _unhandled_input(event):
 func _physics_process(delta: float) -> void:
 	if isDialogGoing:
 		return
+	#READ CONTROLS
+	input_component.update()
+	updir = input_component.move_dir_y
+	spider_move_component.tick(delta)
+	
 	
 	# Handle player-induced upward velocity
-	if (currPhysics == PHYSICS.FLY):
-		if Input.is_action_just_pressed("jump") and !is_on_floor():
+	if (currForm == Global.FORM.BIRD):
+		if input_component.jump_pressed and !is_on_floor():
 			if flyCount < FLY_MAX:
 				flyCount += 1
 				velocity.y = JUMP_VELOCITY * 1.5
 				AudioManager.play_sound_group(Global.SfxType.FLAP) #play flying sfx grouping
-	elif (currPhysics == PHYSICS.JUMP):
-		if Input.is_action_just_pressed("jump") and is_on_floor():
+	elif (currForm == Global.FORM.SNAKE):
+		if input_component.jump_pressed and is_on_floor():
 			velocity.y = JUMP_VELOCITY
 			AudioManager.play_sound_group(Global.SfxType.JUMP) #play jump sfx grouping
-	elif (currPhysics == PHYSICS.SWIM):
-		if Input.is_action_just_pressed("jump"):
+	elif (currForm == Global.FORM.JELLYFISH):
+		if input_component.jump_pressed:
 			velocity.y = JUMP_VELOCITY / 3
 			AudioManager.play_sound_group(Global.SfxType.SWIM) #play swim sfx grouping
 	
@@ -104,18 +109,21 @@ func _physics_process(delta: float) -> void:
 		metafloor = true
 	
 	if !crawling:
-		crawling = (is_on_floor() or custom_on_ceiling() or %SpiderWallLeft.is_colliding() && direction < 0 or %SpiderWallRight.is_colliding() && direction > 0)
 	else:
 		if !is_on_floor() && !custom_on_ceiling() && !%SpiderWallLeft.is_colliding() && !%SpiderWallRight.is_colliding():
 			crawling = false
+		crawling = (is_on_floor() or\
+					custom_on_ceiling() or\
+					%SpiderWallLeft.is_colliding() && direction < 0 or\
+					%SpiderWallRight.is_colliding() && direction > 0)
 			
-	if (currPhysics == PHYSICS.JUMP or currPhysics == PHYSICS.FLY):
+	if ((currForm == Global.FORM.SNAKE) or (currForm == Global.FORM.BIRD)):
 		if not is_on_floor():
 			velocity += get_gravity() * delta
-	elif (currPhysics == PHYSICS.SWIM):
+	elif (currForm == Global.FORM.JELLYFISH):
 		if not is_on_floor():
 			velocity += get_gravity() * delta / 3
-	elif currPhysics == PHYSICS.CRAWL:
+	elif (currForm == Global.FORM.SPIDER):
 		if stunned || !crawling:
 			velocity += get_gravity() * delta
 
@@ -124,7 +132,6 @@ func _physics_process(delta: float) -> void:
 	
 	#left-right movement.
 	#briefly disable it when taking damage
-	direction = Input.get_axis("ui_left", "ui_right")
 	if !stunned:
 		if direction:
 			velocity.x = direction * SPEED
@@ -136,7 +143,6 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 	else:
 		pass
-	if currPhysics == PHYSICS.CRAWL and crawling:
 		var updir := Input.get_axis("ui_up", "ui_down")
 		if updir && (%SpiderWallLeft.is_colliding() || %SpiderWallRight.is_colliding() || custom_on_ceiling()):
 			velocity.y = updir * SPEED
@@ -146,6 +152,8 @@ func _physics_process(delta: float) -> void:
 				facing = Global.FACING.DOWN
 		else:
 			velocity.y = move_toward(velocity.y, 0, SPEED)
+	direction = input_component.move_dir
+	if (currForm == Global.FORM.SPIDER) and crawling:
 	
 	if position.x < 0:
 		position.x = 0
@@ -154,12 +162,13 @@ func _physics_process(delta: float) -> void:
 	# Die code
 	if global_position.y > 2000:
 		Die()
-
+	
+	CheckFormSwap(input_component)
 	UpdateSprites()
 	move_and_slide()
 	
 func POooooOONCH():
-	if(!punching && currForm == FORM.SNAKE):
+	if(!punching && currForm == Global.FORM.SNAKE):
 		punching = true;
 		AudioManager.play_sound_group(Global.SfxType.ATTACK) #play attack sfx grouping
 		%SnakePunching.stop()
@@ -186,67 +195,63 @@ var FORM_SIZES = [
 	[62,124],  #Bird
 	[44,140]]  #Jellyfish
 
-enum FORM { SPIDER, SNAKE, BIRD, JELLYFISH }
-var currForm = FORM.SPIDER
-
-enum PHYSICS { CRAWL , JUMP, FLY, SWIM }
-var formPhysics = [ PHYSICS.CRAWL, PHYSICS.JUMP, PHYSICS.FLY, PHYSICS.SWIM ]
-var currPhysics = formPhysics[currForm]
+var currForm = Global.FORM.SPIDER
 
 var formSpriteNames = [ "spider", "snake", "bird", "jellyfish" ]
 var formSprites = [] # Gets loaded on config
 
 var flyCount = 0
-const FLY_MAX = 3
+@export var FLY_MAX: int = 3
 
 func FormSetup() -> void:
 	for n in formSpriteNames:
 		formSprites.append(SceneManager.GetTexture("res://Assets/characters/", n, ".png"))
 		
 func FixTheGoddamnSpiderBox() -> void:
-	$CollisionShape2D.shape.radius = FORM_SIZES[FORM.SPIDER][0]
-	$CollisionShape2D.shape.height = FORM_SIZES[FORM.SPIDER][1]	
+	$CollisionShape2D.shape.radius = FORM_SIZES[Global.FORM.SPIDER][0]
+	$CollisionShape2D.shape.height = FORM_SIZES[Global.FORM.SPIDER][1]	
 	
 
-func CheckFormSwap() -> void:
+func CheckFormSwap(i: InputComponent) -> void:
 	
 	var prevForm = currForm
-	if Input.is_action_just_pressed("form_cycle"):
+	if(i.form_cycle_pressed):
+		print("cycle pressed!")
 		CycleUntilAllowed(1)
-	elif Input.is_action_just_pressed("form_cycle_reverse"):
+	elif(i.form_cycle_reverse_pressed):
 		CycleUntilAllowed(-1)
-	elif Input.is_action_just_pressed("form_spider"):
-		SwitchIfAllowed(FORM.SPIDER)
-	elif Input.is_action_just_pressed("form_bird"):
-		SwitchIfAllowed(FORM.BIRD)
-	elif Input.is_action_just_pressed("form_snake"):
-		SwitchIfAllowed(FORM.SNAKE)
-	elif Input.is_action_just_pressed("form_jelly"):
-		SwitchIfAllowed(FORM.JELLYFISH)
+	elif(i.form_hotkey_pressed[Global.FORM.SPIDER]):
+		SwitchIfAllowed(Global.FORM.SPIDER)
+	elif(i.form_hotkey_pressed[Global.FORM.BIRD]):
+		SwitchIfAllowed(Global.FORM.BIRD)
+	elif(i.form_hotkey_pressed[Global.FORM.SNAKE]):
+		SwitchIfAllowed(Global.FORM.SNAKE)
+	elif(i.form_hotkey_pressed[Global.FORM.JELLYFISH]):
+		SwitchIfAllowed(Global.FORM.JELLYFISH)
 	
 	if (currForm != prevForm):
 		print ("Changed form to %s" % currForm)
-		currPhysics = formPhysics[currForm]
+		#currPhysics = formPhysics[currForm]
 		UpdateSprites()
 		
-		if currForm == FORM.SPIDER:
-			$CollisionShape2D.shape.radius = FORM_SIZES[FORM.SPIDER][0]
-			$CollisionShape2D.shape.height = FORM_SIZES[FORM.SPIDER][1]		
-		if currForm == FORM.SNAKE:
+		if currForm == Global.FORM.SPIDER:
+			$CollisionShape2D.shape.radius = FORM_SIZES[Global.FORM.SPIDER][0]
+			$CollisionShape2D.shape.height = FORM_SIZES[Global.FORM.SPIDER][1]		
+		if currForm == Global.FORM.SNAKE:
 			%SceneManager.play_single_sound("SnakeMaskActivate")
-			$CollisionShape2D.shape.radius = FORM_SIZES[FORM.SNAKE][0]
-			$CollisionShape2D.shape.height = FORM_SIZES[FORM.SNAKE][1]
-		if currForm == FORM.BIRD:
+			$CollisionShape2D.shape.radius = FORM_SIZES[Global.FORM.SNAKE][0]
+			$CollisionShape2D.shape.height = FORM_SIZES[Global.FORM.SNAKE][1]
+		if currForm == Global.FORM.BIRD:
 			%SceneManager.play_single_sound("BirdMaskActivate")
-			$CollisionShape2D.shape.radius = FORM_SIZES[FORM.BIRD][0]
-			$CollisionShape2D.shape.height = FORM_SIZES[FORM.BIRD][1]
-		if currForm == FORM.JELLYFISH:
+			$CollisionShape2D.shape.radius = FORM_SIZES[Global.FORM.BIRD][0]
+			$CollisionShape2D.shape.height = FORM_SIZES[Global.FORM.BIRD][1]
+		if currForm == Global.FORM.JELLYFISH:
 			%SceneManager.play_single_sound("BlubMaskActivate")
-			$CollisionShape2D.shape.radius = FORM_SIZES[FORM.JELLYFISH][0]
-			$CollisionShape2D.shape.height = FORM_SIZES[FORM.JELLYFISH][1]
+			$CollisionShape2D.shape.radius = FORM_SIZES[Global.FORM.JELLYFISH][0]
+			$CollisionShape2D.shape.height = FORM_SIZES[Global.FORM.JELLYFISH][1]
 
 
-		if (currPhysics != PHYSICS.FLY):
+		if (!(currForm == Global.FORM.BIRD)):
 			flyCount = 0
 
 func land():
@@ -267,7 +272,7 @@ func custom_on_ceiling():
 			return true
 	return false
 
-func IsFormAllowed(form : FORM):
+func IsFormAllowed(form : Global.FORM):
 	var globalForms = [ true, Global.GetVar("hasSnake"),
 		Global.GetVar("hasBird"), Global.GetVar("hasJelly") ]
 	
@@ -287,11 +292,11 @@ func IsFormAllowed(form : FORM):
 
 func CycleUntilAllowed(dir : int):
 	while true: # This forces at least one iteration, like a do-while (which Godot lacks)
-		currForm = (currForm as int + dir + 4) % FORM.size() as FORM
+		currForm = (currForm as int + dir + 4) % Global.FORM.size() as Global.FORM
 		if IsFormAllowed(currForm):
 			break
 
-func SwitchIfAllowed(form : FORM):
+func SwitchIfAllowed(form : Global.FORM):
 	if (IsFormAllowed(form)):
 		currForm = form
 	
@@ -323,7 +328,7 @@ func UpdateSprites():
 	hide_sprites()
 	var is_moving = Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
 	match currForm:
-		FORM.SNAKE:
+		Global.FORM.SNAKE:
 			var sprite
 			if !punching:
 				if is_on_floor():
@@ -337,7 +342,7 @@ func UpdateSprites():
 				sprite = %SnakePunching
 			show_sprite(sprite)
 			SpriteRotate(sprite, facing == Global.FACING.LEFT)
-		FORM.SPIDER:
+		Global.FORM.SPIDER:
 			var sprite
 			if is_moving:
 				sprite = %SpiderWalking
@@ -355,14 +360,14 @@ func UpdateSprites():
 			else:
 				if !stunned:
 					SpriteRotate(sprite, facing == Global.FACING.LEFT, false)
-		FORM.BIRD:
+		Global.FORM.BIRD:
 			if !is_on_floor():
 				SpriteRotate(%BirdFlying, facing == Global.FACING.LEFT)
 				show_sprite(%BirdFlying)
 			else:
 				SpriteRotate(%BirdStanding, facing == Global.FACING.LEFT)
 				show_sprite(%BirdStanding)
-		FORM.JELLYFISH:
+		Global.FORM.JELLYFISH:
 			show_sprite(%JellyfishSwimming)
 
 func SpriteRotate(sprite : Node, flip_h : bool, flip_v : bool = false, rotation : int = 0):

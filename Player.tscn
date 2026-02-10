@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://d0pcdb78t5mfm" path="res://Code/Player/HealthBar.gd" id="17_efikj"]
 [ext_resource type="Texture2D" uid="uid://qnh63xepov4y" path="res://Assets/images/heart_full.png" id="17_rv870"]
 [ext_resource type="Texture2D" uid="uid://vtvkgeqx57pc" path="res://Assets/images/heart_empty.png" id="19_itxgx"]
+[ext_resource type="Script" uid="uid://dqpdfqpsj2yk2" path="res://Code/Components/input_component.gd" id="20_cgsek"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l6ohk"]
 radius = 27.5
@@ -352,6 +353,11 @@ unique_name_in_owner = true
 rotation = -1.5707964
 target_position = Vector2(0, 500)
 collision_mask = 4
+
+[node name="InputComponent" type="Node" parent="." unique_id=2044070775]
+unique_name_in_owner = true
+script = ExtResource("20_cgsek")
+metadata/_custom_type_script = "uid://dqpdfqpsj2yk2"
 
 [connection signal="animation_finished" from="Animations/SnakePunching" to="." method="_on_snake_punching_animation_finished"]
 [connection signal="frame_changed" from="Animations/SnakePunching" to="." method="_on_snake_punching_frame_changed"]
